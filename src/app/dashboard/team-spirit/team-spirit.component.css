@@ -1,0 +1,75 @@
+/* 
+.TeamSpirit
+{
+    
+    
+    background-color: white;
+    height: 200px ;
+    width:  349px;
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 5%;
+    margin-top: 25px;
+     
+   
+} */
+/* .Gauge{
+    position: relative;
+    left: 10px;
+    top: 52px;
+} */
+/* .circle
+{
+    height: 100px;
+    width: 100px;
+    border: 3px solid white;
+    border-radius: 50%;
+    top: -95px;
+    left: 200px;
+    position: relative;
+    background-color: white;
+} */
+.emoji
+{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-top: 25px;
+}
+h5{
+    margin-bottom: 1rem;
+}
+/* #critical
+{
+    border-color: red;
+    
+}
+#normal
+{
+   
+    border-color: orange;
+   
+}
+#good
+{
+    border-color:green;
+} */
+/* .title
+{
+    position: relative;
+  
+   margin-left: 10%;
+    top: -208px;
+    font-weight: 600;
+    color: #6b6b6b;
+} */
+
+.green{
+    background-color:#2ab02f;
+}
+.red{
+    color:#c40000;
+}
+.orange{
+    color:#e09b3a;
+}

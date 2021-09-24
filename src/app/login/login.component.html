@@ -1,0 +1,95 @@
+
+  <div class="container px-5" >
+ 
+    <div class="guest">
+      <a class="guestTest pr-1" (click)="GuestLogin()"><b>Continue as Guest</b></a>
+      <span class="material-icons-outlined mat-icon">
+        arrow_forward
+        </span>
+    </div>
+    <div class="row">
+      <div class="col-md-8 ">
+        <div class="image mx-5">
+          <img class="login-image" src="assets/Images/4936937.jpg" alt="Analytics">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="login-details">
+          <div class="title">
+            <div class="row pt-4">
+              <div class="col-md-4">
+                <div class="logo-icon">
+   
+                  <span class="material-icons logo">
+                    keyboard
+                  </span></div>
+              </div>
+              <div class="col-md-8 ">
+                <b class="title"> Powerboard</b>
+              </div>
+            </div>
+          </div>
+   
+          <form [formGroup]="loginForm" (ngSubmit)="login()" class="mx-auto pt-4">
+            <div class="form-group required">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="material-icons-outlined mat-icon">
+                      person_outline
+                    </span>
+   
+                  </span>
+                </div>
+                <input type="text" class="form-control" placeholder="Corp ID" formControlName="id" />
+              </div>
+            </div>
+            <div class="form-group pt-3">
+   
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <span class="material-icons-outlined mat-icon">
+                      vpn_key
+                    </span>
+   
+                  </span>
+                </div>
+                <input [type]="fieldTextType ? 'text' : 'password'" class="form-control" formControlName="password"
+                  placeholder="Password" />
+                <div class="input-group-append">
+                  <div class="input-group-text icon">
+               
+                    <div *ngIf="fieldTextType;then content else other_content">here is ignored</div>
+                    <ng-template #content ><span class="material-icons-outlined mat-icon eye" (click)="toggleFieldTextType()">
+                        visibility
+                      </span></ng-template>
+                    <ng-template #other_content><span class="material-icons-outlined mat-icon eye" (click)="toggleFieldTextType()">
+                        visibility_off
+                      </span></ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+   
+            <div class="button pt-4">
+   
+              <button class="btn btn-outline btn-cg" [ngClass]="{'disabled':!loginForm.valid}">
+                Login
+              </button>
+            </div>
+          </form>
+   
+        </div>
+        <img class="Logo" src="../../assets/layoutAssets/navbar/logo1.png">
+      </div>
+      
+    </div>
+   
+  </div>
+
+
+  
+  <!-- <div>
+    <img [src]= "imagePath">
+  </div> -->

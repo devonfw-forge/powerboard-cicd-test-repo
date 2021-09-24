@@ -1,0 +1,96 @@
+/* 
+.codeQuality
+{
+    
+    background-image: url("../../../assets/Images/greencodequality.png");
+    height: 214px ;
+    width:  349px;
+    margin: 20px;
+    border-radius: 5%;
+    background-size: cover;
+   margin-top: 15px;
+   margin-left: 30px;
+    background-position: center;
+    background-repeat: no-repeat; 
+   }
+
+   .codeQuality2
+{
+    
+    background-image: url("../../../assets/Images/redcodequality.png");
+    height: 219px ;
+    width:  349px;
+   margin-top: 20px;
+   margin-left: 30px;
+    border-radius: 5%;
+    background-size: cover;
+   
+    background-position: center;
+    background-repeat: no-repeat; 
+   
+}
+   .Bugs
+{
+    position: relative;
+    top: 64px;
+    left: 55px;
+}
+.Debt
+{
+    position: relative;
+    top: 65px;
+    left: 55px;
+}
+.TotalCoverage
+{
+    position: relative;
+    top: -22px;
+    left: 185px;
+}
+.title
+{
+    position: relative;
+    top: -220px;
+     left: 48px;
+    font-weight: 600;
+    color: #6b6b6b;
+}
+
+
+.bugslabel h5
+{
+    position: relative;
+    top: 27px;
+    left:95px ;
+    color: #524e4e;
+    font-size: 14px;
+}
+.debtlabel h5
+{
+    position: relative;
+    top: 29px;
+    left:95px ;
+    color: #524e4e;
+    font-size: 14px;
+}
+.dayslabel h5
+{
+    position: relative;
+    top: 24px;
+    left:55px ;
+    color: #524e4e;
+    font-size: 14px;
+}
+.coveragelabel h5
+{
+    position: relative;
+    top: -51px;
+    left: 229px ;
+    color: #524e4e;
+    font-size: 14px;
+}
+ */
+
+ h5{
+    margin-bottom: 1rem;
+}

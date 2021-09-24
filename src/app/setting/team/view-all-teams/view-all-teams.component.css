@@ -1,0 +1,129 @@
+.row-text{
+  color: #2B0A3D;
+  text-align: initial;
+}
+
+.alignment{
+  text-align: initial;
+}
+
+.link{
+  cursor: pointer;
+}
+
+.text-weight{
+  font-weight: 500;
+}
+
+.margin{
+  padding-left: 8%;
+}
+
+.icon{
+  color: #0070AD;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+
+
+.spacing{
+  max-width: 75%;
+}
+
+
+
+  .margin-delete{
+padding-left: 5%;
+  }
+
+
+
+ .modal-header{
+   border-bottom: none;
+   padding-bottom: 0%;
+ }
+ /* .modal-body{
+   padding: 2rem;
+   padding-top: 1%;
+ } */
+
+ .modal-header{
+  border-bottom: none;
+  padding-bottom: 0%;
+}
+.modal-footer{
+ border-top: none;
+ height: fit-content;
+}
+.modal-body{
+  padding-bottom: 0px;
+}
+.addModel {
+  max-width: 650px;
+  margin: 1.75rem auto;
+}
+ .margin-access{
+  padding-right: 0%;
+}
+
+.margin-delete{
+  padding-left: 1%;
+}
+
+.btn-basic{
+  border: 2px solid grey;
+  Width :125px;  
+  border-radius: 30px;
+}
+
+.btn-custom {
+  background-color: white;
+  color: grey;
+  cursor: pointer;
+}
+
+
+.btn-cg{
+
+
+  Width :125px;
+  
+  
+  /* Primary/Capgemini blue */
+  color: #0070AD;
+  border: 2px solid #0070AD;
+  
+  border-radius: 30px;
+  }
+  .btn-secondary-cg{
+    Width :125px;
+    
+    border-radius: 30px;
+  }
+  
+  .btn-cg:hover{
+    color: white;
+    background-color: #0070AD;
+    border: 2px solid white;
+  }
+
+  .AddTeam{
+    margin-left: 89%;
+   margin-bottom: 10px;
+  }
+
+  .mat-icon{
+    color: #0070AD;
+    font-size: inherit;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    cursor: pointer;
+  }
+  .title{
+    color: #525151;
+  }
+  .float-right {
+    float: right;
+    padding-left: 12%;
+}

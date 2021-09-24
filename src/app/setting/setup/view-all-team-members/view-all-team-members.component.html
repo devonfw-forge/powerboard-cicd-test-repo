@@ -1,0 +1,161 @@
+<div class="container pt-5 pl-4">
+  <div class="row">
+    <div class="col-md-8">
+
+    </div>
+    <div class="col-md-4 float-right">
+      <a class="icon" data-toggle="modal" data-target="#exampleModal"> + Add Member</a>
+    </div>
+  </div>
+
+  <div class="spacing mt-3 ml-5">
+    <table class="table table-borderless">
+      <thead>
+        <tr>
+
+          <th class="font-weight-light alignment " scope="col"><span class="material-icons-outlined mat-icon mr-1">
+            account_box
+            </span><b class="title">Name</b></th>
+
+          <th class="font-weight-light alignment margin-mail " scope="col"><span class="material-icons-outlined mat-icon mr-1">
+            mail_outline
+            </span><b class="title">Email Address</b></th>
+          <th class="font-weight-light alignment margin-role" scope="col"><span class="material-icons-outlined mat-icon mr-1">
+                  work_outline
+                  </span> <b class="title">Role</b></th>
+          <th scope="col"> </th>
+          <th scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let member of teamMembers">
+
+          <th class="row-text alignment text-weight">{{member.userName | titlecase}}</th>
+          <td class="row-text alignment margin-mail"> {{member.email}} </td>
+          <td class="row-text alignment margin-role">
+            <div *ngFor="let role of settingService.roles">
+              <div *ngIf="role.roleId == member.roleId">{{role.roleName  | removeUnderscore | titlecase}}</div>
+            </div>
+          </td>
+          <td class="margin-access">
+            <span class="material-icons-outlined mat-icon icon" data-toggle="modal" data-target="#EditTeamMemberModal" (click)="setCurrentTeamMember(member)">
+              mode
+              </span>
+          </td>
+          <td class="margin-delete">
+            <div *ngFor="let permission of generalService.getPermissions()">
+              <div *ngIf="generalService.deleteTeamMember == permission">
+                <span class="icon" data-toggle="modal" data-target=".bd-example-modal-sm">
+                    <span class="material-icons-outlined mat-icon" (click)="storeDeleteId(member.userTeamId)">
+                      delete
+                      </span></span>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Delete-Member Modal -->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+  
+
+          
+        <h5 class="modal-title pl-5" id="exampleModalLabel">Delete Member</h5>
+       
+        <button type="button" class="close icon" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     
+      
+      </div>
+      <div class="modal-body pt-3 pb-1">
+        <p>Are you sure you want to delete this Member?</p>
+      </div>
+      <div class="footer pb-4">
+
+          <div>
+
+            <button type="button" class="btn btn-basic btn-custom btn-cg mr-2 ml-3"
+              data-dismiss="modal">No,go back</button>
+            <button type="button" class="btn btn-basic btn-custom btn-cg ml-2 mr-2 " data-dismiss="modal" (click)="deleteMember()">Yes,delete</button>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Add-Member Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-4">
+        <h5 class="modal-title pl-2" id="exampleModalLabel">Add Member </h5>
+        <button type="button" class="close icon" (click)="close()" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pb-1">
+        <app-add-member></app-add-member>
+      </div>
+      <div class="footer pt-2 pb-4">
+        <div class="row">
+          <div class="col-md-4">
+
+          </div>
+          <div class="col-md-8">
+
+            <button type="button" class="btn btn-basic btn-custom btn-cg mr-2 ml-3"
+              data-dismiss="modal" (click)="close()">Close</button>
+            <button type="button" class="btn btn-basic btn-custom btn-cg ml-2 mr-2 " data-dismiss="modal" (click)="addMember()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--Update-Member Modal -->
+<div class="modal fade" id="EditTeamMemberModal" tabindex="-1" role="dialog" aria-labelledby="EditTeamMemberModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-4">
+        <h5 class="modal-title pl-2" id="EditTeamMemberModalLabel">Update Member </h5>
+        <button type="button" class="close icon" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pb-1">
+        <app-edit-team-member></app-edit-team-member>
+      </div>
+      <div class="footer pt-2 pb-4">
+        <div class="row">
+          <div class="col-md-4">
+ 
+          </div>
+          <div class="col-md-8">
+ 
+            <button type="button" class="btn btn-basic btn-custom btn-cg mr-2 ml-3"
+              data-dismiss="modal">Close</button>
+            <button type="button" data-dismiss="modal" class="btn btn-basic btn-custom btn-cg ml-2 mr-2 " (click)="editTeamMember()">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        

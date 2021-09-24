@@ -1,0 +1,57 @@
+<div class="col-md-12 row" style="justify-content: center">
+  <div class="col-md-10 row" style="margin-top: 30px">
+    <div class="col-md-3 text-left">
+      <!-- <span class="material-icons-outlined"> arrow_back </span>
+        <b class="rootBack" (click)="back()">Go Back</b> -->
+      <div style="padding-top: 10px">
+        <a style="font-size: 16px" (click)="back()">
+          <span class="material-icons-outlined mat-icon"> chevron_left </span>
+          <span class="text-style">Go Back </span></a
+        >
+      </div>
+    </div>
+    <div class="col-md-7 text-right">
+      <span class="btn btn-primary btn-file">
+        <span style="font-size: 16px"> + Add Files </span>
+        <input type="file" />
+      </span>
+    </div>
+    <div class="col-md-2 text-right" style="padding-top: 10px">
+      <span
+        (click)="deleteCheckedFiles()"
+        class="material-icons"
+        style="color: #0070ad; cursor: pointer; font-size: 16px"
+      >
+        delete_outline
+      </span>
+    </div>
+    <div class="col-md-12 mt-2 row">
+      <div class="col-md-6 text-left">
+        <span class="folderpath">
+          <b>/ {{ configureService.selectedSubFolderName | titlecase }}</b>
+        </span>
+      </div>
+      <div class="col-md-6 text-right">
+        <a>Select All</a>
+        <input
+          type="checkbox"
+          [(ngModel)]="selectAll"
+          (click)="selectAllItems()"
+        />
+      </div>
+    </div>
+    <div>
+        <div class="row mt-4 ml-2">
+            <div *ngFor="let item of allFiles">
+              <img
+                class="FileThunmnail"
+                src="../../../../../assets/Images/redcodequality.png"
+              />
+              <input name="selectAll" type="checkbox" [(ngModel)]="item.isChecked" />
+            </div>
+          </div>
+    </div>
+
+  </div>
+</div>
+

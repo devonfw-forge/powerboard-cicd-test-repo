@@ -1,0 +1,91 @@
+<!-- <div class="codeQuality" *ngIf="codeQuality?.status === 'PASSED'">
+    
+    <span class ="Bugs" *ngIf="codeQuality?.bugs < 10"><h2>0{{codeQuality?.bugs}}</h2></span>
+    <span class ="Bugs" *ngIf="codeQuality?.bugs > 9" ><h2>{{codeQuality?.bugs}}</h2></span>
+
+<div class="bugslabel">
+    <h5>Bugs</h5>
+</div>
+
+    <span class ="Debt"><h2>{{codeQuality?.debt}}</h2></span>
+    <div class="debtlabel">
+        <h5>Debt</h5>
+    </div>
+
+    <div class="dayslabel">
+        <h5>Days</h5>
+    </div>
+
+    <span class="TotalCoverage"><h4>{{codeQuality?.codeCoverage}}%</h4></span>
+    <div class="coveragelabel">
+        <h5>Total Coverage</h5>
+    </div>
+
+</div>
+<h5 class="title">Code Quality</h5>
+
+<div class="codeQuality2" *ngIf="codeQuality?.status != 'PASSED'">
+    <span class ="Bugs" *ngIf="codeQuality?.bugs < 10"><h4>0{{codeQuality?.bugs}}</h4></span>
+    <span class ="Bugs" *ngIf="codeQuality?.bugs >= 10" ><h4>{{codeQuality?.bugs}}</h4></span>
+
+
+    <div class="bugslabel">
+        <h5>Bugs</h5>
+    </div>
+    
+        <span class ="Debt"><h4>{{codeQuality?.debt}}</h4></span>
+        <div class="debtlabel">
+            <h5>Debt</h5>
+        </div>
+    
+        <div class="dayslabel">
+            <h5>Days</h5>
+        </div>
+    
+        <span class="TotalCoverage"><h4>{{codeQuality?.codeCoverage}}%</h4></span>
+        <div class="coveragelabel">
+            <h5>Total Coverage</h5>
+        </div>
+    
+    </div>
+
+ -->
+
+
+
+
+
+    <div class="row">
+        <div class="col-md-12" style=" font-weight: 500;    margin-bottom: 5px;">Code Quality</div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3">
+                <div *ngIf="codeQuality?.status != 'PASSED'"> 
+                    <div class="text-danger"><h5>FAILED</h5></div>
+                </div>
+                <div *ngIf="codeQuality?.status == 'PASSED'"> 
+                    <div class="text-success"><h5>PASSED</h5></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <span *ngIf="codeQuality?.bugs < 10"><h5>0{{codeQuality?.bugs}}</h5></span>
+                    <span *ngIf="codeQuality?.bugs > 9" ><h5>{{codeQuality?.bugs}}</h5></span>
+                    <div class="align-text-bottom"> &nbsp; Bugs</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row ml-1">
+                    <span><h5>{{codeQuality?.codeSmells}}</h5></span>
+                    <div class="align-text-bottom">&nbsp; Code Smells</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <span><h5>{{codeQuality?.codeCoverage}}%</h5></span>
+                    <div class="align-text-bottom"> &nbsp;Code Coverage</div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,164 @@
+<div class="container ml-5 mr-5 mt-3" *ngIf="!configureService.viewSubFolder">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="row float-right">
+        <input class="checkbox pr-2" id='selectAll'
+          type="checkbox"
+          [checked]='isMasterSel'
+          (click)="checkUncheckAll()"
+        />
+        <label for="selectAll">Select All</label>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3 mt-2">
+          <span
+            class="action-button"
+            data-toggle="modal"
+            data-target=".bd-example-modal-sm"
+            style="font-size: 16px"
+          >
+            + New Folder
+          </span>
+        </div>
+        <div class="col-md-3">
+          <span class="btn btn-primary btn-file">
+            <span style="font-size: 16px"> + Add File </span>
+            <input type="file" (change)="uploadFile($event)" />
+          </span>
+        </div>
+        <div class="col-md-3 mt-2">
+          <span class="action-button" style="font-size: 16px">
+            + SlideShow
+          </span>
+        </div>
+        <div class="col-md-2 mt-2 float-center">
+          <span class="material-icons mat-icon" (click)="deleteFile()"> delete_outline </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="pl-1 pt-1"
+    *ngFor="let album of multimedia.folderResponse; index as i"
+  >
+    <div class="text-left">
+      <div class="icon" >
+        <span
+          class="material-icons-outlined mat-icon pr-1"
+          (click)="viewSubFolder(album.folderId, album.folderName)"
+        >
+          folder </span
+        ><span class="pr-1" (click)="viewSubFolder(album.folderId)">
+          {{ album.folderName | titlecase }}</span
+        ><input class="checkbox"
+          type="checkbox"
+          [checked]='multimedia.folderResponse[i].isSelected'
+          (click)="addOrRemoveFromFolderList(i)"
+        />
+      </div>
+    </div>
+  </div>
+  <div *ngIf="multimedia.rootResponse.length != 0">
+    <div class="col-md-12 mt-3">
+      <div class="row">
+        <div
+          class="col-md-3 mt-3"
+          *ngFor="let file of multimedia.rootResponse; index as i"
+        >
+          <img
+            id="bigImage"
+            src="{{ file.fileName }}"
+            style="width: 85%; height: auto"
+          />
+          <!-- <span
+              class="material-icons mat-icon"
+              (click)="deleteFile(file.fileId)"
+            >
+              delete_outline
+            </span> -->
+          <div class="row">
+            <div class="col-md-6 float-left">
+              <!-- <div *ngIf="multimedia.rootResponse[i].inSlideshow"> -->
+              <span class="material-icons-outlined">
+                slideshow
+                </span>
+              <!-- </div> -->
+            </div>
+            <div class="col-md-6 float-right">
+              <input class="checkbox"
+              type="checkbox"
+              [checked]='multimedia.rootResponse[i].isSelected'
+              (click)="addOrRemoveFromFileList(i)"
+            />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="configureService.viewSubFolder">
+  <app-configure-multimedia-subfolder></app-configure-multimedia-subfolder>
+</div>
+
+<!-- Add folder Modal -->
+
+<div
+  class="modal fade bd-example-modal-sm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="mySmallModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header pl-5">
+        <h5 class="modal-title pl-5" id="exampleModalLabel">Add Folder</h5>
+
+        <button
+          type="button"
+          class="close icon"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="close()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body pt-3 pb-1">
+        <div class="mt-2">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Folder Name"
+            [(ngModel)]="newFolderName"
+          />
+        </div>
+      </div>
+      <div class="footer pb-3 pt-4">
+        <div>
+          <button
+            type="button"
+            class="btn btn-basic btn-custom btn-cg mr-2 ml-3"
+            data-dismiss="modal"
+            (click)="close()"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-basic btn-custom btn-cg ml-2 mr-2"
+            data-dismiss="modal"
+            (click)="addFolder()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

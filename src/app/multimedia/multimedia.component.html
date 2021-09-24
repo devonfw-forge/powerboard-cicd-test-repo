@@ -1,0 +1,118 @@
+<div style="width: 100%; justify-content: center;" *ngIf="!slideshowService.isSlideshowRunning">
+  <div class="col-md-11  row" style="margin-left: 5%;">
+      <div style=" height: 83vh; width:20%;">
+          <div style="margin:10px; margin-left: 35px;">
+              <div style="color: #0070AD; font-size: 25px; font-weight: 400; font: ubuntu;">Multimdedia</div>
+              <div style="margin-top: 30px;">
+                  <a *ngIf="currentFolder == 'seeAll'" (click)="seeAll()" style="color: #0070AD; font-size: 16px; font-weight: 500; font: ubuntu;">See All</a>
+                  <a *ngIf="currentFolder !== 'seeAll'" (click)="seeAll()" style="color: #2b0a3d; font-size: 16px; font-weight: 500; font: ubuntu;">See All</a>
+                  <div *ngIf="multimedia.root.length>0">
+                      <div style="margin-top: 5px;" *ngFor="let folder of multimedia.root" >
+                          <span class="material-icons-outlined mat-icon">
+                              folder
+                          </span>
+                           <span *ngIf="folder.folderName !== currentFolder" style="font-size: 16px; font-weight: 500; color: #2b0a3d; "  (click)="getFilesFromFolder(folder.folderId,folder.folderName)"> {{folder.folderName}}</span>
+                           <span *ngIf="folder.folderName == currentFolder" style="font-size: 16px; font-weight: 500;color: #0070AD; "  (click)="getFilesFromFolder(folder.folderId,folder.folderName)"> {{folder.folderName}}</span>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+      </div>
+      <div style="height: 83vh; width: 80%;"  *ngIf="multimediaFiles && multimediaFiles.length > 0">
+          <div class="row" style="height: 75%; ">
+              <div class="col-md-1 arrow" style=" margin: auto; text-align: end;">
+                  <span class="material-icons-outlined mat-icon" [ngClass]="{'disabled': currentIndex===0}" (click)="previousItem()">
+                      arrow_back_ios
+                    </span>
+              </div>
+              <div class="col-md-10 pt-1" style="justify-content: center;">
+                  <div *ngIf="is_video">
+                      <vg-player *ngIf="currentItem" (onPlayerReady)="onPlayerReady($event)" (tap)="onTap()">
+                        <vg-buffering></vg-buffering>
+        
+                        <vg-controls>
+                          <vg-play-pause></vg-play-pause>
+                          <vg-playback-button></vg-playback-button>
+        
+                          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+        
+                          <vg-scrub-bar>
+                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                          </vg-scrub-bar>
+        
+                          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+        
+                          <vg-mute></vg-mute>
+                          <vg-volume></vg-volume>
+        
+                          <vg-fullscreen></vg-fullscreen>
+                        </vg-controls>
+        
+        
+                        <video #media [vgMedia]="media" [src]="realItem" id="singleVideo" autoplay="true" crossorigin></video>
+                      </vg-player>
+                    </div>
+                    <div *ngIf="is_image">
+                      <img style="height: 60vh; width: 100%;" [src]="realItem" alt="" />
+                    </div>
+         
+                     
+              </div>
+              <div class="col-md-1 arrow" style=" margin: auto;">
+                  <span class="material-icons-outlined mat-icon"
+                      [ngClass]="{'disabled': currentIndex===thumbnailData.length-1}" (click)="nextItem()">
+                      arrow_forward_ios
+                  </span>
+              </div>
+              
+          </div>
+          <div class="row" style="height: 25%;">
+              <div class="col-md-1 arrow" style=" margin: auto; text-align: end;">
+                  <span class="material-icons-outlined mat-icon"
+                      (click)="scrollLeft()">arrow_back_ios
+                  </span>
+              </div>
+              <div class="col-md-10">
+
+                  <div #widgetsContent class="custom-slider-main">
+  
+                      <div class="col-md-3" *ngFor="let item of thumbnailData; let i = index"
+                          (click)="onClickPlaylistItem(item, i)"> 
+                          <div class="d-flex flex-row" >
+                              <div *ngIf="thumbnailIsImage[i];then content else other_content">here is ignored</div>
+                              <ng-template #content><img class="thumbnail image" [ngClass]="{
+                                  'selected': i===currentIndex}" src={{item}} />
+                              </ng-template>
+                              <ng-template #other_content> <video class="thumbnail video" [ngClass]="{
+                                  'selected': i===currentIndex}" src={{item}}></video>
+                              </ng-template>
+
+                          </div>
+                      </div>
+                  </div>
+              
+              </div>
+              <div class="col-md-1 arrow" style=" margin: auto;">
+                  <span class="material-icons-outlined mat-icon"
+                      (click)="scrollRight()">arrow_forward_ios
+                  </span>
+              </div>
+          </div>
+
+      </div>
+  </div>
+  
+</div>
+
+
+<!-- Slideshow Implementation -->
+<div class=" text-center" [ngClass]="{'slideshow-bg': slideshowService.isSlideshowRunning}">
+  <div class=" slide-image-viewer" *ngIf="is_image && slideshowService.isSlideshowRunning">
+    <div>
+
+      <img class="shadow slideshow-image" [src]="realItem" alt="" />
+    </div>
+  </div>
+</div>

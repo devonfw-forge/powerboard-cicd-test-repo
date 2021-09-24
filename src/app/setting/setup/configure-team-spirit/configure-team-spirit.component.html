@@ -1,0 +1,120 @@
+
+<!-- <form [formGroup]="form" (ngSubmit)="sendTeamSpriritConfig()">
+  <div>
+    
+    <h4>Team members number:</h4>
+    <input type="number" formControlName="teammembers" />
+    <h4>Sprint Length (days between surveys):</h4>
+    <input type="number" formControlName="sprintlength" />
+    <h4>Start date (first sprint start):</h4>
+    <input type="date" format="DD-MM-YYYY" formControlName="startdate" />
+  </div>
+  <button class="button" type="submit">
+   
+    Send to TeamSPIRIT
+  </button>
+  <p *ngIf="sendStatus === 1">OK!</p>
+  <p *ngIf="sendStatus === 2">Error!</p>
+</form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form #configTeamSpirit="ngForm" (ngSubmit)="sendTeamSpriritConfig(configTeamSpirit)">
+  <h2 class="title">Team spirit</h2>
+  <div class="input-field">
+      <i class="fa fa-users"></i>
+      <input
+        #teamMemberNumber="ngModel"
+        ngModel
+        required
+        [class.is-invalid]="teamMemberNumber.invalid && teamMemberNumber.touched"
+        type="number"
+        name="teamMemberNumber"
+        placeholder="No. of Members"
+        class="form-control"
+        
+        [(ngModel)]="teamSpiritDetails.Num_mumbers"
+      />
+  </div>
+    <div *ngIf="teamMemberNumber.errors && teamMemberNumber.invalid && teamMemberNumber.touched">
+      <span class="text-danger" *ngIf="teamMemberNumber.errors?.required">Team member number cannot be null</span>
+    </div>
+
+
+
+
+
+    <div class="input-field">
+      <i class="fa fa-clock-o"></i>
+      <input
+        #sprintlength="ngModel"
+        ngModel
+        required
+        [class.is-invalid]="sprintlength.invalid && sprintlength.touched"
+        type="number"
+        name="sprintlength"
+        placeholder="Sprint Length"
+        class="form-control"
+        
+        [(ngModel)]="teamSpiritDetails.Frequency"
+      />
+    </div>
+    <div *ngIf="sprintlength.errors && sprintlength.invalid && sprintlength.touched">
+      <span class="text-danger" *ngIf="sprintlength.errors?.required"
+        >Sprint Length cannot be null</span>
+     
+    </div>
+  <div class="input-field">
+    <i class="fa fa-clock-o"></i>
+    <input
+      #startDate="ngModel"
+      ngModel
+      required
+      [class.is-invalid]="startDate.invalid && startDate.touched"
+      type="date"
+      format="DD-MM-YYYY"
+      name="startDate"
+      placeholder="Start Date"
+      class="form-control"
+      
+      [(ngModel)]="teamSpiritDetails.StartDate"
+    />
+  </div>
+  <div *ngIf="startDate.errors && startDate.invalid && startDate.touched">
+    <span class="text-danger" *ngIf="startDate.errors?.required"
+      >Start date cannot be null</span>
+   
+  </div>
+
+
+
+  <input
+    type="submit"
+    id="sign-button"
+    value="Submit Data"
+    class="disable-btn solid"
+    [hidden]="configTeamSpirit.form.valid"
+    [disabled]="!configTeamSpirit.form.valid"
+  />
+  <input
+    type="submit"
+    id="sign-button"
+    value="Submit Data"
+    class="enable-btn solid"
+    [hidden]="!configTeamSpirit.form.valid"
+  />
+</form>

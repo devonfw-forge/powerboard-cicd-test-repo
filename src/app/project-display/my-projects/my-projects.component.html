@@ -1,0 +1,25 @@
+<div class="mt-2">  
+<h3 id="title">Your Projects</h3>
+
+<div class="row">
+<div class="card" (click)="getTeamDetails(team.teamId)" *ngFor="let team of myTeams"> 
+    <h3>{{team.teamName}}</h3>
+    <img class="Logo" src="{{getLogoPath(team.teamId, team.teamLogo)}}">
+    
+    <div class="row" style="position: absolute; bottom: 15px; text-align: left; left: 0px;" >
+        <div class="row" *ngIf="team.teamStatus != 3" >
+          <span class="dot" *ngIf="team.teamStatus===2" style="background-color: #FF304C"></span>
+          <span class="protecttitle"  style="color: #FF304C;" *ngIf="team.teamStatus===2">Off Track</span>
+          <span class="dot" *ngIf="team.teamStatus===1" style="background-color: #23BD98;"></span>
+          <span class="protecttitle"  style="color: #23BD98;" *ngIf="team.teamStatus===1">On Track</span>
+       </div>
+  
+        <div class="row" *ngIf="team.teamStatus===3">
+       <span class="dot" style="background-color: orange;"></span>
+       <span class="protecttitle"  style="color: orange;">Potential Risk</span>
+       </div>
+      </div>
+      <a style="position: absolute; bottom: 15px; text-align: right; right :20px; color: #0070AD; cursor: pointer;">view project ></a>
+</div>
+</div>
+</div>

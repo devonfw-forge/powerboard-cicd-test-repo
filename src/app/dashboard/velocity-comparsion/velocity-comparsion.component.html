@@ -1,0 +1,64 @@
+<!-- 
+<div class="velocityComparison">
+    <div>
+        <h5 class="title">Velocity</h5>
+    </div>
+    <div>
+       
+
+        <div class="Avg">
+            <h2 class="avgvalue">{{velocity?.Avg}}</h2>
+            <h4 class="title1">Average Velocity</h4>
+            
+        </div>
+
+        <div class="row justify-content-between spacestyle">
+
+
+            <div class="days row">
+               
+                <h2>{{velocity?.Committed}}</h2>
+                <div class="label">
+                    <h5></h5>
+                    <h5>Committed</h5>
+                </div>
+               
+                
+            </div>
+
+
+
+            <div class="days row">
+               
+                <h2>{{velocity?.Completed}}</h2>
+                <div class="label">
+                    <h5></h5>
+                    <h5>Completed</h5>
+                </div>
+               
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+ -->
+
+
+<div class="row">
+    <div class="col-md-12" style=" font-weight: 500;    margin-bottom: 5px;">Velocity</div>
+    <div class="col-md-12 ">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row"  >
+                    <h5 style="margin-left: 15px; color: #0070AD;">{{velocity?.Avg}}&nbsp;Average Velocity</h5></div>
+            </div>
+            <div class="col-md-3">
+                <div class="row"><h5>{{velocity?.Committed}}</h5>&nbsp;{{workUnit | titlecase}} Committed</div>
+            </div>
+            <div class="col">
+                <div class="row ml-1"><h5>{{velocity?.Completed}}</h5>&nbsp;{{workUnit | titlecase}} Completed</div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,43 @@
+
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+    color: #0070AD;
+    font-size: 20px;
+    background-color: white;
+    border: none;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;  
+    cursor: inherit;
+    display: block;
+  }
+  .mat-icon {
+    
+    font-size: inherit;
+    vertical-align: middle;
+    padding-bottom: 3px;
+    cursor: pointer;
+  }
+  
+  .text-style {
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .folderpath{
+    margin-left: 5px;
+    margin-top: 25px;
+  }
+  .FileThunmnail{
+      height: 100px;
+      width: 150px;
+  }

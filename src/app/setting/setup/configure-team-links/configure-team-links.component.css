@@ -1,0 +1,78 @@
+.row-text{
+  color: #2B0A3D;
+  text-align: initial;
+}
+
+.alignment{
+  text-align: initial;
+}
+
+.link{
+  cursor: pointer;
+}
+
+.text-weight{
+  font-weight: 500;
+}
+
+.margin{
+  padding-left: 6%;
+}
+
+.icon{
+  color: #0070AD;
+  cursor: pointer;
+}
+
+.mat-icon{
+  color: #0070AD;
+  font-size: inherit;
+  vertical-align: middle;
+  padding-bottom: 3px;
+}
+
+
+
+.spacing{
+  max-width: 75%;
+}
+
+
+
+
+ .modal-header{
+   border-bottom: none;
+   padding-bottom: 0%;
+ }
+ .modal-body{
+   padding: 2rem;
+   padding-top: 1%;
+ }
+
+ .btn-basic{
+  border: 2px solid grey;
+  Width :125px;  
+  border-radius: 30px;
+}
+
+.btn-custom {
+  background-color: white;
+  color: grey;
+  cursor: pointer;
+}
+
+
+.btn-cg{
+  
+  color: #0070AD;
+  border-color:  #0070AD;
+
+  }
+
+  .btn-cg:hover{
+    background-color: #0070AD;
+    color: white;
+  }
+  .title{
+    color: #525151;
+  }

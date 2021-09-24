@@ -1,0 +1,67 @@
+<div class="container bg-height pl-5" *ngIf="!slideshowService.isSlideshowRunning">
+    <div class="team-links pt-3" *ngIf="!slideshowService.isSlideshowRunning">
+
+
+        <div class="team-sec-1">
+            <b class="title">Meeting Links</b>
+        </div>
+        <div class="team-sec-2 pt-3 inner-container">
+
+            <ng-template let-link ngFor [ngForOf]="teamLinks" let-i="index" >
+                <li class="text-left" [ngClass]="{'spacing-1':i==1}" *ngIf="link.linkType!='web_link'">
+                    <a class="spacing-2"  (click)="openMeetingLink(link.links)">
+                        
+                        <span >{{ link.linkName}}</span>
+                    </a>
+                </li>
+            </ng-template>
+
+        </div>
+
+    </div>
+    <div class="web-links pt-3" *ngIf="!slideshowService.isSlideshowRunning">
+        <div class='web-sec-1' >
+            <b class="title">Web Links</b> 
+        </div>
+        <div class="web-sec-2 pt-3 inner-container" >
+            
+                <ng-template let-link ngFor [ngForOf]="teamLinks" let-i="index">
+                    <li  [ngClass]="{'spacing-1':i==1}" *ngIf="link.linkType=='web_link'">
+                        <a class="spacing-2" [ngClass]="{'selected': src===link.links && isElectronRunning}" (click)="openLink(link.links)">
+                            <span >{{ link.linkName}}</span>
+                        </a>
+                    </li>
+                </ng-template>
+            
+        </div>
+        
+        <div class="web-sec-3 pt-4" >
+
+            <webview class="frame" src="" allowpopups partition="persist:frame" autosize="on" style="min-width:900px; min-height:420px"
+                *ngIf="isElectronRunning">
+            </webview>
+        </div>
+        <div class="spinner pt-5" *ngIf="loading">
+            <div class="spinner-border" style="height: 50px; width: 50px;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div [ngClass]="{'slideshow-bg':slideshowService.isSlideshowRunning}" *ngIf="slideshowService.isSlideshowRunning">
+    <div class="web-sec-3 pt-4" [ngClass]="{'shadow':slideshowService.isSlideshowRunning}">
+        <div *ngIf="slideshowService.isSlideshowRunning">
+        </div>
+        <webview class="frame" [ngClass]="{'slideshow-frame':slideshowService.isSlideshowRunning}" src="" allowpopups partition="persist:frame" autosize="on" style="min-width:900px; min-height:420px"
+            *ngIf="isElectronRunning">
+        </webview>
+    </div>
+    <div class="spinner pt-5" *ngIf="loading">
+        <div class="spinner-border" style="height: 50px; width: 50px;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>

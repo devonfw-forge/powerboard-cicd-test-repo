@@ -1,0 +1,11 @@
+.dropdown{
+    height: 35px;
+
+}
+
+input::value{
+    color: #2B0A3D;
+}
+.dropdown-item{
+    cursor: pointer;
+  }

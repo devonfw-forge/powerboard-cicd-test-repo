@@ -1,0 +1,47 @@
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+       
+      </div>
+    </div>
+    
+    <div style="background-color: white">
+      <div id="wrapper" class="row">
+        <div style="height: 40px; width: 100%; background-color: #f1f8fc">
+          <!-- <h4 style="margin-top: 3px; margin-left: 15px;"> Configuration</h4> -->
+        </div>
+        <div id="side-menu">
+          <div class="navigation">
+            <ul>
+              <li class="list active" (click)="changeActive(1); showEditTeam()">
+                <a>
+                  <span class="title">Edit Team</span>
+                </a>
+              </li>
+              <li class="list" (click)="changeActive(2); showViewTeamMember()">
+                <a>
+                  <span class="title">View Members</span>
+                </a>
+              </li>
+    
+              <li class="list" (click)="changeActive(3); showTeamLink()">
+                <a>
+                  <span class="title">Links</span>
+                </a>
+              </li>
+    
+              <li class="list" (click)="changeActive(4);showMultimedia()">
+                <a>
+                  <span class="title">Multimedia</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="side-container">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+    

@@ -1,0 +1,96 @@
+<form [formGroup]= "form">
+  <div class="row">
+      <div class="col-md-9" style="margin-top: 10px;">
+        <div class="col-md-12">
+          <div class="form-group">
+          <input class="form-control" formControlName="teamName" placeholder="Team Name">
+           <label class="text-danger"
+              *ngIf="form.get('teamName').touched && form.get('teamName').errors?.required">
+              Required Field
+          </label> 
+          </div>
+        </div>
+          <div class="row">
+              
+          
+        <div class="col-md-6">
+          <div class="form-group teamcode">
+          <input class="form-control" formControlName="teamCode" placeholder="Team code">
+           <label class="text-danger"
+              *ngIf="form.get('teamCode').touched && form.get('teamCode').errors?.required">
+              Required Field
+          </label> 
+          </div>
+        </div>
+
+
+
+        <div class="col-md-6">
+          <div class="form-group projectkey">
+          <input class="form-control" formControlName="projectKey" placeholder="Project Key">
+          <label class="text-danger"
+              *ngIf="form.get('projectKey').touched && form.get('projectKey').errors?.required">
+              Required Field
+          </label> 
+          </div>
+        </div>
+
+      </div>
+
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <div class="dropdown" style="position: static;">
+              <button class="btn border dropdown-toggle" style="width: 100%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               {{centerName}}
+              </button>
+              <div class="dropdown-menu" style="width: 100%;" aria-labelledby="dropdownMenuButton">
+                  <div *ngFor="let list of ADCList">
+                <a class="dropdown-item" (click)="updateCenter(list.centerId, list.centerName)">{{list.centerName}}</a>
+                </div>
+               
+              </div>
+          </div> 
+           <label class="text-danger"
+              *ngIf="form.get('ad_center').touched && form.get('ad_center').errors?.required">
+              Required Field
+          </label> 
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+  
+      </div>
+      <div class="col-md-3 form-group">
+        <p><img id="output" style="height: 100px; width: 100px;" src="assets/layoutAssets/logo/uploadLogo.PNG"/></p>
+        <span class="btn btn-primary btn-file">
+          <span class="material-icons-outlined" style="font-size: 14px;">
+            upload
+            </span>
+            <span style="font-size: 14px;">
+              Upload Logo
+            </span>
+           <input type="file" (change)="uploadFile($event)"/>
+      </span>
+      </div>
+  </div>  
+
+   <!--  <div class="form-group required">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-text-width icon" aria-hidden="true"></i>
+
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Team Name" formControlName="id" />
+        </div>
+      </div> -->
+
+  </form>

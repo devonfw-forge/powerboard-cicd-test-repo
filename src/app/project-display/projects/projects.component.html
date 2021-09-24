@@ -1,0 +1,37 @@
+<div class="mt-4">
+<h3 id="title"> All Projects</h3>
+<div class="dropdown mt-4">
+    <button class="btn btn-light" style="background: white; width: 100%; border-radius: 10px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     <span style="position: relative; left: -60px">{{ADC_Center}}</span>
+     <span style="position: relative; left: 60px"  class="dropdown-toggle"></span>
+    </button>
+    <div class="dropdown-menu" style="width: 100%;" aria-labelledby="dropdownMenuButton">
+        <div *ngFor="let list of ADCList">
+      <a class="dropdown-item" (click) = "getTeamsInADC(list)" *ngIf="list.centerName!=ADC_Center">{{list.centerName}}</a>
+      
+    </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-3">
+
+<div class="card" (click)="getTeamDetails(team.teamId)" *ngFor="let team of ADCTeams"> 
+    <h3 class="teamname">{{team.teamName}}</h3>
+    <img class="Logo" src="{{getLogoPath(team.teamId, team.teamLogo)}}">
+    
+    <div class="row" style="position: absolute; bottom: 15px; text-align: left; left: 0px;" >
+      <div class="row" *ngIf="team.teamStatus != 3" >        
+        <span class="dot" *ngIf="team.teamStatus=== 2" style="background-color: #FF304C;"></span>
+        <span class="protecttitle" style="color: #FF304C;" *ngIf="team.teamStatus===2">Off Track</span>
+        <span class="dot" *ngIf="team.teamStatus===1" style="background-color: #23BD98;"></span>
+        <span class="protecttitle" style="color: #23BD98;" *ngIf="team.teamStatus===1">On Track</span>
+       </div>
+       <div class="row" *ngIf="team.teamStatus===3">
+         <span class="dot" style="background-color: orange;"></span>
+        <span class="protecttitle"  style="color: orange;">Potential Risk</span>
+      </div>
+    </div>
+    <a style="position: absolute; bottom: 15px; text-align: right; right : 20px; color: #0070AD; cursor: pointer;">view project ></a>
+  </div>
+</div>
+ 

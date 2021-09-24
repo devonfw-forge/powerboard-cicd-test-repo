@@ -1,0 +1,116 @@
+.input-field input {
+  background: transparent;
+ /*  background-color: white; */
+  outline: none;
+  border: none;
+  height: 31px;
+ width: 160px;
+  line-height: 31;
+  font-weight: 400;
+  font-size: 1.0rem;
+  color: #333;
+  padding-left: 0px;
+  margin-left: 30px;
+}
+
+.mat-icon{
+  color: #0070AD;
+  font-size: inherit;
+  vertical-align: middle;
+  padding-bottom: 3px;
+  cursor: default;
+}
+
+.input-field input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+td{
+  text-align: left;
+}
+tr{
+  line-height: 35px;
+  height: 60px;
+}
+th, td{
+  width: 150px;
+  
+}
+
+.btn-cg{
+ 
+  Width :157px;
+  Height :36px;
+  margin-left: 10px;
+  
+  /* Primary/Capgemini blue */
+  color: #0070AD;
+  border: 2px solid #0070AD;
+  
+  border-radius: 30px;
+  padding-top: 2%;
+  }
+  
+  .btn-cg:hover{
+    color: white;
+    background-color: #0070AD;
+    border: none;
+  }
+
+  .logo{
+    width: 175px;
+    border: 1px solid grey;
+  }
+
+  .fa{
+    color: #0070AD;
+    margin: 5px;
+    margin-left: 10px;
+  }
+
+  .btn-file {
+    position: relative;
+    overflow: hidden;
+    color: #0070AD;
+    font-size: 14px;
+    background-color: white;
+    border: none;
+    line-height: 14px;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;  
+    cursor: inherit;
+    display: block;
+  }
+
+  .spinnerPosition{
+    position: absolute;
+    width: 53%;
+    bottom: 249px;
+    height: 104px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    backdrop-filter: blur(1px);
+}
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 34px;
+  vertical-align: text-bottom;
+  border: .25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border .75s linear infinite;
+}

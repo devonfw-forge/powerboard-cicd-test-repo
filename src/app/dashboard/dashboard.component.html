@@ -1,0 +1,47 @@
+
+<div style="height:10vh; width:100%" *ngIf="slideshowService.isSlideshowRunning"></div>
+<div class="container bg-height">
+ <!--  <h3 style="color: #0070AD;">Dashboard</h3> -->
+  <div class="row ml-1">
+    <div class="row ml-2" >
+      <div class="row" *ngIf="teamStatus != 3"  >         
+        <span class="dot" *ngIf="teamStatus===2" style="background-color: red;"></span>
+        <span *ngIf="teamStatus===2">Off Track</span>
+        <span class="dot" *ngIf="teamStatus===1" style="background-color: green;"></span>
+        <span *ngIf="teamStatus===1">On Track</span>
+      </div>
+      <div class="row" *ngIf="teamStatus===3">
+        <span class="dot" style="background-color: orange;"></span>
+        <span >Potential Risk</span>
+      </div>
+    </div>
+    <div class="row ml-5">
+      <span>Sprint: &nbsp;<span class="sprintno">{{sprintDetails.sprint_number}}</span></span>
+      <span class="ml-4">Sprint Day: &nbsp;<span class="sprintno">{{sprintDetails.Sprint_current_day}}</span></span>
+      <span class="ml-4">Sprint Duration: &nbsp;<span class="sprintno">{{sprintDetails.Sprint_days}} Days</span></span>
+    </div> 
+  </div>
+<!--   <hr class="col-md-12 align-self-center" /> -->
+  <div class="row align-items-center justify-content-center mt-3">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="kpi col-md-6">
+          <app-team-spirit></app-team-spirit>
+        </div>
+        <div class="kpi col ml-1">
+          <app-client-satisfaction></app-client-satisfaction>
+        </div>
+      </div>
+    </div>
+    <div class="kpi col-md-12 mt-3">
+      <app-code-quality></app-code-quality>
+    </div>
+    <div class="kpi col-md-12 mt-3">
+      <app-burndown></app-burndown>
+    </div>
+
+    <div class="kpi col-md-12 mt-3">
+      <app-velocity-comparsion></app-velocity-comparsion>
+    </div>
+  </div>
+</div>

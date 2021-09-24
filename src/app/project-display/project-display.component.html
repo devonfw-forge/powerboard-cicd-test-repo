@@ -1,0 +1,18 @@
+<div *ngIf= "isMyProjects" style="height: 90vh; overflow: auto; margin: 0 auto; " class="col-md-12 row">
+  <div class="col-md-12 row" style="height: 30vh;">
+  <div class="col-md-1"></div>  
+  <div class="col-md-10"><app-my-projects></app-my-projects></div>
+  </div>
+  <div class="col-md-12 row" style="height: 60vh;">
+  <div class="col-md-1"></div>
+  <div class="col-md-10"><app-projects></app-projects></div>
+</div>
+</div>
+
+
+<div *ngIf= "!isMyProjects" class="col-md-12 row">
+  <div class="col-md-1">
+
+  </div>
+    <div class="col-md-10" style="height: 90vh; overflow: auto;"><app-projects></app-projects></div>
+</div>

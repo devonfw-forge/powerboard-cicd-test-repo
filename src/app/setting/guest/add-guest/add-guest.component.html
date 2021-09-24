@@ -1,0 +1,81 @@
+<div style="margin: 20px;">
+  
+  <h3>Add Guest</h3>
+        <hr>
+
+    <form #addGuestForm="ngForm" (ngSubmit)="addGuest(addGuestForm)">
+      
+
+
+      <div class="input-field" id="username">
+        <i class="fa fa-user"></i>
+        <input
+          [(ngModel)]="guest.username"
+          #username="ngModel"
+          ngModel
+          required
+          [class.is-invalid]="username.invalid && username.touched"
+          type="text"
+          name="username"
+          placeholder="Username"
+          class="form-control"
+         
+        />
+      </div>
+
+
+
+      <div *ngIf="username.errors && username.invalid && username.touched">
+        <span class="text-danger" *ngIf="username.errors?.required"
+          >Username cannot be null</span
+        >
+        <span class="text-danger" *ngIf="username.errors?.pattern"
+          >Usename Not valid</span
+        >
+      </div>
+
+
+
+      <div class="input-field">
+        <i class="fa fa-envelope"></i>
+        <input
+          #email="ngModel"
+          ngModel
+          required
+          [class.is-invalid]="email.invalid && email.touched"
+          type="email"
+          name="email"
+          placeholder="Email"
+          class="form-control"
+          
+          [(ngModel)]="guest.email"
+        />
+      </div>
+
+
+
+      <div *ngIf="email.errors && email.invalid && email.touched">
+        <span class="text-danger" *ngIf="email.errors?.required"
+          >Password cannot be null</span
+        >
+       
+      </div>
+      <input
+        type="submit"
+        id="sign-button"
+        value="Add Guest"
+        class="disable-btn solid"
+        [hidden]="addGuestForm.form.valid"
+        [disabled]="!addGuestForm.form.valid"
+      />
+      <input
+        type="submit"
+        id="sign-button"
+        value="Add Guest"
+        class="btn solid"
+        [hidden]="!addGuestForm.form.valid"
+      />
+    </form>
+  </div>
+
+  <div id="snackbar"></div>

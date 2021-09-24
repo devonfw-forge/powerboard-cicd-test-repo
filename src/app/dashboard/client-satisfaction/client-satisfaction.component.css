@@ -1,0 +1,89 @@
+/* 
+.ClientSatisfaction
+{
+    
+   
+    background-color: white;
+    height: 200px ;
+    width:  349px;
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 5%;
+}
+.Gauge{
+    position: relative;
+    left: -30px;
+    top: 52px;
+} */
+/* .ClientGauge
+{
+    position: relative;
+    left: 10px;
+    top: 52px; 
+} */
+/* .circle
+{
+    height: 100px;
+    width: 100px;
+    border: 3px solid white;
+    border-radius: 50%;
+    top: -95px;
+    left: 200px;
+    position: relative;
+    background-color: white;
+} */
+.emoji
+{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-top: 25px;
+}
+/* #critical
+{
+    border-color: red;
+   
+}
+#normal
+{
+   
+    border-color: orange;
+   
+}
+#good
+{
+    border-color:green;
+}
+.title
+{
+    position: relative;
+     left: 90px; 
+    top: -215px;
+    font-weight: 600;
+    margin-left: 10%;
+    color: #636362;
+}
+.demo-chart {
+    height: 400px;
+  } */
+
+  h5{
+    margin-bottom: 1rem;
+}
+.green{
+  color:#2ab02f; 
+  background: url("../../../assets/layoutAssets/dashboard/emoji-smile.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.red{
+    color:#c40000;
+}
+.orange{
+    color:#e09b3a;
+}
+.greennew{
+    background-color: black;
+    border-radius: 50%;
+}

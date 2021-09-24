@@ -1,0 +1,78 @@
+.card {
+  width: 30%;
+  height: 150px;
+  margin: 15px;
+  position: relative;
+  padding: 1rem;
+  background: #fefefe;
+  /* 00dp */
+  box-shadow: 0px 0px 12.0119px rgba(0, 0, 0, 0.102);
+  border-radius: 8px;
+}
+.card:hover {
+  transform: scale(1.05);
+  transition: 1s;
+}
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: orange;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid white;
+  margin-left: 51px;
+  margin-top: -1%;
+}
+.protecttitle {
+  padding-right: 10px;
+  margin-left: 5px;
+  font-family: Ubuntu;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.25px;
+  margin-top: -3px;
+}
+#title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.25px;
+
+  /* Secondary/Deep purple 100 */
+
+  color: #2b0a3d;
+}
+
+h3 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 0px;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.25px;
+
+  /* Secondary/Deep purple 100 */
+
+  color: #2b2b2b;
+}
+
+hr {
+  width: 100%;
+  border: 0.705509px solid #ececec;
+  margin: 0px;
+  padding: 0px;
+}
+.Logo{
+   height: 60%;
+   width: fit-content;
+   cursor: default; 
+   align-self: center;
+}

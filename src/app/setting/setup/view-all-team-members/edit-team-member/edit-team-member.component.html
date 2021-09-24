@@ -1,0 +1,38 @@
+<div>
+    <form  autocomplete="off" class="my-3">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group required">
+            <input class="form-control" placeholder="{{currentMember.userName}}" value="{{currentMember.userName}}" readonly>
+            
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{roleName}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div *ngFor="let list of settingService.roles">
+                <div *ngFor="let permission of generalService.getPermissions()">
+                  <a class="dropdown-item"
+                    *ngIf="list.roleId == settingService.teamMemberRole && generalService.addTeamMember == permission"
+                    (click)="updateRole(list.roleId, list.roleName)">{{list.roleName | removeUnderscore | uppercase}}</a>
+                  <a class="dropdown-item"
+                    *ngIf="list.roleId == settingService.teamAdminRole && generalService.addTeamAdmin == permission"
+                    (click)="updateRole(list.roleId, list.roleName)">{{list.roleName | removeUnderscore | uppercase}}</a>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div class="form-group required">
+        <input type="email" class="form-control"  placeholder="{{currentMember.email}}" readonly>
+      </div>
+  
+    </form>
+  </div>

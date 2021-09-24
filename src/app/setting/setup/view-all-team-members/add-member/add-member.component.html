@@ -1,0 +1,50 @@
+
+
+<div>
+  <form [formGroup]="memberGroup" autocomplete="off" class="my-3">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="form-group required">
+          <input class="form-control" formControlName="username" placeholder="User Name">
+          <label class="text-danger"
+            *ngIf="memberGroup.get('username').touched && memberGroup.get('username').errors?.required">
+            Required Field
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="dropdown">
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{roleName}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div *ngFor="let list of settingService.roles">
+              <div *ngFor="let permission of generalService.getPermissions()">
+                <a class="dropdown-item"
+                  *ngIf="list.roleId == settingService.teamMemberRole && generalService.addTeamMember == permission"
+                  (click)="updateRole(list.roleId, list.roleName)">{{list.roleName | removeUnderscore | uppercase}}</a>
+                <a class="dropdown-item"
+                  *ngIf="list.roleId == settingService.teamAdminRole && generalService.addTeamAdmin == permission"
+                  (click)="updateRole(list.roleId, list.roleName)">{{list.roleName | removeUnderscore | uppercase}}</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <label class="text-danger"
+        *ngIf="memberGroup.get('role').touched && memberGroup.get('role').errors?.required">
+        Required Field
+      </label>
+
+      </div>
+    </div>
+    <div class="form-group required">
+      <input type="email" class="form-control" formControlName="email" placeholder="Email Id">
+      <label class="text-danger" *ngIf="memberGroup.get('email').touched && memberGroup.get('email').errors?.required">
+        Required Field
+      </label>
+    </div>
+
+  </form>
+</div>

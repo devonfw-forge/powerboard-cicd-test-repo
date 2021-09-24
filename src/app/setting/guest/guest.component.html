@@ -1,0 +1,48 @@
+
+<!-- div *ngFor="let permission of generalService.getPermissions()">
+  <div *ngIf="generalService.addGuest == permission">
+    <input
+    type="submit"
+ 
+    value="Add Guest"
+    class="btn solid"
+    (click)="openAddGuest()"
+  />
+  </div>
+</div>
+
+
+<div>
+  <input
+    type="submit"
+    value="View Guest"
+    class="btn solid"
+    (click)="openViewAllGuests()"
+  />
+  </div>
+ -->
+  
+<div class="navigation">
+  <ul>
+    <li class="list" (click)="changeActive(1);openAddGuest()">
+      <b></b>
+      <b></b>
+      <a>
+        <span class="icon"></span>
+        <span class="title">Add Guest</span>
+      </a>
+    </li>
+    <li class="list active" (click)="changeActive(2);openViewAllGuests()">
+    <b></b>
+    <b></b>
+      <a>
+        <span class="icon"></span>
+        <span class="title">View All Guests</span>
+      </a>
+    </li>
+  </ul>
+  </div>
+
+
+
+  
