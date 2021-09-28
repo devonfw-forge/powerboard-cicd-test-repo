@@ -23,11 +23,13 @@ export class ProjectsComponent implements OnInit {
   ADCList: ADCListDetails[] = [];
   updatedCenter: ADCDetails;
   ADC_Center: string;
+  localLoader : boolean;
   userId: string;
   teamDetails: TeamDetailResponse = new TeamDetailResponse();
   private powerboardLoginResponse: PowerboardLoginResponse = new PowerboardLoginResponse();
   constructor(private teamDetailsService: TeamDetailsService, private router: Router, public generalService: GeneralService) {
     this.ADC_Center = "Select center";
+    this.localLoader = false;
   }
 
   ngOnInit(): void {
@@ -56,11 +58,12 @@ export class ProjectsComponent implements OnInit {
       console.log(adcenter);
       
       this.updatedCenter=adcenter;
-  
+      this.localLoader = true;
       this.ADC_Center = adcenter.centerName;
       const data = await this.teamDetailsService.getTeamsInADCenter(adcenter.centerId);
       console.log(data);
       this.ADCTeams = data;
+      this.localLoader = false;
       this.updateTeamsInADC(this.ADCTeams);
 
     }
@@ -96,6 +99,7 @@ export class ProjectsComponent implements OnInit {
       this.generalService.storeLastLoggedIn();
     }
     catch (e) {
+      this.localLoader = false;
       console.log(e);
     }
     console.log(teamId);

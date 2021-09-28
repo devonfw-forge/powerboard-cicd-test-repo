@@ -182,3 +182,84 @@ padding-top: 2%;
     margin-top: 75px; 
     
 }
+
+
+.button{
+  cursor: pointer;
+}
+
+
+
+
+/*   dot loader */
+.loader {
+  position: relative;
+  width: 10px;
+  height: 10px;
+
+  border-radius: 5px;
+
+  background-color: #0070ad;
+  color: #0070ad;
+  animation: dotFlashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: 60%;
+  bottom: 50%;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.loader::before {
+  left: -15px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 5px;
+  background-color: #0070ad;
+  color: #0070ad;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.loader::after {
+  left: 15px;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 5px;
+  background-color: #0070ad;
+  color: #0070ad;
+  animation: dotFlashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+.blur-background {
+  background: transparent;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(1px);
+}
+@keyframes dotFlashing {
+  0% {
+    background-color: #0070ad;
+  }
+  50%,
+  100% {
+    background-color: #ebe6ff;
+  }
+}

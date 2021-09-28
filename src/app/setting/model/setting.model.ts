@@ -113,8 +113,9 @@ linkName: string;
 linkType : string;
 }
 
-export class MultimediaFilesChecked{
-  fileId : string;
-  fileName : string;
-  isChecked? : boolean;
+export class DeleteResponse {
+  subFolderId: string;
+  foldersId: string[];//null when in sub folder
+  filesId: string[];
 }
+

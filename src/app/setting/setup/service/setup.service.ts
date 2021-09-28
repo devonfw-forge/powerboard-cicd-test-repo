@@ -12,13 +12,7 @@ export class SetupService {
 
 
 
- async addFilesToTeam(teamId, file:File):Promise<any>{
-    // Headers
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    return await this.http
-    .post<any>('http://localhost:3001/v1/multimedia/uploadFile/' + teamId, formData).toPromise();
-  }
+ 
 
   async addVideosToTeam(teamId, file:File):Promise<any>{
     // Headers

@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   multimediaPrefix = environment.multimediaPrefix;
   imagePath : string;
+  localLoader : boolean;
   teamDetails : TeamDetailResponse = new TeamDetailResponse();
 
   constructor(
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     private changeDetector: ChangeDetectorRef
   ) {
     this.authError = null;
+    this.localLoader = false;
     this.imagePath = this.multimediaPrefix + "multimedia/46455bf7-ada7-495c-8019-8d7ab76d490e/Screenshot(3)2fd7e5fd-5340-47b3-b704-f18596a38656.png"
   }
 
@@ -55,12 +57,13 @@ export class LoginComponent implements OnInit {
 
   async login() {
     try {
-      this.globalLoader.startLoader();
+     this.localLoader = true;
       const data = await this.loginService.Login(
         this.loginForm.controls.id.value,
         this.loginForm.controls.password.value
       );
       this.powerboardLoginResponse = data;
+      this.localLoader = false;
       this.generalService.setPermissions(
         this.powerboardLoginResponse.loginResponse.privileges
       );
@@ -73,7 +76,7 @@ export class LoginComponent implements OnInit {
 
       this.changeDetector.detectChanges();
       this.generalService.setpowerboardLoginResponse(this.powerboardLoginResponse);
-      this.globalLoader.stopLoader();
+    
       if (this.powerboardLoginResponse.loginResponse.isPasswordChanged) {
         
         this.generalService.checkLastLoggedIn();
@@ -85,6 +88,7 @@ export class LoginComponent implements OnInit {
       
       this.notificationService.showSuccess("", "Login Successful");
     } catch (e) {
+      this.localLoader = false;
       console.log(e);
       this.globalLoader.stopLoader();
 

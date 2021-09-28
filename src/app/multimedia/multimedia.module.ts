@@ -6,6 +6,7 @@ import {​​​​​​​​VgBufferingModule}​​​​​​​​ from'
 
 import { MultimediaComponent } from './multimedia.component';
 import { RouterModule, Routes } from '@angular/router';
+import { SlideshowMultimediaComponent } from './slideshow-multimedia/slideshow-multimedia.component';
 
 
 
@@ -17,7 +18,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
 
-    MultimediaComponent
+    MultimediaComponent,
+      SlideshowMultimediaComponent
   ],
   imports: [
     CommonModule,

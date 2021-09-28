@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { SlideshowMultimediaComponent } from './multimedia/slideshow-multimedia/slideshow-multimedia.component';
 import { ViewTeamComponent } from './setting/team/view-team/view-team.component';
 
 
@@ -18,7 +19,7 @@ const routes: Routes = [
   {path:'setting', loadChildren: () => import('./setting/setting.module').then(m=> m.SettingModule)},
 
   { path: 'viewTeam', component: ViewTeamComponent },
-
+  { path: 'slideshow-multimedia', component: SlideshowMultimediaComponent},
 
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Multimedia, TeamDetailResponse } from 'src/app/model/general.model';
-import { SetupService } from '../service/setup.service';
+import { MultimediaFolderResponse, rootNew, TeamDetailResponse } from 'src/app/model/general.model';
 import { environment } from '../../../../environments/environment';
 import { NotificationService } from 'src/app/service/notification.service';
 import { Router } from '@angular/router';
 import { ConfigureMultimediaServiceService } from './configure-multimedia-service.service';
+import { DeleteResponse } from '../../model/setting.model';
 
 @Component({
   selector: 'app-configure-multimedia',
@@ -13,52 +13,30 @@ import { ConfigureMultimediaServiceService } from './configure-multimedia-servic
 })
 export class ConfigureMultimediaComponent implements OnInit {
   teamId: string;
-  multimedia: any;
+  fileAndFolderIds : string[];
+  deleteFiles_Folders : DeleteResponse = new DeleteResponse();
+  newSubFolder : rootNew = new rootNew();
+  multimedia: MultimediaFolderResponse = new MultimediaFolderResponse();
   isMasterSel: boolean = false;
   folderAddedInSlideshow: string[] = [];
   filesAddedInSlideshow: string[] = [];
   newFolderName: string = '';
   componentReady: boolean;
-  multimediagallery: any;
+  /* multimediagallery: any; */
   tempPath: string;
   teamDetail: TeamDetailResponse = new TeamDetailResponse();
   multimediaPrefix = environment.multimediaPrefix;
   localPrefix = environment.localPrefix;
-  multimedia_mock = {
-    commonResponse: [
-      {
-        fileId: 'aaad19f7-1b66-44aa-a443-4fcdd173f391',
-        fileName: 'bannerd8a32383-b767-44e7-b48c-d15fbecc9a49.jpg',
-        inSlideshow: false,
-      },
-      {
-        fileId: 'aaad19f7-1b66-44aa-a443-4fcdd173f392',
-        fileName: 'cannerd8a32383-b767-44e7-b48c-d15fbecc9a49.jpg',
-        inSlideshow: true,
-      },
-    ],
-    albumResponse: [
-      {
-        albumId: 'aaad19f7-1b66-44aa-a443-4fcdd173f390',
-        albumName: 'festival',
-        inSlideshow: true,
-      },
-      {
-        albumId: 'aaad19f7-1b66-44aa-a443-4fcdd173f391',
-        albumName: 'holidays',
-        inSlideshow: false,
-      },
-    ],
-  };
 
   constructor(
     public configureService: ConfigureMultimediaServiceService,
     private route: Router,
-    private setupService: SetupService,
     private notifyService: NotificationService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
+    this.configureService.viewSubFolder = false;
     this.updateComponent();
   }
 
@@ -72,29 +50,25 @@ export class ConfigureMultimediaComponent implements OnInit {
       localStorage.getItem('TeamDetailsResponse')
     ).powerboardResponse.multimedia;
 
-    this.multimedia.folderResponse.map((obj) => {
+    this.multimedia.root.map((obj) => {
       obj.isSelected = false;
     });
-    this.multimedia.rootResponse.map((obj) => {
+    this.multimedia.display.map((obj) => {
       obj.isSelected = false;
     });
-    this.multimediagallery = JSON.parse(
+    /* this.multimediagallery = JSON.parse(
       localStorage.getItem('TeamDetailsResponse')
-    ).powerboardResponse.multimedia;
+    ).powerboardResponse.multimedia; */
     // this.multimediagallery=this.multimedia_mock.commonResponse;
-    for (let file of this.multimedia.rootResponse) {
-      this.tempPath =
-        // environment.multimediaPrefix + this.teamId + '/' + file.fileName;
-        /* 'assets/uploads/multimedia/' + this.teamId + '/' + file.fileName; */
-
-        environment.localPrefix + this.teamId + '/' + file.fileName;
-      const isImage = this.isImage(file.fileName);
+    for (let file of this.multimedia.display) {
+      this.tempPath = file.urlName;
+      const isImage = this.isImage(file.urlName);
 
       if (!isImage) {
         const video_thumbnail = this.tempPath + '#t=5';
-        file.fileName = video_thumbnail;
+        file.urlName = video_thumbnail;
       } else {
-        file.fileName = this.tempPath;
+        file.urlName = this.tempPath;
       }
     }
   }
@@ -112,19 +86,24 @@ export class ConfigureMultimediaComponent implements OnInit {
     }
   }
 
+
+
   async uploadFile(event) {
-     console.log(this.multimediagallery);
+     /* console.log(this.multimediagallery); */
     const file = (event.target as HTMLInputElement).files[0];
     try {
-      const data = await this.setupService.addFilesToTeam(this.teamId, file);
+      const data = await this.configureService.addFilesToTeam(this.teamId, file);
       console.log(data);
       let newFile = {
-        fileId: data.id,
-        fileName: data.fileName,
+        id: data.id,
+        urlName: data.fileName,
+        isSelected : false,
+        isImage : this.isImage(data.fileName)
       };
-      this.multimediagallery.rootResponse.push(newFile);
+      /* this.multimediagallery.display[0].push(newFile); */
+      this.multimedia.display.push(newFile);
       this.teamDetail = JSON.parse(localStorage.getItem('TeamDetailsResponse'));
-      this.teamDetail.powerboardResponse.multimedia = this.multimediagallery;
+      this.teamDetail.powerboardResponse.multimedia = this.multimedia;
       localStorage.setItem(
         'TeamDetailsResponse',
         JSON.stringify(this.teamDetail)
@@ -149,8 +128,50 @@ export class ConfigureMultimediaComponent implements OnInit {
   //   }
   // }
 
-  deleteFile() {
+  async deleteFile() {
+    this.checkIds();
+    try{
+      await this.configureService.deleteFilesInSubFolder(this.teamId, this.deleteFiles_Folders);
+      this.notifyService.showSuccess("", "File deleted Successfully");
+      this.removeIds();
+    }
+    catch(e){
+      console.log(e.error.message);
+      this.notifyService.showError("", e.error.message);
+    } 
+   
     console.log('delete');
+  }
+ removeIds(){
+  for(let file of this.deleteFiles_Folders.filesId){
+    this.multimedia.display = this. multimedia.display.filter(displayFile => displayFile.id!= file);
+  }
+  for(let folder of this.deleteFiles_Folders.foldersId){
+    this.multimedia.root = this. multimedia.root.filter(rootFolder => rootFolder.folderId!= folder);
+  }
+  this.updateLocalStorage();
+ }
+ updateLocalStorage(){
+  this.teamDetail = JSON.parse(localStorage.getItem('TeamDetailsResponse'));
+  this.teamDetail.powerboardResponse.multimedia = this.multimedia;
+  localStorage.setItem('TeamDetailsResponse', JSON.stringify(this.teamDetail));
+ }
+  checkIds(){
+    this.deleteFiles_Folders.filesId = [];
+    this.deleteFiles_Folders.foldersId = [];
+    this.deleteFiles_Folders.subFolderId = null;
+    for(let file of this.multimedia.display){
+      if(file.isSelected){
+        this.deleteFiles_Folders.filesId.push(file.id);
+      }
+    }
+    for(let folder of this.multimedia.root){
+      if(folder.isSelected){
+        console.log(folder.folderId);
+        this.deleteFiles_Folders.foldersId.push(folder.folderId);
+      }
+    }
+    console.log(this.deleteFiles_Folders);
   }
 
   viewSubFolder(id: string, name:string){
@@ -160,15 +181,15 @@ export class ConfigureMultimediaComponent implements OnInit {
   }
 
   addOrRemoveFromFolderList(i: number) {
-    this.multimedia.folderResponse[i].isSelected = !this.multimedia
-      .folderResponse[i].isSelected;
-    if (this.multimedia.folderResponse[i].isSelected) {
+    this.multimedia.root[i].isSelected = !this.multimedia
+      .root[i].isSelected;
+    if (this.multimedia.root[i].isSelected) {
       this.folderAddedInSlideshow.push(
-        this.multimedia.folderResponse[i].folderId
+        this.multimedia.root[i].folderId
       );
     } else {
       const index = this.folderAddedInSlideshow.indexOf(
-        this.multimedia.folderResponse[i].folderId
+        this.multimedia.root[i].folderId
       );
       if (index > -1) {
         this.folderAddedInSlideshow.splice(index, 1);
@@ -177,14 +198,14 @@ export class ConfigureMultimediaComponent implements OnInit {
     this.checkMasterSel();
   }
   addOrRemoveFromFileList(i: number) {
-    this.multimedia.rootResponse[i].isSelected = !this.multimedia.rootResponse[
+    this.multimedia.display[i].isSelected = !this.multimedia.display[
       i
     ].isSelected;
-    if (this.multimedia.rootResponse[i].isSelected) {
-      this.filesAddedInSlideshow.push(this.multimedia.rootResponse[i].fileId);
+    if (this.multimedia.display[i].isSelected) {
+      this.filesAddedInSlideshow.push(this.multimedia.display[i].id);
     } else {
       const index = this.filesAddedInSlideshow.indexOf(
-        this.multimedia.rootResponse[i].fileId
+        this.multimedia.display[i].id
       );
       if (index > -1) {
         this.filesAddedInSlideshow.splice(index, 1);
@@ -196,8 +217,8 @@ export class ConfigureMultimediaComponent implements OnInit {
     let l1 =
       this.folderAddedInSlideshow.length + this.filesAddedInSlideshow.length;
     let l2 =
-      this.multimedia.rootResponse.length +
-      this.multimedia.folderResponse.length;
+      this.multimedia.display.length +
+      this.multimedia.root.length;
     if (l1 === l2) {
       this.isMasterSel = true;
     } else {
@@ -209,13 +230,28 @@ export class ConfigureMultimediaComponent implements OnInit {
     this.newFolderName = '';
   }
 
-  addFolder() {
+  async addFolder() {
+    try{
+      const data = await this.configureService.addFolderToTeam(this.teamId, this.newFolderName);
+      console.log(data);
+      this.newSubFolder.folderId = data.id;
+      this.newSubFolder.folderName = data.albumName;
+      this.newSubFolder.status = false;
+      this.newSubFolder.isSelected = false;
+      this.multimedia.root.push(this.newSubFolder);
+     this.updateLocalStorage();
+     this.newFolderName = '';
+      this.updateComponent();
+    }
+    catch(e){
+      console.log(e.error.message);
+    }
     console.log(this.newFolderName);
   }
 
   checkUncheckAll() {
     this.isMasterSel = !this.isMasterSel;
-    this.multimedia.folderResponse.map((obj) => {
+    this.multimedia.root.map((obj) => {
       obj.isSelected = this.isMasterSel;
       if (this.isMasterSel) {
         this.folderAddedInSlideshow.indexOf(obj.folderId) === -1
@@ -224,11 +260,11 @@ export class ConfigureMultimediaComponent implements OnInit {
       }
     });
 
-    this.multimedia.rootResponse.map((obj) => {
+    this.multimedia.display.map((obj) => {
       obj.isSelected = this.isMasterSel;
       if (this.isMasterSel) {
-        this.filesAddedInSlideshow.indexOf(obj.fileId) === -1
-          ? this.filesAddedInSlideshow.push(obj.fileId)
+        this.filesAddedInSlideshow.indexOf(obj.id) === -1
+          ? this.filesAddedInSlideshow.push(obj.id)
           : console.log('This item already exists');
       }
     });
@@ -238,4 +274,28 @@ export class ConfigureMultimediaComponent implements OnInit {
       this.filesAddedInSlideshow = [];
     }
   }
+ async addToSlideShow(){
+
+  this.fileAndFolderIds = [];
+  for(let file of this.multimedia.display){
+    if(file.isSelected){
+      this.fileAndFolderIds.push(file.id);
+    }
+  }
+  for(let folder of this.multimedia.root){
+    if(folder.isSelected){
+      this.fileAndFolderIds.push(folder.folderId);
+    }
+  }
+  console.log(this.fileAndFolderIds);
+  try{
+    const data = await this.configureService.addToSlideshow(this.teamId, this.fileAndFolderIds);
+    this.notifyService.showSuccess("", "File & folders aded to slide show Successfully");
+  }
+  catch(e){
+    console.log(e.error.message);
+    this.notifyService.showError("", e.error.message);
+  } 
+ 
+}
 }

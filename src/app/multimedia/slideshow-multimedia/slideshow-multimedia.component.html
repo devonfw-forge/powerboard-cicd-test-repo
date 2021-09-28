@@ -1,0 +1,9 @@
+<!-- Slideshow Implementation -->
+<div class=" text-center" [ngClass]="{'slideshow-bg': slideshowService.isSlideshowRunning}">
+    <div class=" slide-image-viewer" *ngIf="is_image && slideshowService.isSlideshowRunning">
+      <div>
+  
+        <img class="shadow slideshow-image" [src]="realItem" alt="" />
+      </div>
+    </div>
+  </div>

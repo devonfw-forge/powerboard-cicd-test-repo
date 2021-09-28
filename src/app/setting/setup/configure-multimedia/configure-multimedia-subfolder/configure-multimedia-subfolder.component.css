@@ -41,3 +41,28 @@
       height: 100px;
       width: 150px;
   }
+  /* .thumbnail {
+
+   
+    margin: 22px;
+    border: 2px solid black;
+    cursor: pointer;
+  
+  }
+   */
+  .image{
+    height: 100px;
+    width: 150px;
+  }
+  .alignImages{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    margin: 10px;
+  }
+
+  .video{
+    object-fit: initial;
+    height: 100px;
+    width: 150px;
+  }

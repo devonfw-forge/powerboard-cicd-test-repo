@@ -95,9 +95,9 @@
         </li>
           <span>{{checkLocation()}}</span>
       </ul>
-      <div class="custom-control custom-switch">
-        <input type="checkbox"[(ngModel)]="slideShowService.isSlideshowRunning" (change)="slideShowService.checkSlideshowArray()" class="custom-control-input" id="customSwitches">
-        <label class="custom-control-label" for="customSwitches">Slideshow</label>
+      <div class="custom-control custom-switch" >
+        <input style="cursor: pointer;" type="checkbox"[(ngModel)]="slideShowService.isSlideshowRunning" (change)="slideShowService.checkSlideshowArray()" class="custom-control-input" id="customSwitches">
+        <label style="cursor: pointer;" class="custom-control-label" for="customSwitches">Slideshow</label>
       </div>
     </div>
   </nav>

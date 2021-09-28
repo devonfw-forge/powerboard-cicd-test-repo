@@ -1,7 +1,7 @@
 <div class="container ml-5 mr-5 mt-3" *ngIf="!configureService.viewSubFolder">
   <div class="row">
     <div class="col-md-4">
-      <div class="row float-right">
+      <div class="row float-right selectCheckbox">
         <input class="checkbox pr-2" id='selectAll'
           type="checkbox"
           [checked]='isMasterSel'
@@ -29,9 +29,10 @@
           </span>
         </div>
         <div class="col-md-3 mt-2">
-          <span class="action-button" style="font-size: 16px">
+          <span class="action-button" (click)="addToSlideShow()" style="font-size: 16px">
             + SlideShow
           </span>
+          
         </div>
         <div class="col-md-2 mt-2 float-center">
           <span class="material-icons mat-icon" (click)="deleteFile()"> delete_outline </span>
@@ -41,7 +42,7 @@
   </div>
   <div
     class="pl-1 pt-1"
-    *ngFor="let album of multimedia.folderResponse; index as i"
+    *ngFor="let album of multimedia.root; index as i"
   >
     <div class="text-left">
       <div class="icon" >
@@ -50,26 +51,26 @@
           (click)="viewSubFolder(album.folderId, album.folderName)"
         >
           folder </span
-        ><span class="pr-1" (click)="viewSubFolder(album.folderId)">
+        ><span class="pr-1" (click)="viewSubFolder(album.folderId, album.folderName)">
           {{ album.folderName | titlecase }}</span
         ><input class="checkbox"
           type="checkbox"
-          [checked]='multimedia.folderResponse[i].isSelected'
+          [checked]='multimedia.root[i].isSelected'
           (click)="addOrRemoveFromFolderList(i)"
         />
       </div>
     </div>
   </div>
-  <div *ngIf="multimedia.rootResponse.length != 0">
+  <div *ngIf="multimedia.display.length != 0">
     <div class="col-md-12 mt-3">
       <div class="row">
         <div
           class="col-md-3 mt-3"
-          *ngFor="let file of multimedia.rootResponse; index as i"
+          *ngFor="let file of multimedia.display; index as i"
         >
           <img
             id="bigImage"
-            src="{{ file.fileName }}"
+            src="{{ file.urlName }}"
             style="width: 85%; height: auto"
           />
           <!-- <span
@@ -89,7 +90,7 @@
             <div class="col-md-6 float-right">
               <input class="checkbox"
               type="checkbox"
-              [checked]='multimedia.rootResponse[i].isSelected'
+              [checked]='multimedia.display[i].isSelected'
               (click)="addOrRemoveFromFileList(i)"
             />
             </div>

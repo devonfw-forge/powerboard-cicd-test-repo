@@ -59,7 +59,7 @@ win.show(); */
 
       this.slideshowArray.push("/links");
     }
-    this.slideshowArray.push("/multimedia");
+    this.slideshowArray.push("/slideshow-multimedia");
     console.log(this.slideshowArray);
 
 

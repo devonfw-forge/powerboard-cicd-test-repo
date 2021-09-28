@@ -1,20 +1,17 @@
-
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
-import { MultimediaFilesNew, MultimediaFolderResponse } from 'src/app/model/general.model';
+import { MultimediaFolderResponse, MultimediaFilesNew } from 'src/app/model/general.model';
+import { GeneralService } from 'src/app/service/general.service';
+import { SlideshowService } from 'src/app/slideshow/slideshow.service';
 import { environment } from 'src/environments/environment';
-import { GeneralService } from '../service/general.service';
-import { SlideshowService } from '../slideshow/slideshow.service';
-
-
 
 @Component({
-  selector: 'app-multimedia',
-  templateUrl: './multimedia.component.html',
-  styleUrls: ['./multimedia.component.css']
+  selector: 'app-slideshow-multimedia',
+  templateUrl: './slideshow-multimedia.component.html',
+  styleUrls: ['./slideshow-multimedia.component.css']
 })
-export class MultimediaComponent implements OnInit {
-  @ViewChild('widgetsContent') widgetsContent: ElementRef;
+export class SlideshowMultimediaComponent implements OnInit {
+
   currentPath : string;
   currentIndex = 0;
   currentItem: string;
@@ -27,19 +24,19 @@ export class MultimediaComponent implements OnInit {
   realItem: string;
   currentFolder : string;
   multimedia: MultimediaFolderResponse = new MultimediaFolderResponse();
-  multimediaFiles: MultimediaFilesNew[];
+  /* multimediaFiles: MultimediaFilesNew[]; */
   componentReady: boolean;
   tempPath: string;
   is_image: boolean = true;
   is_video: boolean = false;
   counter: number = 0;
-  multimediaPrefix = environment.multimediaPrefix;
-  localPrefix = environment.localPrefix;
   interval: number = environment.slideshowInterval;
+  slideshowFiles : { fileURL : string}[]=[];
 
   constructor(public slideshowService: SlideshowService, private generalService : GeneralService) { 
     this.thumbnailData = [];
-    this.multimediaFiles = [];
+    /* this.multimediaFiles = []; */
+    this.slideshowFiles = [];
     this.currentFolder = '';
     this.currentIndex = 0;
     this.currentPath = '';
@@ -48,65 +45,36 @@ export class MultimediaComponent implements OnInit {
     await this.updateComponent(); 
   }
 
-   updateComponent() {
+   async updateComponent() {
+     try{
     this.componentReady = false;
     this.currentFolder = '';
     this.teamId = JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.team_id;
-    this.multimedia = JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.multimedia;
-    this.multimediaFiles  = this.multimedia.display;
-    this.currentItem = this.multimediaFiles[this.currentIndex].urlName;
+    const data = await this.generalService.getSlideshowFiles(this.teamId);
+    this.slideshowFiles = data;
+    console.log(this.slideshowFiles);
+    this.currentItem = this.slideshowFiles[this.currentIndex].fileURL;
     this.processFiles();
     for(let folder of this.multimedia.root){
       if(folder.status == true){
         this.currentFolder = folder.folderName;
       }
     }
-   /*  if(this.multimedia.rootResponse.length>0){
-      this.currentItem = this.multimedia.rootResponse[this.currentIndex].fileName;
-      this.multimediaFiles = this.multimedia.rootResponse;
-      this.currentPath = environment.multimediaPrefix + this.teamId + '/';
-    }
-    else{
-      this.currentItem = this.multimedia.folderResponse[0].fileResponse[this.currentIndex].fileName;
-      this.multimediaFiles = this.multimedia.folderResponse[0].fileResponse;
-      this.currentPath = environment.multimediaPrefix + this.teamId + '/' 
-                      + this.multimedia.folderResponse[0].folderName + '/';
-      this.currentFolder = this.multimedia.folderResponse[0].folderName;
-    }
-    this.processFiles(); */
-  } 
-  async getFilesFromFolder(folderId:string,folderName:string){
-    
-    console.log(folderName);
-    try{
-      const data = await this.generalService.getAllFilesFromFolder(this.teamId, folderId);
-      this.multimediaFiles = data;
-      this.currentFolder = folderName;
-      this.thumbnailData = [];
-      this.thumbnailIsImage = [];
-      this.currentIndex = 0;
-      this.currentItem = this.multimediaFiles[this.currentIndex].urlName;
-      this.processFiles();
-  
     }
     catch(e){
       console.log(e.error.message);
     }
-  }
+  } 
+  
 
   
 
   processFiles(){
   
-      for (let file of this.multimediaFiles) {
-         this.tempPath = file.urlName; 
-        const isImage = this.isImage(file.urlName);
-        if (!isImage && !this.slideshowService.isSlideshowRunning) {
-          const video_thumbnail = this.tempPath + '#t=5';
-          this.thumbnailData.push(video_thumbnail);
-          this.thumbnailIsImage.push(isImage);
-        }
-        else {
+      for (let file of this.slideshowFiles) {
+         this.tempPath = file.fileURL; 
+        const isImage = this.isImage(file.fileURL);
+        if (isImage && this.slideshowService.isSlideshowRunning) {
           this.thumbnailData.push(this.tempPath);
           this.thumbnailIsImage.push(isImage);
         }
@@ -179,26 +147,7 @@ export class MultimediaComponent implements OnInit {
     }
   }
 
-  onPlayerReady(api: VgApiService) {
-    console.log("api value");
-    console.log(api);
-    this.api = api;
 
-    if (this.componentReady) {
-      this.api.volume = 0;
-    }
-
-
-  }
-
-  onTap() {
-    if (this.api.state === 'playing') {
-      this.api.pause();
-
-    } else {
-      this.api.play();
-    }
-  }
 
   toggleFullScreen() {
     this.api.fsAPI.toggleFullscreen();
@@ -221,36 +170,6 @@ export class MultimediaComponent implements OnInit {
   ngOnDestroy() {
     if (this.intervalID) {
       clearInterval(this.intervalID);
-    }
-  }
-
-
-
-
-
-  scrollLeft(){
-    this.widgetsContent.nativeElement.scrollLeft -= 150;
-  }
-
-  scrollRight(){
-    this.widgetsContent.nativeElement.scrollLeft += 150;
-  }
-
-
-  async seeAll(){
-    try{
-      const data = await this.generalService.getAllFilesFromTeam(this.teamId);
-      this.multimediaFiles = data;
-      this.currentFolder = "seeAll";
-      this.thumbnailData = [];
-      this.thumbnailIsImage = [];
-      this.currentIndex = 0;
-      this.currentItem = this.multimediaFiles[this.currentIndex].urlName;
-      this.processFiles();
-  
-    }
-    catch(e){
-      console.log(e.error.message);
     }
   }
 

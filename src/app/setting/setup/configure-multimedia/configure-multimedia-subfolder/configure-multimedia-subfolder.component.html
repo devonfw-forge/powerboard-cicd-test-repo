@@ -10,10 +10,18 @@
         >
       </div>
     </div>
-    <div class="col-md-7 text-right">
+    <div class="col-md-3 text-right" style="margin-top: 10px;">
+      <a>Select All</a>
+        <input
+          type="checkbox"
+          [checked]='selectAll'
+          (click)="selectAllItems()"
+        />
+    </div>
+    <div class="col-md-4 text-right">
       <span class="btn btn-primary btn-file">
         <span style="font-size: 16px"> + Add Files </span>
-        <input type="file" />
+        <input type="file" (change)="uploadFile($event)" />
       </span>
     </div>
     <div class="col-md-2 text-right" style="padding-top: 10px">
@@ -32,26 +40,36 @@
         </span>
       </div>
       <div class="col-md-6 text-right">
-        <a>Select All</a>
-        <input
-          type="checkbox"
-          [(ngModel)]="selectAll"
-          (click)="selectAllItems()"
-        />
       </div>
     </div>
     <div>
-        <div class="row mt-4 ml-2">
-            <div *ngFor="let item of allFiles">
+      <div class="row mt-4 ml-2">
+        <!-- <div *ngFor="let item of allFiles">
               <img
                 class="FileThunmnail"
                 src="../../../../../assets/Images/redcodequality.png"
               />
               <input name="selectAll" type="checkbox" [(ngModel)]="item.isChecked" />
-            </div>
+            </div> -->
+        <div
+          class="alignImages"
+          *ngFor="let item of multimediaSubFolderFiles; index as i"
+        >
+          <div *ngIf="item.isImage">
+            <img class="thumbnail image" src="{{ item.urlName }}" />
           </div>
+          <div *ngIf="!item.isImage">
+            <video class="thumbnail video" src="{{ item.urlName }}"></video>
+          </div>
+          <input
+          style="margin-left: 5px;"
+            name="selectAll"
+            type="checkbox"
+            (click)="printArray(i)"
+            [checked]="multimediaSubFolderFiles[i].isSelected"
+          />
+        </div>
+      </div>
     </div>
-
   </div>
 </div>
-

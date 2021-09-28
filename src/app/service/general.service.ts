@@ -279,4 +279,7 @@ export class GeneralService {
       .get<MultimediaFilesNew[]>('http://localhost:3001/v1/multimedia/getAllFilesForTeam/' + teamId)
       .toPromise();
   }
+  async getSlideshowFiles(teamId: string) : Promise<any>{
+    return await this.http.get<any>('http://localhost:3001/v1/multimedia/slideshow/' + teamId).toPromise();
+    }
 }

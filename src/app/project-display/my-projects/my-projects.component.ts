@@ -20,10 +20,13 @@ import { TeamDetailsService } from '../service/team-details.service';
 export class MyProjectsComponent implements OnInit {
 myTeams : TeamDetails[] = [];
 userId : string;
+
+localLoader : boolean;
 logoPrefix = environment.logoPrefix;
 UserIdTeamIdDetails : GetTeamDetails = new GetTeamDetails();
 teamDetails : TeamDetailResponse = new TeamDetailResponse();
   constructor(private teamDetailsService : TeamDetailsService, private router:Router, public generalService : GeneralService, public slideShowService : SlideshowService ) { 
+    this.localLoader = false;
     
   }
 
@@ -38,9 +41,11 @@ async getTeamDetails(teamId:string){
 
   try{
     this.UserIdTeamIdDetails.teamId = teamId;
-    this.UserIdTeamIdDetails.userId = this.userId
+    this.UserIdTeamIdDetails.userId = this.userId;
+    this.localLoader = true;
     const data = await this.teamDetailsService.getTeamDetails(this.UserIdTeamIdDetails);
     this.teamDetails.powerboardResponse = data;
+    this.localLoader = false;
     localStorage.setItem('TeamDetailsResponse', JSON.stringify(this.teamDetails));
     this.teamDetailsService.setTeamDetailPermissions();
     this.generalService.showNavBarIcons = true;
@@ -49,6 +54,7 @@ async getTeamDetails(teamId:string){
     this.generalService.storeLastLoggedIn();
   }
   catch(e){
+    this.localLoader = false;
     console.log(e.error.message);
   }
 }

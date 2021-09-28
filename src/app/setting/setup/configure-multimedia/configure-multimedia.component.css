@@ -93,3 +93,7 @@
  .title{
    color: #525151;
  }
+ .selectCheckbox{
+  align-items: baseline;
+  margin-top: 8px;
+ }
