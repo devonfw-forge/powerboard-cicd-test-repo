@@ -1,0 +1,6 @@
+{
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.quoteStyle": "single",
+  "editor.formatOnSave": true,
+  "spellchecker.ignoreWordsList": ["Do2xfMRmvJCfS2tyyQhZHRyuJuROuuaBOexJ", "AKIAVHIMMQTGL5CQ7QE6"]
+}
