@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm install
+      - npm run build
+      - docker build -t $AWS_IMAGE_NAME:$AWS_IMAGE_TAG .
+      - docker tag $AWS_IMAGE_NAME:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG
+      - cd $CODEBUILD_SRC_DIR
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":$AWS_IMAGE_NAME,"imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
+cache:
+  paths:
+    - './node_modules/**/*'
