@@ -16,7 +16,7 @@ phases:
       - echo Build started on `date`
       - npm install
       - npm run build
-      - docker build -t $AWS_IMAGE_NAME:$latest .
+      - docker build -t $AWS_IMAGE_NAME .
       - docker tag $AWS_IMAGE_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:latest
       - cd $CODEBUILD_SRC_DIR
   post_build:
@@ -27,7 +27,7 @@ phases:
       # - docker push $REPOSITORY_URI:$IMAGE_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:latest
       - echo Writing image definitions file...
-      - printf '[{"name":$AWS_IMAGE_NAME,"imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":$AWS_IMAGE_NAME,"imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:latest > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:
