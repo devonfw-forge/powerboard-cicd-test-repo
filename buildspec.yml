@@ -14,8 +14,8 @@ phases:
       - echo Build started on `date`
       - npm install
       - npm run build
-      - docker build -t $AWS_IMAGE_NAME:$AWS_IMAGE_TAG .
-      - docker tag $AWS_IMAGE_NAME:$AWS_IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG .
+      - docker tag $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:$AWS_IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
