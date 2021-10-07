@@ -17,7 +17,7 @@ phases:
       - npm install
       - npm run build
       - docker build -t $REPO_URI:latest .
-      - docker tag $AWS_IMAGE_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:latest
+      - docker tag $REPO_URI:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_IMAGE_NAME:latest
       - cd $CODEBUILD_SRC_DIR
   post_build:
     commands:
