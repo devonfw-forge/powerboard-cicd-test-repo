@@ -3,7 +3,7 @@ import { Config } from '../app/shared/model/config/config.model';
 const def: Config = {
   isDev: true,
   host: 'localhost',
-  port: 3001,
+  port: 3000,
   clientUrl: 'localhost:4200',
   globalPrefix: 'v1',
   loggerConfig: {
@@ -15,7 +15,7 @@ const def: Config = {
   database: {
     type: 'postgres',
     host: process.env.DB_HOST,
-    port: 5432,
+    port: Number(process.env.DB_PORT),
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
