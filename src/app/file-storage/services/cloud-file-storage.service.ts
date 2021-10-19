@@ -14,14 +14,17 @@ export class CloudFileStorageService implements IFileStorageService {
     const name = `${filename}` + `${extension}`;
     const finalName: string = filePath + name;
     const bucketS3 = process.env.AWS_BUCKET;
-    return await this.uploadS3(file.buffer, bucketS3, finalName);
+    const fileUploaded = await this.uploadS3(file.buffer, bucketS3, finalName);
+    console.log('file has been uploaded');
+    console.log(fileUploaded);
+    return fileUploaded;
   }
 
-  async uploadS3(file: any, bucket: any, name: any) {
+  async uploadS3(file: any, bucket: any, filePath: any) {
     const s3 = this.getS3();
     const params = {
       Bucket: bucket,
-      Key: String(name),
+      Key: String(filePath),
       Body: file,
     };
     return new Promise((resolve, reject) => {
@@ -44,7 +47,7 @@ export class CloudFileStorageService implements IFileStorageService {
 
   async deleteFile(filePath: string) {
     const params = {
-      Bucket: 'powerboard-test',
+      Bucket: process.env.AWS_BUCKET as string,
       Key: filePath,
     };
     const s3 = this.getS3();

@@ -53,3 +53,4 @@ export class UserInfoRepositoryMock extends MockRepository {}
 export class ADCenterRepositoryMock extends MockRepository {}
 export class UserSessionDetailsRepositoryMock extends MockRepository {}
 export class TeamStatusRepositoryMock extends MockRepository {}
+export class FilesRepositoryMock extends MockRepository {}

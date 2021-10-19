@@ -13,4 +13,6 @@ export interface IMultimediaService {
   addFolder(teamId: string, folderName: string): Promise<Multimedia>;
   addFilesAndFoldersIntoSlideshow(teamId: string, fileAndFolderIds: string[]): Promise<Multimedia[]>;
   getMultimediaForSlideshow(teamId: string): Promise<any>;
+  deleteFilesAndFoldersFromRoot(teamId: string, filesId: string[], foldersId: string[]): any;
+  deleteFilesFromSubFolder(teamId: string, subFolderId: string, filesId: string[]): any;
 }

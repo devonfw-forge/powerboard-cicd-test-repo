@@ -225,4 +225,19 @@ describe('UserService', () => {
       expect(userTeamService.isSystemAdmin(userId)).resolves.toStrictEqual(false);
     });
   });
+
+  describe('findUserTeamDetails()', () => {
+    it('findUserTeamDetails() should return unqiue userteam object for that particular user in that team  ', async () => {
+      const userId = '10cf1dfd-43e9-4cc4-8257-a6ba5c70e33d';
+      const teamId = '46455bf7-ada7-495c-8019-8d7ab76d488e';
+      const userTeam = {
+        id: '762f1dfd-43e9-4cc4-8257-a6ba5c70e33d',
+        userId: '10cf1dfd-43e9-4cc4-8257-a6ba5c70e33d',
+        teamId: '46455bf7-ada7-495c-8019-8d7ab76d488e',
+        userRole: '555f1dfd-43e9-4cc4-8257-a6ba5c70e34d',
+      };
+      jest.spyOn(userTeamRepo, 'findOne').mockImplementation(() => userTeam);
+      expect(await userTeamService.findUserTeamDetails(userId, teamId)).toEqual(userTeam);
+    });
+  });
 });

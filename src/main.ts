@@ -9,7 +9,7 @@ import { ErrorFilter } from './app/shared/filters/errors.filter';
 
 const path = require('path');
 require('dotenv').config({ path: path.resolve('src/.env') });
-
+require('dotenv').config({ path: path.resolve('sonar.env') });
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, { logger: new WinstonLogger() });
   const configModule = app.get(ConfigService);

@@ -15,6 +15,7 @@ import { TeamsInADC } from '../model/dto/TeamsInADC';
 import { IGlobalTeamsService } from './global.team.service.interface';
 import { TeamStatus } from '../model/entities/team_status.entity';
 import * as dotenv from 'dotenv';
+import { TeamResponse } from '../model/dto/TeamResponse';
 dotenv.config();
 @Injectable()
 export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlobalTeamsService {
@@ -45,7 +46,11 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
     for (i = 0; i < teams.length; i++) {
       teamsResponse.teamId = teams[i].id;
       teamsResponse.teamName = teams[i].name;
-      teamsResponse.teamLogo = `${this.globalLink}/${teams[i].id}/` + teams[i].logo!;
+      if (teams[i].logo == null) {
+        teamsResponse.teamLogo = null;
+      } else {
+        teamsResponse.teamLogo = `${this.globalLink}/${teams[i].id}/` + teams[i].logo!;
+      }
       teamsResponse.teamStatus = await this.findStatusByTeam(teams[i]);
       teamsDTOArray.push(teamsResponse);
       teamsResponse = {} as TeamsInADC;
@@ -60,7 +65,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
    * @return {Images} Images as response for that team
    */
 
-  async uploadLogoForTeam(logo: any, teamId: string): Promise<Team> {
+  async uploadLogoForTeam(logo: any, teamId: string): Promise<TeamResponse> {
     const team = await this.teamRepository.findOne(teamId);
     if (!team) {
       throw new NotFoundException('Team Not Found');
@@ -76,7 +81,14 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
 
     let team1 = await this.teamRepository.save(team);
     team1.logo = `${this.globalLink}/${teamId}/` + team.logo!;
-    return team1;
+    let teamsResponse: TeamResponse = {} as TeamResponse;
+    teamsResponse.id = team1.id;
+    teamsResponse.name = team1.name;
+    teamsResponse.projectKey = team1.projectKey;
+    teamsResponse.teamCode = team1.teamCode;
+    teamsResponse.ad_center = team1.ad_center.id;
+    teamsResponse.logo = team1.logo;
+    return teamsResponse;
   }
 
   async deleteLogoFromTeam(teamId: string): Promise<void> {
@@ -97,7 +109,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
    * @param {AddTeamDTO} .Takes AddTeamDTO as input
    * @return {Team} Created Team as response
    */
-  async addTeam(addteam: AddTeam, logo: any): Promise<Team> {
+  async addTeam(addteam: AddTeam, logo: any): Promise<TeamResponse> {
     const teamCode = addteam.teamCode;
     const teamExisted = await this.teamRepository.findOne({ where: { teamCode: teamCode } });
     console.log(teamExisted);
@@ -115,7 +127,15 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
       if (teamCreated && logo) {
         return await this.uploadLogoForTeam(logo, teamCreated.id);
       } else {
-        return teamCreated;
+        console.log('team created');
+        console.log(teamCreated);
+        let teamsResponse: TeamResponse = {} as TeamResponse;
+        teamsResponse.id = teamCreated.id;
+        teamsResponse.name = teamCreated.name;
+        teamsResponse.projectKey = teamCreated.projectKey;
+        teamsResponse.teamCode = teamCreated.teamCode;
+        teamsResponse.ad_center = teamCreated.ad_center;
+        return teamsResponse;
       }
     }
   }
@@ -168,7 +188,11 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
     for (i = 0; i < teamList.length; i++) {
       viewTeamsInADC.teamId = teamList[i].id;
       viewTeamsInADC.teamName = teamList[i].name;
-      viewTeamsInADC.teamLogo = `${this.globalLink}/${teamList[i].id}/` + teamList[i].logo!;
+      if (teamList[i].logo == null) {
+        viewTeamsInADC.teamLogo = null;
+      } else {
+        viewTeamsInADC.teamLogo = `${this.globalLink}/${teamList[i].id}/` + teamList[i].logo!;
+      }
       // const dashboard = (await this.dashboardService.getDashboardByTeamId(teamList[i])) as DashBoardResponse;
       //viewTeamsInADC.teamStatus = this.dashboardService.fetchStatus(dashboard);
       viewTeamsInADC.teamStatus = await this.findStatusByTeam(teamList[i]);

@@ -15,7 +15,7 @@ const def: Config = {
     host: 'localhost',
     port: 5432,
     username: 'postgres',
-    password: 'test',
+    password: process.env.CONFIG_PASSWORD,
     database: 'test',
     synchronize: false,
     migrationsRun: true,

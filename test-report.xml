@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\user\services\user-team.service.spec.ts">
+    <testCase name="UserService should be defined after module initialization" duration="62"/>
+    <testCase name="UserService addUserToTeam() addUserToTeam() should throw error if the user is already present in the team" duration="89"/>
+    <testCase name="UserService addUserToTeam() addUserToOtherTeam() should successfully add user to the team if it is not present in the team" duration="56"/>
+    <testCase name="UserService deleteUserFromTeamById() deleteUserFromTeamById() should delete the user from team if it is present there  " duration="14"/>
+    <testCase name="UserService deleteUserFromTeamById() should delete the user from team if it is present there  " duration="12"/>
+    <testCase name="UserService updateUserRole() updateUserRole should successfully update the user role" duration="19"/>
+    <testCase name="UserService updateUserRole() updateUserRole should successfully update the user role" duration="15"/>
+    <testCase name="UserService isSystemAdmin()  method should return true if the user role name is system_admin" duration="37"/>
+    <testCase name="UserService isSystemAdmin()  method should return true if the user role name is guest_user" duration="38"/>
+    <testCase name="UserService isSystemAdmin()  method should return false if the user role name is not system_admin or guest_user" duration="9"/>
+    <testCase name="UserService findUserTeamDetails() findUserTeamDetails() should return unqiue userteam object for that particular user in that team  " duration="17"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\services\dashboard.service.spec.ts">
+    <testCase name="DashboardService should be defined after module initialization" duration="76"/>
+    <testCase name="DashboardService getDashboardByTeamId() test 1 if team present" duration="31"/>
+    <testCase name="DashboardService fetchStatus method will return status of project test 1 if client status is null" duration="30"/>
+    <testCase name="DashboardService fetchStatus method will return status of project test 1 if client status is null" duration="95"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\multimedia\services\multimedia.crud.service.spec.ts">
+    <testCase name="MultimdeiaCrudService should be defined after module initialization" duration="42"/>
+    <testCase name="MultimdeiaCrudService uploadFile should return the multimedia entity which is uploaded" duration="102"/>
+    <testCase name="MultimdeiaCrudService uploadFile should return undefined if the file is not uploaded " duration="12"/>
+    <testCase name="MultimdeiaCrudService uploadFileToFolder should return the uploaded file entity " duration="14"/>
+    <testCase name="MultimdeiaCrudService uploadFileToFolder should return undefined if the file is not uploaded " duration="10"/>
+    <testCase name="MultimdeiaCrudService getDefaultMultimediaForTeam() should return the default root multimedia for team who has root files" duration="23"/>
+    <testCase name="MultimdeiaCrudService getDefaultMultimediaForTeam() should return the default root multimedia for team who has no root files" duration="25">
+      <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 0
++ Received  + 2
+
+@@ -13,14 +13,16 @@
+    ],
+    "root": Array [
+      Object {
+        "folderId": "cbad5f43-396e-4abb-9e55-4036f58bede7",
+        "folderName": "resort",
++       "inSlideShow": false,
+        "status": false,
+      },
+      Object {
+        "folderId": "cbad5f43-396e-4abb-9e55-4036f58bede9",
+        "folderName": "birthday",
++       "inSlideShow": false,
+        "status": false,
+      },
+    ],
+  }
+    at Object.<anonymous> (C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\multimedia\services\multimedia.crud.service.spec.ts:322:22)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testCase>
+    <testCase name="MultimdeiaCrudService getDefaultMultimediaForTeam() should throw no found message if there is no multimedia present in the root file" duration="9"/>
+    <testCase name="MultimdeiaCrudService getDisplay() should return the files display" duration="12"/>
+    <testCase name="MultimdeiaCrudService addFiles() should add files" duration="8"/>
+    <testCase name="MultimdeiaCrudService getDisplayFilesFromFolder() should return display files for a folder" duration="9"/>
+    <testCase name="MultimdeiaCrudService getDisplayFilesFromFolder() should return empty array if the files are not present in any sub folder" duration="13"/>
+    <testCase name="MultimdeiaCrudService getCommonFiles() should return the common root files present in the root folder" duration="15"/>
+    <testCase name="MultimdeiaCrudService getFolderList() should return list of sub folders" duration="9"/>
+    <testCase name="MultimdeiaCrudService deleteFilesFromSubFolder() should return all the files present in a particular folder" duration="17"/>
+    <testCase name="MultimdeiaCrudService deleteFilesAndFoldersFromRoot() should delete all the files and folders present in the root" duration="9"/>
+    <testCase name="MultimdeiaCrudService deleteMultipleFilesAndFolders() should delete multiple root multimedia files and folders present for a team" duration="14"/>
+    <testCase name="MultimdeiaCrudService deleteMultipleFilesAndFolders() should delete multiple multimedia files present in a sub-folder of a team" duration="15"/>
+    <testCase name="MultimdeiaCrudService addFolder() should create a new folder" duration="9"/>
+    <testCase name="MultimdeiaCrudService addFolder() should throw error if empty folderName is given" duration="67"/>
+    <testCase name="MultimdeiaCrudService getAllFilesInFolderForTeam() should return all files present in the folder" duration="8"/>
+    <testCase name="MultimdeiaCrudService getAllFilesForTeam() should return all files present in the team" duration="8"/>
+    <testCase name="MultimdeiaCrudService getAllFilesForTeam() should return all files present in root folder of the team" duration="7"/>
+    <testCase name="MultimdeiaCrudService addFilesAndFoldersIntoSlideshow() should add files and folders to the slide show" duration="7"/>
+    <testCase name="MultimdeiaCrudService addFilesAndFoldersIntoSlideshow() getMultimediaForSlideshow() should return all the multimedia present in an album for slide show" duration="7"/>
+    <testCase name="MultimdeiaCrudService addFilesAndFoldersIntoSlideshow() getMultimediaForSlideshow() should return all the root files present for slide show" duration="5"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\teams\services\team.crud.service.spec.ts">
+    <testCase name="TeamCrudService should be defined after module initialization" duration="80"/>
+    <testCase name="TeamCrudService updateTeam() should update the team test 1 if team not found" duration="33"/>
+    <testCase name="TeamCrudService updateTeam() should update the team test 2 if team found" duration="36"/>
+    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 1 if team not present in db " duration="42"/>
+    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 2 if team present in db and user is System Admin " duration="42"/>
+    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 3 if team present in db and user is not a System Admin " duration="28"/>
+    <testCase name="TeamCrudService getCenterByTeamId() should ftech all center in the team test 1 if team not found" duration="35"/>
+    <testCase name="TeamCrudService getCenterByTeamId() should ftech all center in the team test 2 if team found" duration="24"/>
+    <testCase name="TeamCrudService  getLinksForTeam() getLinksForTeam() should fetch the all the links of the team if priveleges includes view-links" duration="42"/>
+    <testCase name="TeamCrudService  getLinksForTeam() getLinksForTeam() should fetch the all the links of the team if priveleges does not include view-links" duration="28"/>
+    <testCase name="TeamCrudService  getMultimediaForTeam() it should return all the multimedia related to the team" duration="27"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\multimedia\controllers\multimedia.crud.controller.spec.ts">
+    <testCase name="Multimedia Controller should be defined after module initialization" duration="1"/>
+    <testCase name="Multimedia Controller getAllAlbums() should return all the folders/albums present in the DB" duration="2"/>
+    <testCase name="Multimedia Controller uploadImage() should upload the image properly" duration="1"/>
+    <testCase name="Multimedia Controller uploadFileToFolder() should upload the file to a folder properly" duration="1"/>
+    <testCase name="Multimedia Controller getAllFilesInFolderForTeam() should return all the files present in a folder of a team" duration="1"/>
+    <testCase name="Multimedia Controller deleteMultipleFilesAndFolders() should delete multiple files and folders present in a team" duration="26"/>
+    <testCase name="Multimedia Controller getAllFilesForTeam() should return all files present in a team" duration="1"/>
+    <testCase name="Multimedia Controller addFolderInRoot() should return all files present in a team" duration="7"/>
+    <testCase name="Multimedia Controller addFilesAndFoldersIntoSlideshow() should return all files present in a team" duration="2"/>
+    <testCase name="Multimedia Controller getMultimediaForSlideshow() should return all files present in a team" duration="2"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\teams\controllers\team.crud.controller.spec.ts">
+    <testCase name="Multimedia Controller should be defined after module initialization" duration="1"/>
+    <testCase name="Multimedia Controller getTeamInfoById() should return team information by user id and team id" duration="2"/>
+    <testCase name="Multimedia Controller getTeamsByCenterId() should return team information by user id and team id" duration="3"/>
+    <testCase name="Multimedia Controller addTeam() should create a new team" duration="38"/>
+    <testCase name="Multimedia Controller deleteTeamById() should create a new team" duration="3"/>
+    <testCase name="Multimedia Controller getAllTeams() should create a new team" duration="2"/>
+    <testCase name="Multimedia Controller updateTeam() should create a new team" duration="3"/>
+    <testCase name="Multimedia Controller uploadLogo() should create a new team" duration="4"/>
+    <testCase name="Multimedia Controller deleteLogoFromTeam() should create a new team" duration="8"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\user\services\user.service.spec.ts">
+    <testCase name="UserService should be defined after module initialization" duration="47"/>
+    <testCase name="UserService findUser() should return the User successfully if the user is present" duration="39"/>
+    <testCase name="UserService registerUser registerUser() should register the User successfully if the user is not already present" duration="400"/>
+    <testCase name="UserService registerUser registerUser() should successfully register the existing user to other team" duration="35"/>
+    <testCase name="UserService registerUser registerUser() should throw error message if the user is already present in that team" duration="31"/>
+    <testCase name="UserService changePassword() changePassword() method should change the password of a user successfully if user is present" duration="766"/>
+    <testCase name="UserService changePassword() changePassword() method should throw error if user is not present" duration="21"/>
+    <testCase name="UserService deleteGuestById() deleteGuestById() should delete guest user if it is present" duration="25"/>
+    <testCase name="UserService deleteGuestById() deleteGuestById() should throw error if user is not present" duration="43"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\teams\services\global.team.service.spec.ts">
+    <testCase name="TeamCrudService should be defined after module initialization" duration="148"/>
+    <testCase name="TeamCrudService getTeamsByCenterId() should update the team test 1 if no team found inside centerId" duration="73"/>
+    <testCase name="TeamCrudService getTeamsByCenterId() should update the team test 2 if teams found inside centerId" duration="103"/>
+    <testCase name="TeamCrudService uploadLogoForTeam()  should upload logo of a team" duration="82"/>
+    <testCase name="TeamCrudService deleteLogoForTeam()  should delete logo of a team" duration="30"/>
+    <testCase name="TeamCrudService deleteLogoForTeam()  should throw error if file not present in path" duration="30"/>
+    <testCase name="TeamCrudService addTeam()  should throw error if team is already present in db" duration="35"/>
+    <testCase name="TeamCrudService addTeam()  should add team if team is not already present in db" duration="36"/>
+    <testCase name="TeamCrudService addTeam()  should create new team if team is not already present in db and even if logo is not there" duration="32"/>
+    <testCase name="TeamCrudService deleteTeamById()  should delete team if team is present in db" duration="29"/>
+    <testCase name="TeamCrudService deleteTeamById()  should throw error if team is not present in db" duration="46"/>
+    <testCase name="TeamCrudService getAllTeams()  should return all the teams present in the db" duration="29"/>
+    <testCase name="TeamCrudService getAllTeams()  should return a message when no team is found" duration="37"/>
+    <testCase name="TeamCrudService viewTeamsInADC() should return adc Team list" duration="33"/>
+    <testCase name="TeamCrudService findTeamById() should return the team if it is present in the db" duration="42"/>
+    <testCase name="TeamCrudService updateTeamStatus() should update the status of team " duration="91"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\auth\services\auth.service.spec.ts">
+    <testCase name="AuthService should be defined after module initialization" duration="89"/>
+    <testCase name="AuthService validateUser should return a defined user response if the user is present in the database" duration="367"/>
+    <testCase name="AuthService validateUser should return undefined response if the user is not present in the database" duration="24"/>
+    <testCase name="AuthService singIn should return accessToken if the user is present in the database" duration="60"/>
+    <testCase name="AuthService login should return a JWT token and login response when a valid user is provided" duration="53"/>
+    <testCase name="AuthService login should return a exception when an invalid user is provided" duration="40"/>
+    <testCase name="AuthService loginGuest() should call the loginResponseForGuest() method and return login response for a guest user" duration="39"/>
+    <testCase name="AuthService loginResponseForGuest() should return login response for a guest user" duration="38"/>
+    <testCase name="AuthService getHomeDetailsForUserId should return a home detail response for the given user" duration="56"/>
+    <testCase name="AuthService getPowerboard() should return the powerboard response inside login response for a user who visited any team earlier" duration="54"/>
+    <testCase name="AuthService changePassword() should return the user with updated password" duration="44"/>
+    <testCase name="AuthService systemAdminHome() should return home response for system admin" duration="30"/>
+    <testCase name="AuthService teamMemberTeamAdminHome() should return a home detail response for the team member or team admin" duration="30"/>
+    <testCase name="AuthService homeDetailsForTeamMemberAdmin() should return home detail for the team member or team admin" duration="49"/>
+    <testCase name="AuthService getPrivileges() should return the priveleges if the user is system admin or guest " duration="40"/>
+    <testCase name="AuthService getPrivileges() should return the priveleges if the user is team admin or team member associated with any team" duration="47"/>
+    <testCase name="AuthService register should register a new user if not exists" duration="36"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\email\services\email.service.spec.ts">
+    <testCase name="EmailService should be defined after module initialization" duration="11"/>
+    <testCase name="EmailService sendTeamplateEmail() should throw error if sendTemplateEmail method fails" duration="6"/>
+    <testCase name="EmailService sendTeamplateEmail() should send the template Email to destined user" duration="6"/>
+    <testCase name="EmailService sendTeamplateEmail() should throw error if the file is not found" duration="5"/>
+    <testCase name="EmailService getSES() should return an SES object" duration="59"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\team-links\controllers\team-links.crud.controller.spec.ts">
+    <testCase name="Auth Controller should be defined after module initialization" duration="1"/>
+    <testCase name="Auth Controller getTeamLinks should return all the team links of team" duration="3"/>
+    <testCase name="Auth Controller deleteTeamLinkById should delete the team link by its id" duration="13"/>
+    <testCase name="Auth Controller addTeamLinks should create the team link" duration="1"/>
+    <testCase name="Auth Controller getLinksCategory should return the team links category" duration="1"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\ad-center\services\ad-center.crud.service.spec.ts">
+    <testCase name="ADCenterCrudService should be defined after module initialization" duration="18"/>
+    <testCase name="ADCenterCrudService getAllADCenter should return all center list" duration="30"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\file-storage\services\file-storage.service.spec.ts">
+    <testCase name="CloudFileStorageService should be defined after module initialization" duration="9"/>
+    <testCase name="CloudFileStorageService uploadFile() method  should upload the file to s3 correctly" duration="80"/>
+    <testCase name="CloudFileStorageService uploadFile() method  uploadS3() method  should call the s3 with correct parameters to upload a file to aws" duration="47"/>
+    <testCase name="CloudFileStorageService uploadFile() method  uploadS3() method  should throw error if there any" duration="7"/>
+    <testCase name="CloudFileStorageService uploadFile() method  getS3() method  should return the S3 instance" duration="39"/>
+    <testCase name="CloudFileStorageService uploadFile() method  deleteFile() method  should delete the file from s3 successfully" duration="7"/>
+    <testCase name="CloudFileStorageService uploadFile() method  deleteFile() method  should throw error if there is any" duration="8"/>
+    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFiles() method  should delete the multiple files together from s3 successfully" duration="23"/>
+    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFiles() method  should throw error if there is any" duration="27"/>
+    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFolders() method  should delete the multiple files together from s3 successfully" duration="14"/>
+    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFolders() method  should throw error if there is any" duration="20"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\sprint\services\sprint.crud.service.spec.ts">
+    <testCase name="SprintCrudService should be defined after module initialization" duration="36"/>
+    <testCase name="SprintCrudService getSprintDetailResponse() should return sprint Detail Response" duration="46"/>
+    <testCase name="SprintCrudService getBurnDown() should return burndown details" duration="73"/>
+    <testCase name="SprintCrudService getVelocityComparison() getVelocityComparison() should return velocity comparison details" duration="27"/>
+    <testCase name="SprintCrudService getVelocityComparison() getVelocityComparison() should return undefined error if there is any error with query builder" duration="45"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\team-spirit\controllers\team-spirit.crud.controller.spec.ts">
+    <testCase name="TeamSpiritController should be defined after module initialization" duration="1"/>
+    <testCase name="TeamSpiritController getTeamSpiritFromSurvery() should fetch the team spirit rating for the team" duration="8"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\team-spirit\services\team-spirit.crud.service.spec.ts">
+    <testCase name="TeamSpiritCrudService should be defined after module initialization" duration="30"/>
+    <testCase name="TeamSpiritCrudService getTeamSpiritFromSurvey getTeamSpiritFromSurvey() method should return teamSpiritResponse" duration="17"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\team-links\services\team-links.crud.service.spec.ts">
+    <testCase name="TeamLinksCrudService should be defined after module initialization" duration="17"/>
+    <testCase name="TeamLinksCrudService getTeamLinks getTeamLinks() method should return TeamLinkResponse" duration="36"/>
+    <testCase name="TeamLinksCrudService createTeamLinks createTeamLinks() method should return saved TeamLinks" duration="18"/>
+    <testCase name="TeamLinksCrudService deleteTeamLinkById deleteTeamLinkById() should delete the given team links " duration="18"/>
+    <testCase name="TeamLinksCrudService getLinksCategory  should throw error message if the links are not present" duration="14"/>
+    <testCase name="TeamLinksCrudService getLinksCategory  should fetch all the links category present" duration="42"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\user\services\user-session-details.service.spec.ts">
+    <testCase name="UserSessionDetailsService should be defined after module initialization" duration="49"/>
+    <testCase name="UserSessionDetailsService registerUserIntoUserSession should register the user into the User Session" duration="43"/>
+    <testCase name="UserSessionDetailsService getUserSessionDetails should get the User Session Details of the user" duration="8"/>
+    <testCase name="UserSessionDetailsService updateUserSessionAfterPasswordChange should update user session after password change" duration="9"/>
+    <testCase name="UserSessionDetailsService updateLastLoggedInProject should update last logged in project id in user session entity in db" duration="40"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\auth\strategies\jwt.strategy.spec.ts">
+    <testCase name="JwtStrategy validate should validate the payload received in the JWT token and should return it" duration="3"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\user\services\user-privilege.service.spec.ts">
+    <testCase name="UserPrivilegeService should be defined after module initialization" duration="45"/>
+    <testCase name="UserPrivilegeService getUserPrivilegeForTeam() getPrivilegesList()  getPrivilegesList() method should return all the privileges of that particular user" duration="26"/>
+    <testCase name="UserPrivilegeService getAllPrivileges() getAllPrivileges() method should return all the privileges of that particular user if the user is present" duration="123"/>
+    <testCase name="UserPrivilegeService getAllPrivileges() getAllPrivileges() method should throw error if the user is not present" duration="22"/>
+    <testCase name="UserPrivilegeService getAllUserRoles() getAllUserRoles() should fetch all user roles" duration="38"/>
+    <testCase name="UserPrivilegeService getAllUserRoles() getAllUserRoles() should throw error if user is not present" duration="19"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\ad-center\controllers\ad-center.crud.controller.spec.ts">
+    <testCase name="Auth Controller should be defined after module initialization" duration="1"/>
+    <testCase name="Auth Controller getAllCenters should return all the centers present in db" duration="5"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\sprint\controllers\sprint.crud.controller.spec.ts">
+    <testCase name="SprintController should be defined after module initialization" duration="10"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\code-quality-snapshot\services\code-quality-snapshot.crud.service.spec.ts">
+    <testCase name="CodeQualitySnapshotCrudService should be defined after module initialization" duration="10"/>
+    <testCase name="CodeQualitySnapshotCrudService getCodeQualitySnapshot should return code quality response of the existed team" duration="44"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\dashboard\client-status\services\client-status.crud.service.spec.ts">
+    <testCase name="ClientStatusCrudService should be defined after module initialization" duration="12"/>
+    <testCase name="ClientStatusCrudService getClientFeedback() method should return clientStatusResponse" duration="10"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\auth\controllers\auth.controller.spec.ts">
+    <testCase name="Auth Controller should be defined after module initialization" duration="1"/>
+    <testCase name="Auth Controller login should return the JWT token and login response when the user is correct" duration="4"/>
+    <testCase name="Auth Controller login should return the error if there is any error from the auth service" duration="2"/>
+    <testCase name="Auth Controller loginGuest should return the JWT token and login response when the user is a guest" duration="2"/>
+    <testCase name="Auth Controller register should return the newly registered User entity" duration="1"/>
+    <testCase name="Auth Controller changePassword should change the password of the user" duration="2"/>
+    <testCase name="Auth Controller getHomeDetailsForUserId should home page response for user" duration="1"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\user\controllers\user.controller.spec.ts">
+    <testCase name="Auth Controller should be defined after module initialization" duration="2"/>
+    <testCase name="Auth Controller getAllMemberOfTeam should return all the members of a team" duration="2"/>
+    <testCase name="Auth Controller deleteUserFromTeamById should delete the member from a team" duration="10"/>
+    <testCase name="Auth Controller updateUserRole should update user role" duration="3"/>
+    <testCase name="Auth Controller getAllUserRoles should return all the user roles" duration="3"/>
+    <testCase name="Auth Controller updateLastLoggedProject should update the project with last logged in project" duration="2"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\email\controller\email.controller.spec.ts">
+    <testCase name="EmailController should be defined after module initialization" duration="1"/>
+    <testCase name="EmailController sendEmailToNewUser should send templated email to new user" duration="3"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\auth\guards\roles.guard.spec.ts">
+    <testCase name="RolesGuard canActivate should return true when the role of the user is in the roles array reflected by the handler or class" duration="3"/>
+    <testCase name="RolesGuard canActivate should return false when the role of the user is not in the roles array reflected by the handler or class" duration="2"/>
+    <testCase name="RolesGuard canActivate should return true if no role metadata is defined" duration="1"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\shared\filters\business-logic.filter.spec.ts">
+    <testCase name="BusinessLogicFilter should be defined" duration="0"/>
+    <testCase name="BusinessLogicFilter catch should return an 400 Bad Request error" duration="4"/>
+    <testCase name="BusinessLogicFilter catch should also work without logger" duration="0"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\core\auth\decorators\roles.decorator.spec.ts">
+    <testCase name="Roles should reflect metadata in the class and methods" duration="2"/>
+  </file>
+  <file path="C:\projects\workspaces\Powerboard_New_Repo\powerboard-business-api\src\app\app.controller.spec.ts">
+    <testCase name="AppController root should return &quot;Hello World!&quot;" duration="11"/>
+  </file>
+</testExecutions>

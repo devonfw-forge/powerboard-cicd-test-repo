@@ -63,7 +63,11 @@ export class TeamCrudService extends TypeOrmCrudService<Team> implements ITeamSe
     this.powerboardResponse.project_key = teams.projectKey;
     this.powerboardResponse.center = teams.ad_center.name;
     this.powerboardResponse.team_code = teams.teamCode;
-    this.powerboardResponse.logo = `${this.globalLink}/${teamId}/` + teams.logo!;
+    if (teams.logo == null) {
+      this.powerboardResponse.logo = null;
+    } else {
+      this.powerboardResponse.logo = `${this.globalLink}/${teamId}/` + teams.logo!;
+    }
     this.powerboardResponse.dashboard = await this.dashboardService.getDashboardByTeamId(teams);
     // console.log("This is dashboard response");
     // console.log(this.powerboardResponse.dashboard);

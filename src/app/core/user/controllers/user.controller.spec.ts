@@ -4,7 +4,6 @@ import { UserSessionDetailsMockService } from '../../../../../test/mockedService
 import { UserTeamMockService } from '../../../../../test/mockedServices/user-team.service.mock';
 import { UserMockService } from '../../../../../test/mockedServices/user.service.mock';
 import { User } from '../model/entities/user.entity';
-import { UserRole } from '../model/entities/user_role.entity';
 import { UserController } from './user.controller';
 
 describe('Auth Controller', () => {
@@ -121,11 +120,9 @@ describe('Auth Controller', () => {
         json: jest.fn(),
         message: jest.fn(),
       };
-      const userRoles = {} as UserRole[];
-      jest.spyOn(userPrivilegeService, 'getAllUserRoles').mockImplementation(() => userRoles);
-      await userController.getAllUserRoles(mockResponse);
-      expect(mockResponse.status).toBeCalledWith(200);
-      expect(mockResponse.status).toBeCalledTimes(1);
+
+      await expect(userController.getAllUserRoles(mockResponse)).resolves.not.toThrow();
+      expect(userPrivilegeService.getAllUserRoles).toBeCalled();
     });
   });
   describe('updateLastLoggedProject', () => {

@@ -180,7 +180,7 @@ describe('DashboardService', () => {
         velocity: { Avg: 115, Committed: 140, Completed: 18 },
       };
 
-      const expectedOutput = undefined;
+      const expectedOutput = 2;
 
       //test
       const actualOutput = dashboardService.fetchStatus(dashboard);

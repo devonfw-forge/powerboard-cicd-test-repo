@@ -7,7 +7,7 @@ export interface PowerboardResponse {
   team_name: string;
   project_key: string;
   center: string;
-  logo: string;
+  logo: string | null;
   team_code: string;
   privileges: string[];
   dashboard: DashBoardResponse;

@@ -6,6 +6,7 @@ import {
   ADCenterRepositoryMock,
   ClientStatusRepositoryMock,
   CodeQualityRepositoryMock,
+  FilesRepositoryMock,
   LinksCategoryMock,
   MultimediaRepositoryMock,
   SprintRepositoryMock,
@@ -37,6 +38,7 @@ import { TeamSpiritCrudService } from '../../../dashboard/team-spirit/services/t
 import { ITeamSpiritService } from '../../../dashboard/team-spirit/services/team-spirit.interface';
 import { EmailService } from '../../../email/services/email.service';
 import { CloudFileStorageService } from '../../../file-storage/services/cloud-file-storage.service';
+import { Files } from '../../../multimedia/model/entities/files.entity';
 import { Multimedia } from '../../../multimedia/model/entities/multimedia.entity';
 import { MultimediaCrudService } from '../../../multimedia/services/multimedia.crud.service';
 import { IMultimediaService } from '../../../multimedia/services/multimedia.crud.service.interface';
@@ -99,6 +101,7 @@ describe('AuthService', () => {
   let teamStatusRepo: TeamStatusRepositoryMock;
   let fileStorageService: CloudFileStorageService;
   let multimediaRepo: MultimediaRepositoryMock;
+  let filesRepositoryMock: FilesRepositoryMock;
   // let jwtService: JwtService;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -139,6 +142,10 @@ describe('AuthService', () => {
         {
           provide: getRepositoryToken(TeamLinks),
           useClass: TeamLinksMockRepo,
+        },
+        {
+          provide: getRepositoryToken(Files),
+          useClass: FilesRepositoryMock,
         },
         {
           provide: getRepositoryToken(LinksCategory),
@@ -276,6 +283,7 @@ describe('AuthService', () => {
     linksCategoryRepo = module.get<LinksCategoryMock>(getRepositoryToken(LinksCategory));
     teamStatusRepo = module.get<TeamStatusRepositoryMock>(getRepositoryToken(TeamStatus));
     multimediaRepo = module.get<MultimediaRepositoryMock>(getRepositoryToken(Multimedia));
+    filesRepositoryMock = module.get<FilesRepositoryMock>(getRepositoryToken(Files));
     //jwtService = module.get<JwtService>(JwtService);
   });
 
@@ -310,6 +318,7 @@ describe('AuthService', () => {
     expect(teamStatusRepo).toBeDefined();
     expect(fileStorageService).toBeDefined();
     expect(multimediaRepo).toBeDefined();
+    expect(filesRepositoryMock).toBeDefined();
   });
 
   describe('validateUser', () => {

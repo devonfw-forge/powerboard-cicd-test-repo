@@ -18,7 +18,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "sonar": "ts-node sonar-scanner.ts"
   },
   "dependencies": {
     "@devon4node/common": "^2.0.0",
@@ -81,9 +82,11 @@
     "husky": "^4.2.3",
     "jest": "^26.6.3",
     "jest-mock-extended": "^1.0.18",
+    "jest-sonar-reporter": "^2.0.0",
     "prettier": "^2.1.2",
     "pretty-quick": "^2.0.1",
-    "supertest": "^6.0.0",
+    "sonarqube-scanner": "^2.8.1",
+    "supertest": "^6.1.6",
     "ts-jest": "^26.4.3",
     "ts-loader": "^8.0.8",
     "ts-node": "^9.0.0",
@@ -96,11 +99,18 @@
       "json",
       "ts"
     ],
+    "testResultsProcessor": "jest-sonar-reporter",
+    "jestSonar": {
+      "reportPath": "coverage",
+      "reportFile": "test-reporter.xml",
+      "indent": 4
+    },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
