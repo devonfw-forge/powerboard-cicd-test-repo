@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { classToPlain } from 'class-transformer';
+// import { classToPlain } from 'class-transformer';
 import { User } from '../../user/model/entities/user.entity';
 import { LoginDTO } from '../model/LoginDTO';
 import { JwtService } from '@nestjs/jwt';
@@ -48,7 +48,8 @@ export class AuthService implements IAuthService {
   async validateUser(username: string, pass: string): Promise<User | undefined> {
     const user = (await this.userService.findUser(username)) as User;
     if (user && (await compare(pass, user.password!))) {
-      return classToPlain(user) as User;
+      // return classToPlain(user) as User;
+      return user;
     }
     return undefined;
   }
@@ -82,7 +83,6 @@ export class AuthService implements IAuthService {
     const payload = await this.validateUser(user.username!, user.password!);
     if (payload) {
       console.log('In Payload block');
-
       const accessToken = await this.signIn(user.username, user.password);
       const userSession = await this.userSessionDetailsService.getUserSessionDetails(payload.id);
       if (userSession) {
