@@ -48,7 +48,10 @@ export class AuthService implements IAuthService {
   async validateUser(username: string, pass: string): Promise<User | undefined> {
     try {
       const user = (await this.userService.findUser(username)) as User;
-      if (user && (await compare(pass, user.password!))) {
+      const isMatched = await compare(pass, user.password!);
+      console.log(isMatched);
+      if (user && isMatched) {
+        console.log('Everything fine here');
         return classToPlain(user) as User;
       }
       return undefined;
