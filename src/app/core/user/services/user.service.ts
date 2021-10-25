@@ -26,10 +26,10 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
     super(userRepository);
   }
 
-  async findUser(username: string): Promise<User | undefined> {
+  async findUser(name: string): Promise<User | undefined> {
     return this.userRepository.findOne({
       where: {
-        username,
+        username: name,
       },
     });
   }
