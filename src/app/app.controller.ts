@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Response, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { Response as eResponse } from 'express';
 
 @Controller()
 export class AppController {
@@ -8,5 +9,10 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('health')
+  async getHealth(@Response() res: eResponse): Promise<void> {
+    res.status(200).json('OK');
   }
 }
