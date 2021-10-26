@@ -24,7 +24,6 @@
   "dependencies": {
     "@devon4node/common": "^2.0.0",
     "@devon4node/config": "^2.0.0",
-    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@nestjs-modules/mailer": "^1.6.0",
     "@nestjs/common": "^7.5.1",
     "@nestjs/core": "^7.5.1",
@@ -42,7 +41,6 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.1",
     "dotenv": "^10.0.0",
-    "fluent-ffmpeg": "^2.1.2",
     "generate-password": "^1.6.0",
     "helmet": "^3.21.3",
     "lodash": "^4.17.15",
@@ -54,7 +52,6 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
     "swagger-ui-express": "^4.1.4",
-    "thumbler": "^1.1.2",
     "typeorm": "^0.2.24",
     "winston": "^3.2.1"
   },
