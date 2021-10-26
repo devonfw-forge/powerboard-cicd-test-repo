@@ -3,7 +3,7 @@ import { classToPlain } from 'class-transformer';
 import { User } from '../../user/model/entities/user.entity';
 import { LoginDTO } from '../model/LoginDTO';
 import { JwtService } from '@nestjs/jwt';
-// import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import { UserDTO } from '../../user/model/dto/UserDTO';
 import { MyProject } from '../../user/model/dto/my_project.interface';
 import { LoginResponse } from '../model/LoginResponse';
@@ -50,8 +50,8 @@ export class AuthService implements IAuthService {
       const user = (await this.userService.findUser(username)) as User;
       console.log(user);
       console.log(pass);
-      // const isMatched = await compare(pass, user.password!);
-      const isMatched = true;
+      const isMatched = await compare(pass, user.password!);
+      // const isMatched = true;
       console.log(isMatched);
       if (user && isMatched) {
         console.log('Everything fine here');

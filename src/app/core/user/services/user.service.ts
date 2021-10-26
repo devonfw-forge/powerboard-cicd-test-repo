@@ -3,7 +3,7 @@ import { DeleteResult, Repository } from 'typeorm';
 import { User } from '../model/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
-import { compare, genSalt, hash } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcryptjs';
 import { UserDTO } from '../model/dto/UserDTO';
 import { ChangePasswordDTO } from '../../auth/model/ChangePasswordDTO';
 import { IUserTeamService } from './user-team.service.interface';
