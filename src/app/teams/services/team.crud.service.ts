@@ -45,18 +45,16 @@ export class TeamCrudService extends TypeOrmCrudService<Team> implements ITeamSe
   async getTeamInfoById(userTeam: UserTeamDTO): Promise<PowerboardResponse> {
     const teamId = userTeam.teamId;
     const userId = userTeam.userId;
+
     const teams = await this.globalTeamService.findTeamById(teamId);
-    //console.log("Team inside getTeamInfo")
-    //console.log(teams);
+
     if (!teams) {
       throw new NotFoundException('Team Not Found');
     }
     let isSystemAdmin, privilegeList: string[] | undefined;
     if (userId) {
       isSystemAdmin = await this.userTeamService.isSystemAdmin(userId);
-      // console.log(isSystemAdmin);
       privilegeList = await this.userPrivilegeService.getUserPrivilegeForTeam(userId, teamId, isSystemAdmin);
-      // console.log(privilegeList);
     }
     this.powerboardResponse.team_id = teams.id;
     this.powerboardResponse.team_name = teams.name;
@@ -66,24 +64,16 @@ export class TeamCrudService extends TypeOrmCrudService<Team> implements ITeamSe
     if (teams.logo == null) {
       this.powerboardResponse.logo = null;
     } else {
-      this.powerboardResponse.logo = `${this.globalLink}/${teamId}/` + teams.logo!;
+      this.powerboardResponse.logo = `${this.globalLink}/${teamId}/` + teams.logo;
     }
     this.powerboardResponse.dashboard = await this.dashboardService.getDashboardByTeamId(teams);
-    // console.log("This is dashboard response");
-    // console.log(this.powerboardResponse.dashboard);
     this.powerboardResponse.teamLinks = await this.getLinksForTeam(teams.id, privilegeList);
-    // console.log("Team Links");
-    // console.log(this.powerboardResponse.teamLinks);
     this.powerboardResponse.multimedia = await this.getMultimediaForTeam(teams.id);
-    // console.log("Multimedia");
-    // console.log(this.powerboardResponse.multimedia)
     if (isSystemAdmin) {
       this.powerboardResponse.privileges = [];
     } else {
       this.powerboardResponse.privileges = privilegeList!;
     }
-    // console.log('This is powerboard response');
-    // console.log(this.powerboardResponse)
     return this.powerboardResponse;
   }
 
@@ -119,7 +109,7 @@ export class TeamCrudService extends TypeOrmCrudService<Team> implements ITeamSe
     teamExisted.name = updateTeam.teamName;
     teamExisted.projectKey = updateTeam.projectKey;
     teamExisted.teamCode = updateTeam.teamCode;
-    return await this.teamRepository.save(teamExisted);
+    return this.teamRepository.save(teamExisted);
   }
   async getCenterByTeamId(teamId: string): Promise<MyCenter> {
     const result = await this.teamRepository.findOne({ where: { id: teamId } });

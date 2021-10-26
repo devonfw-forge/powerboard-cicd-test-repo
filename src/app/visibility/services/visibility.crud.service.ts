@@ -27,8 +27,7 @@ export class VisibilityCrudService extends TypeOrmCrudService<Visibility> {
     } else {
       visible.videos = visibility.value;
     }
-    const result = await this.visibilityRepository.save(visible);
-    return result;
+    return this.visibilityRepository.save(visible);
   }
 
   visibility: VisibilityResponse = {} as VisibilityResponse;

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Repository } from 'typeorm';
@@ -21,7 +22,7 @@ export class UserSessionDetailsService extends TypeOrmCrudService<UserSession> i
     userSession.isPasswordChanged = false;
     console.log('Registering inside user session db');
     console.log(userSession);
-    return await this.userSessionDetailsRepository.save(userSession);
+    return this.userSessionDetailsRepository.save(userSession);
   }
 
   async getUserSessionDetails(userId: string): Promise<any> {
@@ -31,13 +32,18 @@ export class UserSessionDetailsService extends TypeOrmCrudService<UserSession> i
   async updateUserSessionAfterPasswordChange(userId: string): Promise<UserSession> {
     const userSession = (await this.userSessionDetailsRepository.findOne({ where: { userId: userId } })) as UserSession;
     userSession.isPasswordChanged = true;
-    return await this.userSessionDetailsRepository.save(userSession);
+    return this.userSessionDetailsRepository.save(userSession);
   }
 
   async updateLastLoggedInProject(loggedTeam: UpdateLastLoggedTeamDTO): Promise<void> {
     const result = (await this.userSessionDetailsRepository.findOne({
       where: { userId: loggedTeam.userId },
     })) as UserSession;
+    if (!result) {
+      throw new NotFoundException('User Session not found');
+    }
+    // result.lastCheckedInProjectId = loggedTeam.teamId;
+    // await this.userSessionDetailsRepository.save(result);
     const session = new UserSession();
     console.log(';;;;;;;;;;;;;;;;;');
     console.log(result);

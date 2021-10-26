@@ -84,7 +84,6 @@ export class CloudFileStorageService implements IFileStorageService {
       } else {
         console.log('Deleted successfully');
         console.log(data);
-        //console.log('File has been deleted successfully');
         return data;
       }
     });
@@ -127,16 +126,16 @@ export class CloudFileStorageService implements IFileStorageService {
         // data.Contents.forEach( (content: any)=>) {
         //   deleteParams.Delete.Objects.push({ Key: content.Key });
         // });
-        s3.deleteObjects(deleteParams, (error, data) => {
+        s3.deleteObjects(deleteParams, (error, success) => {
           if (error) {
             console.log('error occurred');
             console.log(error);
             return error;
           }
           console.log('Deleted successfully');
-          console.log(data);
-          //console.log('File has been deleted successfully');
-          return data;
+          console.log(success);
+
+          return success;
         });
         // s3.deleteObjects(deleteParams, function (err, data) {
         //   if (err) {

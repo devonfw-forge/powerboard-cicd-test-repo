@@ -36,8 +36,7 @@ export class UserPrivilegeService extends TypeOrmCrudService<UserRole> implement
   }
 
   async findRole(roleId: string): Promise<UserRole> {
-    const roleObj = (await this.userRoleRepository.findOne({ where: { id: roleId } })) as UserRole;
-    return roleObj;
+    return (await this.userRoleRepository.findOne({ where: { id: roleId } })) as UserRole;
   }
 
   async getAllPrivilegeForAdmin(userId: string): Promise<string[]> {
@@ -56,7 +55,7 @@ export class UserPrivilegeService extends TypeOrmCrudService<UserRole> implement
     }
     let rolesList = [],
       i;
-    for (i = 0; i < roles!.length; i++) {
+    for (i = 0; i < roles.length; i++) {
       let userRole: UserRolesDTO = {} as UserRolesDTO;
       userRole.roleId = roles[i]!.id;
       userRole.roleName = roles[i]!.roleName;

@@ -26,10 +26,10 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
     super(userRepository);
   }
 
-  async findUser(name: string): Promise<User | undefined> {
+  async findUser(username: string): Promise<User | undefined> {
     return this.userRepository.findOne({
       where: {
-        username: name,
+        username,
       },
     });
   }
@@ -48,7 +48,6 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
       return this.userTeamService.addUserToTeam(actualUser, userDTO);
     }
     var password = generator.generate({ length: 6, numbers: true });
-    //console.log(password);
     console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
     const salt = await genSalt(12);
     const hashPass = await hash(password, salt);
@@ -97,6 +96,6 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    return await this.userRepository.delete(guestId);
+    return this.userRepository.delete(guestId);
   }
 }

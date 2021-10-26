@@ -31,7 +31,7 @@ export class TeamLinksCrudService extends TypeOrmCrudService<TeamLinks> implemen
     //   .createQueryBuilder('team_link')
     //   .where('team_link.team_id=:team_id', { team_id: team_Id })
     //   .getMany()) as TeamLinks[];
-    const result = (await this.teamLinkRepository.find({ where: { team: team_Id } })) as TeamLinks[];
+    const result = await this.teamLinkRepository.find({ where: { team: team_Id } });
     if (result == null) {
       return teamLinksArray;
     } else {
@@ -51,7 +51,7 @@ export class TeamLinksCrudService extends TypeOrmCrudService<TeamLinks> implemen
    * deleteteamLinkById method will delete the link of team
    */
   async deleteTeamLinkById(teamLinkId: string): Promise<any> {
-    return await this.teamLinkRepository.delete(teamLinkId);
+    return this.teamLinkRepository.delete(teamLinkId);
   }
 
   /**
@@ -80,7 +80,7 @@ export class TeamLinksCrudService extends TypeOrmCrudService<TeamLinks> implemen
     console.log(output);
     let linksList = [],
       i;
-    for (i = 0; i < output!.length; i++) {
+    for (i = 0; i < output.length; i++) {
       let linkCategory: LinksCategoryResponse = {} as LinksCategoryResponse;
       linkCategory.linkId = output[i].id;
       linkCategory.linkTitle = output[i].title;

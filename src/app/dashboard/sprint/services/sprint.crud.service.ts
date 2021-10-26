@@ -238,11 +238,10 @@ export class SprintCrudService extends TypeOrmCrudService<Sprint> implements ISp
    */
   getAverageVelocity(previousSprintCompleted: any): number {
     let sum = 0;
-    for (let i = 0; i < previousSprintCompleted.length; i++) {
-      sum = sum + Number(previousSprintCompleted[i].ssm_value);
+    for (let value of previousSprintCompleted) {
+      sum = sum + Number(value.ssm_value);
     }
-    let avg = sum / previousSprintCompleted.length;
-    return avg;
+    return sum / previousSprintCompleted.length;
   }
 
   /**

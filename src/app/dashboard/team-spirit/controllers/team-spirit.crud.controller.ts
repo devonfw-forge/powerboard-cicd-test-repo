@@ -16,14 +16,6 @@ export class TeamSpiritCrudController {
 
   @Get('/surveyResult/:teamName')
   async getTeamSpiritFromSurvery(@Param('teamName') teamName: string): Promise<any> {
-    const teamSpirit = await this.teamSpiritServiceInterface.getTeamSpiritFromSurvey(teamName);
-    return teamSpirit;
+    return this.teamSpiritServiceInterface.getTeamSpiritFromSurvey(teamName);
   }
-
-  // @Put('/updateTeam/:teamName')
-  // async updateTeamConfiguration(@Body() updatedTeam: TeamDTO, @Param('teamName') teamName: string) {
-  //   console.log(updatedTeam);
-  //   const updatedTeamSpirit = await this.teamSpiritService.updateTeamConfiguration(updatedTeam, teamName);
-  //   return updatedTeamSpirit;
-  // }
 }

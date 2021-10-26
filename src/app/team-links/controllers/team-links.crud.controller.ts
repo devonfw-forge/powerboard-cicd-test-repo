@@ -3,7 +3,6 @@ import { Crud } from '@nestjsx/crud';
 import { CrudType } from '@devon4node/common/serializer';
 import { TeamLinks } from '../model/entities/team-links.entity';
 import { TeamLinkDTO } from '../model/dto/TeamLinkDTO';
-//import { AuthGuard } from '@nestjs/passport';
 import { Response as eResponse } from 'express';
 import { ITeamLinksservice } from '../services/team-links.service.interface';
 

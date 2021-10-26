@@ -1,6 +1,5 @@
 import { BurndownResponse } from '../model/dto/BurndownResponse';
 import { SprintDetailResponse } from '../model/dto/SprintDetailResponse';
-//import { SprintWorkUnitResponse } from '../model/dto/sprintWorkUnitResponse';
 import { VelocityComparisonResponse } from '../model/dto/VelocityComparisonResponse';
 
 export interface ISprintCrudService {

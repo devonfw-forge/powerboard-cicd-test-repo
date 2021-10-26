@@ -9,7 +9,7 @@ import { ICodeQualityService } from '../code-quality-snapshot/services/code-qual
 import { DashBoardResponse } from '../model/DashBoardResponse';
 import { BurndownResponse } from '../sprint/model/dto/BurndownResponse';
 import { SprintDetailResponse } from '../sprint/model/dto/SprintDetailResponse';
-//import { SprintWorkUnitResponse } from '../sprint/model/dto/sprintWorkUnitResponse';
+
 import { VelocityComparisonResponse } from '../sprint/model/dto/VelocityComparisonResponse';
 
 import { ISprintCrudService } from '../sprint/services/sprint.crud.service.interface';
@@ -35,8 +35,6 @@ export class DashboardService implements IDashboardService {
    */
   async getDashboardByTeamId(team: Team): Promise<DashBoardResponse> {
     this.dash.teamId = team.id;
-    // const sprintWorkUnit: SprintWorkUnitResponse | undefined = await this.sprintService.sprintWorkUnit(team.id);
-    // this.dash.sprintWorkUnit = sprintWorkUnit;
 
     const codeQuality: CodeQualityResponse | undefined = await this.codequalityService.getCodeQualitySnapshot(team.id);
 
@@ -46,7 +44,7 @@ export class DashboardService implements IDashboardService {
     this.dash.clientStatus = clientStatus;
 
     const teamSpirit: TeamSpiritResponse | undefined = await this.teamSpiritServiceInterface.getTeamSpiritFromSurvey(
-      team!.name,
+      team.name,
     );
     this.dash.teamSpirit = teamSpirit;
 
@@ -71,12 +69,13 @@ export class DashboardService implements IDashboardService {
   fetchStatus(dashboard: DashBoardResponse): number | undefined {
     let statusResult;
     if (dashboard?.clientStatus == null) {
-      return (statusResult = 2);
+      statusResult = 2;
+      return statusResult;
     } else {
-      const codeQualityStatus = dashboard!.codeQuality!.status;
+      const codeQualityStatus = dashboard.codeQuality!.status;
       //const teamSpiritStatus = dashboard!.teamSpirit!.teamSpiritRating;
-      const clientStatus = dashboard!.clientStatus!.clientSatisfactionRating;
-      const burndownStatus = dashboard!.burndown!.burndownStatus;
+      const clientStatus = dashboard.clientStatus.clientSatisfactionRating;
+      const burndownStatus = dashboard.burndown!.burndownStatus;
       if (
         clientStatus >= 6 &&
         //teamSpiritStatus >= 6 &&

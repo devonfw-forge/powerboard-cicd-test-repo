@@ -297,11 +297,13 @@ describe('MultimdeiaCrudService', () => {
         {
           folderId: 'cbad5f43-396e-4abb-9e55-4036f58bede7',
           folderName: 'resort',
+          inSlideShow: false,
           status: false,
         },
         {
           folderId: 'cbad5f43-396e-4abb-9e55-4036f58bede9',
           folderName: 'birthday',
+          inSlideShow: false,
           status: false,
         },
       ];

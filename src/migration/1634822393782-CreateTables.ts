@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateTables1631625281680 implements MigrationInterface {
-  name = 'CreateTables1631625281680';
+export class CreateTables1634822393782 implements MigrationInterface {
+  name = 'CreateTables1634822393782';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -59,7 +59,7 @@ export class CreateTables1631625281680 implements MigrationInterface {
       `CREATE TABLE "team_spirit" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "version" integer NOT NULL DEFAULT '1', "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "team_spirit_rating" integer NOT NULL, "sprint_id" uuid, CONSTRAINT "REL_c258101a9e329fc1cf1ca46019" UNIQUE ("sprint_id"), CONSTRAINT "PK_f4f2b4281be72d5392d9efb8466" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
-      `CREATE TABLE "multimedia" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "version" integer NOT NULL DEFAULT '1', "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "album_name" character varying(1000), "file_name" character varying(1000),"in_slideshow" boolean NOT NULL DEFAULT false  ,"multimedia_team_id" uuid, CONSTRAINT "PK_8de2f47ce83e221b35e05e52d0d" PRIMARY KEY ("id"))`,
+      `CREATE TABLE "multimedia" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "version" integer NOT NULL DEFAULT '1', "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "album_name" character varying(1000), "file_name" character varying(1000), "in_slideshow" boolean NOT NULL DEFAULT false, "multimedia_team_id" uuid, CONSTRAINT "PK_8de2f47ce83e221b35e05e52d0d" PRIMARY KEY ("id"))`,
     );
     await queryRunner.query(
       `CREATE TABLE "files" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "version" integer NOT NULL DEFAULT '1', "createdAt" TIMESTAMP NOT NULL DEFAULT now(), "updatedAt" TIMESTAMP NOT NULL DEFAULT now(), "file_name" character varying(3000) NOT NULL, "multimedia_album_id" uuid, CONSTRAINT "PK_6c16b9093a142e0e7613b04a3d9" PRIMARY KEY ("id"))`,

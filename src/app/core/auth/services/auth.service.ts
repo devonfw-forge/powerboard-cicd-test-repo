@@ -8,12 +8,9 @@ import { UserDTO } from '../../user/model/dto/UserDTO';
 import { MyProject } from '../../user/model/dto/my_project.interface';
 import { LoginResponse } from '../model/LoginResponse';
 import { DashBoardResponse } from '../../../dashboard/model/DashBoardResponse';
-
 import { UserTeam } from '../../user/model/entities/user_team.entity';
-
 import { Inject } from '@nestjs/common/decorators/core/inject.decorator';
 import { IADCenterService } from '../../../ad-center/services/ad-center.interface';
-//import { IDashboardService } from '../../../dashboard/services/dashboard.service.interface';
 import { IAuthService } from './auth.service.interface';
 import { IUserService } from '../../user/services/user.service.interface';
 import { IUserTeamService } from '../../user/services/user-team.service.interface';
@@ -46,22 +43,11 @@ export class AuthService implements IAuthService {
    * @return {User} User as response
    */
   async validateUser(username: string, pass: string): Promise<User | undefined> {
-    try {
-      const user = (await this.userService.findUser(username)) as User;
-      console.log(user);
-      console.log(pass);
-      const isMatched = await compare(pass, user.password!);
-      // const isMatched = true;
-      console.log(isMatched);
-      if (user && isMatched) {
-        console.log('Everything fine here');
-        return classToPlain(user) as User;
-      }
-      return undefined;
-    } catch (e) {
-      console.log('error occur');
-      console.log(e);
+    const user = (await this.userService.findUser(username)) as User;
+    if (user && (await compare(pass, user.password))) {
+      return classToPlain(user) as User;
     }
+    return undefined;
   }
 
   /**
@@ -71,14 +57,12 @@ export class AuthService implements IAuthService {
    */
   async signIn(username: string, password: string): Promise<string> {
     const user: any = { username, password };
-    console.log('In SignIn ');
-    const accessToken = this.jwtService.sign(user, { expiresIn: '1h' });
-    return accessToken;
+    return this.jwtService.sign(user, { expiresIn: '1h' });
   }
 
   async loginGuest(user: LoginDTO): Promise<any> {
     const accessToken = await this.signIn(user.username, user.password);
-    return await this.loginResponseForGuest(accessToken);
+    return this.loginResponseForGuest(accessToken);
   }
 
   /**
@@ -90,27 +74,20 @@ export class AuthService implements IAuthService {
 
   async login(user: LoginDTO): Promise<any> {
     let isPassword: boolean = false;
-
-    const payload = (await this.validateUser(user.username!, user.password!)) as User;
-    console.log('This is payload');
-    console.log(payload);
+    const payload = await this.validateUser(user.username, user.password);
     if (payload) {
-      console.log('In Payload block');
       const accessToken = await this.signIn(user.username, user.password);
       const userSession = await this.userSessionDetailsService.getUserSessionDetails(payload.id);
       if (userSession) {
-        console.log('In user session block');
         isPassword = userSession.isPasswordChanged;
       }
       let visitedTeam: string = '';
       let loginResponse: LoginResponse = {} as LoginResponse;
       loginResponse.userId = payload.id;
       loginResponse.isPasswordChanged = isPassword;
-      console.log('Passed after userSession nd before lastchecked');
       if (userSession.lastCheckedInProjectId != null) {
         visitedTeam = userSession.lastCheckedInProjectId;
         loginResponse.powerboardResponse = await this.getPowerboard(visitedTeam, payload.id);
-        console.log('passed lastchecked');
       } else {
         loginResponse.homeResponse = await this.getHomeDetailsForUserId(payload.id);
         console.log('This is login home response');
@@ -131,7 +108,7 @@ export class AuthService implements IAuthService {
   }
 
   async changePassword(changePassword: ChangePasswordDTO): Promise<any> {
-    return await this.userService.changePassword(changePassword);
+    return this.userService.changePassword(changePassword);
   }
 
   async getPowerboard(visitedTeam: string, userId: string) {
@@ -141,7 +118,7 @@ export class AuthService implements IAuthService {
     if (visitedTeam == '') {
       return undefined;
     } else {
-      return await this.teamService.getTeamInfoById(userTeamDTO);
+      return this.teamService.getTeamInfoById(userTeamDTO);
     }
   }
 
@@ -173,7 +150,6 @@ export class AuthService implements IAuthService {
     homeResponse.ADC_List = await this.adCenterServiceInterface.getAllCenters();
 
     homeResponse.Teams_In_ADC = await this.globalTeamsService.getTeamsByCenterId(homeResponse.ADC_List[0].centerId);
-    //homeResponse.privileges = await this.userPrivilegeService.getAllPrivilegeForAdmin(userTeam.user.id);
     return homeResponse;
   }
 
@@ -190,15 +166,12 @@ export class AuthService implements IAuthService {
         teamsWithinUser.teamName = userTeam[i].team.name;
         teamsWithinUser.teamLogo = `${this.globalLink}/${userTeam[i].team.id}/` + userTeam[i].team.logo!;
         teamsWithinUser.myRole = userTeam[i].role.roleName;
-        //this.dash = (await this.dashboardService.getDashboardByTeamId(userTeam[i].team)) as DashBoardResponse;
-        //teamsWithinUser.teamStatus = this.dashboardService.fetchStatus(this.dash);
         teamsWithinUser.teamStatus = await this.globalTeamsService.findStatusByTeam(userTeam[i].team);
         teamsDTOArray.push(teamsWithinUser);
         teamsWithinUser = {} as MyProject;
       }
       let teamId = teamsDTOArray[0].teamId;
-      const homeResponse = await this.homeDetailsForTeamMemberAdmin(teamId, teamsDTOArray);
-      return homeResponse;
+      return this.homeDetailsForTeamMemberAdmin(teamId, teamsDTOArray);
     }
   }
 

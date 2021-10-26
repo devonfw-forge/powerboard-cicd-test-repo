@@ -400,16 +400,19 @@ describe('AuthService', () => {
           {
             teamId: '46455bf7-ada7-495c-8019-8d7ab76d489e',
             teamName: 'Team B',
+            teamLogo: '',
             teamStatus: 3,
           },
           {
             teamId: '46455bf7-ada7-495c-8019-8d7ab76d490e',
             teamName: 'Team C',
+            teamLogo: '',
             teamStatus: 3,
           },
           {
             teamId: '46455bf7-ada7-495c-8019-8d7ab76d488e',
             teamName: 'Team A',
+            teamLogo: '',
             teamStatus: 3,
           },
         ],

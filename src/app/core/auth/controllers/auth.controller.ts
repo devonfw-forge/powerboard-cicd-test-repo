@@ -15,14 +15,14 @@ export class AuthController {
   //@UseGuards(AuthGuard('jwt'))
   async login(@Body() login: LoginDTO): Promise<any> {
     console.log(login);
-    return await this.authService.login(login);
+    return this.authService.login(login);
   }
 
   @Post('login/guest')
   //@UseGuards(AuthGuard('jwt'))
   async loginGuest(@Body() login: LoginDTO): Promise<any> {
     console.log('hiiiiiiii');
-    return await this.authService.loginGuest(login);
+    return this.authService.loginGuest(login);
   }
 
   //Add the user

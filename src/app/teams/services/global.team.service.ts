@@ -9,8 +9,6 @@ import { AddTeam } from 'src/app/shared/interfaces/addTeam.interface';
 import { ADCenter } from '../../ad-center/model/entities/ad-center.entity';
 import { IDashboardService } from '../../dashboard/services/dashboard.service.interface';
 import { IFileStorageService } from '../../file-storage/services/file-storage.service.interface';
-// const fs = require('fs');
-// import path = require('path');
 import { TeamsInADC } from '../model/dto/TeamsInADC';
 import { IGlobalTeamsService } from './global.team.service.interface';
 import { TeamStatus } from '../model/entities/team_status.entity';
@@ -125,7 +123,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
 
       const teamCreated = await this.teamRepository.save(team);
       if (teamCreated && logo) {
-        return await this.uploadLogoForTeam(logo, teamCreated.id);
+        return this.uploadLogoForTeam(logo, teamCreated.id);
       } else {
         console.log('team created');
         console.log(teamCreated);
@@ -150,7 +148,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
     if (!team) {
       throw new NotFoundException('Team not found');
     }
-    return await this.teamRepository.delete(teamId);
+    return this.teamRepository.delete(teamId);
   }
 
   /**
@@ -203,7 +201,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
   }
 
   async findTeamById(teamId: string): Promise<Team | undefined> {
-    return (await this.teamRepository.findOne(teamId)) as Team;
+    return this.teamRepository.findOne({ where: { id: teamId } });
   }
 
   async findStatusByTeam(team: Team): Promise<number | undefined> {
@@ -225,6 +223,6 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
     const teamExisted = (await this.teamRepository.findOne({ where: { id: teamId } })) as Team;
     teamExisted.isStatusChanged = false;
     teamExisted.team_status = (await this.teamStatusRepository.findOne({ where: { id: status } })) as TeamStatus;
-    return await this.teamRepository.save(teamExisted);
+    return this.teamRepository.save(teamExisted);
   }
 }

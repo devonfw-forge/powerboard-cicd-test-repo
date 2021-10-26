@@ -27,7 +27,7 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
   async addUserToTeam(actualUser: User, userDTO: UserDTO): Promise<any> {
     let userTeam = new UserTeam();
     userTeam.user = actualUser;
-    //const roleObj = await this.userPrivilegeService.findRole(userDTO.role);
+
     const roleObj = (await this.userRoleRepository.findOne({ where: { id: userDTO.role } })) as UserRole;
     const output = (await this.userTeamRepository.findOne({
       where: { user: actualUser.id, team: userDTO.team.id },
@@ -39,7 +39,7 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
     }
     userTeam.role = roleObj;
     userTeam.team = userDTO.team;
-    return await this.userTeamRepository.save(userTeam);
+    return this.userTeamRepository.save(userTeam);
   }
 
   /**
@@ -52,7 +52,7 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
     if (!userTeam) {
       throw new NotFoundException('user not found for that team');
     } else {
-      return await this.userTeamRepository.delete(id);
+      return this.userTeamRepository.delete(id);
     }
   }
 
@@ -62,7 +62,7 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
    * @return {TeamsMemberResponse[]} .Return array of team member as response
    */
   async getAllMemberOfTeam(teamId: string): Promise<TeamsMemberResponse[]> {
-    const result = (await this.userTeamRepository.find({ where: { team: teamId } })) as UserTeam[];
+    const result = await this.userTeamRepository.find({ where: { team: teamId } });
     if (result.length == 0) {
       throw new NotFoundException('No Member Found in team');
     }
@@ -89,8 +89,7 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
    * @return {UserTeam} .Return object of UserTeam as response
    */
   async findUserTeamForAdmin(userId: string) {
-    const userTeam = (await this.userTeamRepository.findOne({ where: { user: userId } })) as UserTeam;
-    return userTeam;
+    return (await this.userTeamRepository.findOne({ where: { user: userId } })) as UserTeam;
   }
 
   /**
@@ -108,10 +107,8 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
     }
     let userTeamOBJ = new UserTeam();
     userTeamOBJ.id = userTeam.id;
-    //userTeamOBJ.role = await this.userPrivilegeService.findRole(updateRoleDTO.roleId);
     userTeamOBJ.role = (await this.userRoleRepository.findOne({ where: { id: updateRoleDTO.roleId } })) as UserRole;
-    const result = await this.userTeamRepository.save(userTeamOBJ);
-    return result;
+    return this.userTeamRepository.save(userTeamOBJ);
   }
 
   /**
@@ -142,7 +139,6 @@ export class UserTeamService extends TypeOrmCrudService<UserTeam> implements IUs
    * @return {UserTeam[]} .Return unique UserTeam object as response
    */
   async findUserTeamDetails(userId: string, teamId: string) {
-    const output = (await this.userTeamRepository.findOne({ where: { user: userId, team: teamId } })) as UserTeam;
-    return output;
+    return (await this.userTeamRepository.findOne({ where: { user: userId, team: teamId } })) as UserTeam;
   }
 }

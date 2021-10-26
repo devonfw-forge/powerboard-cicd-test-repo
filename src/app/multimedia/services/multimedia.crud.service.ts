@@ -15,8 +15,6 @@ import { DisplayResponse } from '../model/dto/DisplayResponse';
 import { DeleteResponse } from '../model/dto/DeleteResponse.interface';
 
 dotenv.config();
-//const Thumbler = require('thumbler');
-
 @Injectable()
 export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implements IMultimediaService {
   constructor(
@@ -40,10 +38,7 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
    */
   async uploadFile(file: any, teamId: string): Promise<any> {
     let multimedia = new Multimedia();
-    // console.log('Multimedia Service');
-    // console.log(file);
     const originalPath = `uploads/uploads/multimedia/${teamId}/`;
-
     const output = await this.fileStorageService.uploadFile(file, originalPath);
     console.log('This is output');
     console.log(output);
@@ -55,9 +50,6 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
       console.log(multimedia);
       console.log(multimedia.team);
       const result = await this.multimediaRepository.save(multimedia);
-      // if (result && this.videos.includes(output.split('.')[1])) {
-      //   this.fileStorageService.saveThumbail(output, originalPath);
-      // }
       result.fileName = `${this.globalLink}/${teamId}/${result.fileName}`;
       return result;
     }
@@ -193,8 +185,9 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
     const subFolder = await this.multimediaRepository.findOne(subFolderId);
 
     const commanPath = 'uploads/uploads/multimedia/' + teamId + '/' + subFolder?.albumName + '/';
-    for (var k = 0; k < filesId.length; k++) {
-      const file = (await this.filesRepository.findOne(filesId[k])) as Files;
+
+    for (let id of filesId) {
+      const file = (await this.filesRepository.findOne(id)) as Files;
       filesPath.push(commanPath + file.fileName);
     }
     console.log(filesPath);
@@ -203,7 +196,7 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
 
     if (fileDeletedFromDB) {
       if (filesPath.length > 0) {
-        return await this.fileStorageService.deleteMultipleFiles(filesPath);
+        return this.fileStorageService.deleteMultipleFiles(filesPath);
       }
     }
   }
@@ -213,12 +206,14 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
 
     let foldersPath: string[] = [];
     let filesPath: string[] = [];
-    for (var i = 0; i < foldersId.length; i++) {
-      const folder = (await this.multimediaRepository.findOne(foldersId[i])) as Multimedia;
+
+    for (let folderId of foldersId) {
+      const folder = (await this.multimediaRepository.findOne(folderId)) as Multimedia;
       foldersPath.push(commanPath + folder.albumName);
     }
-    for (var i = 0; i < filesId.length; i++) {
-      const file = (await this.multimediaRepository.findOne(filesId[i])) as Multimedia;
+
+    for (let fileId of filesId) {
+      const file = (await this.multimediaRepository.findOne(fileId)) as Multimedia;
       filesPath.push(commanPath + file.fileName);
     }
     const finalList = filesId.concat(foldersId);
@@ -248,11 +243,11 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
     if (deleteResponse.subFolderId === null) {
       console.log('delete files from root');
       console.log(deleteResponse);
-      return await this.deleteFilesAndFoldersFromRoot(teamId, deleteResponse.filesId, deleteResponse.foldersId);
+      return this.deleteFilesAndFoldersFromRoot(teamId, deleteResponse.filesId, deleteResponse.foldersId);
     } else {
       console.log('delete files from sub folder');
       console.log(deleteResponse);
-      return await this.deleteFilesFromSubFolder(teamId, deleteResponse.subFolderId, deleteResponse.filesId);
+      return this.deleteFilesFromSubFolder(teamId, deleteResponse.subFolderId, deleteResponse.filesId);
     }
   }
 
@@ -323,23 +318,22 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
 
   async addFilesAndFoldersIntoSlideshow(teamId: string, fileAndFolderIds: string[]): Promise<Multimedia[]> {
     let finalMultimediaList: Multimedia[] = [];
-    let resetMultimedia = (await this.multimediaRepository.find({
+    let resetMultimedia = await this.multimediaRepository.find({
       where: { team: teamId },
-    })) as Multimedia[];
-    for (var i = 0; i < resetMultimedia.length; i++) {
-      resetMultimedia[i].inSlideshow = false;
+    });
+    for (let eachMultimedia of resetMultimedia) {
+      eachMultimedia.inSlideshow = false;
     }
     let multimedia = await this.multimediaRepository.save(resetMultimedia);
     console.log(multimedia);
-    for (var j = 0; j < multimedia.length; j++) {
-      if (fileAndFolderIds.includes(multimedia[j].id)) {
-        multimedia[j].inSlideshow = true;
-
-        finalMultimediaList.push(multimedia[j]);
+    for (let eachMultimedia of multimedia) {
+      if (fileAndFolderIds.includes(eachMultimedia.id)) {
+        eachMultimedia.inSlideshow = true;
+        finalMultimediaList.push(eachMultimedia);
       }
     }
 
-    return await this.multimediaRepository.save(finalMultimediaList);
+    return this.multimediaRepository.save(finalMultimediaList);
   }
 
   async getMultimediaForSlideshow(teamId: string): Promise<any> {
@@ -349,12 +343,12 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
 
     let multimedia = await this.multimediaRepository.find({ where: { team: teamId, inSlideshow: true } });
 
-    for (var i = 0; i < multimedia.length; i++) {
-      if (multimedia[i].albumName === null) {
-        result.push({ fileURL: commanPath + multimedia[i].fileName });
+    for (let eachMultimedia of multimedia) {
+      if (eachMultimedia.albumName === null) {
+        result.push({ fileURL: commanPath + eachMultimedia.fileName });
       } else {
-        for (var j = 0; j < multimedia[i].files.length; j++) {
-          result.push({ fileURL: commanPath + multimedia[i].albumName + '/' + multimedia[i].files[j].fileName });
+        for (let file of eachMultimedia.files) {
+          result.push({ fileURL: commanPath + eachMultimedia.albumName + '/' + file.fileName });
         }
       }
     }

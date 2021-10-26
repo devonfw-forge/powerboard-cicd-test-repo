@@ -30,15 +30,8 @@ export class ClientStatusCrudService extends TypeOrmCrudService<ClientStatus> {
       .getOne()) as Sprint;
     if (sprint == null) {
       return undefined;
-    } else {
     }
-    // const sprint = await this.sprintRepository.find({
-    //   where: { team: team_Id },
-    //   order: { sprint_number: 'DESC' },
-    //   skip: 1,
-    //   take: 1,
-    // });
-    //console.log(sprint);
+
     const clientStatus = (await this.clientRepository
       .createQueryBuilder('client_status')
       .where('client_status.sprintId=:sprintId', { sprintId: sprint.id })
@@ -49,7 +42,7 @@ export class ClientStatusCrudService extends TypeOrmCrudService<ClientStatus> {
     } else {
       this.clientStatus.clientSatisfactionRating = clientStatus.client_rating;
       this.clientStatus.sprintNumber = sprint.sprint_number;
-      return this.clientStatus!;
+      return this.clientStatus;
     }
   }
 }

@@ -17,6 +17,6 @@ export class VisibilityCrudController {
 
   @Post('teamId/create')
   async setVisibility(@Body() visibilityDTO: VisibilityDTO): Promise<Visibility> {
-    return await this.visibilityService.setVisibility(visibilityDTO);
+    return this.visibilityService.setVisibility(visibilityDTO);
   }
 }

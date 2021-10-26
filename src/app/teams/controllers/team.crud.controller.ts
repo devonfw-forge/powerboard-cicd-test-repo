@@ -14,17 +14,14 @@ import {
 import { Crud } from '@nestjsx/crud';
 import { CrudType } from '@devon4node/common/serializer';
 import { Team } from '../model/entities/team.entity';
-
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiConsumes } from '@nestjs/swagger';
-
 import { UserTeamDTO } from '../model/dto/UserTeamDTO';
 import { Response as eResponse } from 'express';
 import { AddTeam } from '../../shared/interfaces/addTeam.interface';
 import { UpdateTeam } from '../model/dto/updateTeam.interface';
 import { ITeamService } from '../services/team.service.interface';
 import { IGlobalTeamsService } from '../services/global.team.service.interface';
-//import { AuthGuard } from '@nestjs/passport';
 
 @Crud({
   model: {
@@ -64,7 +61,6 @@ export class TeamCrudController {
     const result = await this.globalTeamsService.addTeam(addTeam, logo);
     console.log(result);
     res.status(200).json(result);
-    //res.status(201).json({ message: 'Team successfully Created' });
   }
 
   //Deleting the team , system admin can do it
@@ -73,7 +69,6 @@ export class TeamCrudController {
   async deleteTeamById(@Param('id') teamId: string, @Response() res: eResponse): Promise<void> {
     const result = await this.globalTeamsService.deleteTeamById(teamId);
     console.log(result);
-    // res.status(200).json(result);
     res.status(200).json({ message: 'Team successfully Deleted' });
   }
 

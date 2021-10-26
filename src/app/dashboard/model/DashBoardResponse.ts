@@ -4,7 +4,6 @@ import { SprintDetailResponse } from '../sprint/model/dto/SprintDetailResponse';
 import { TeamSpiritResponse } from '../team-spirit/model/dto/TeamSpiritResponse.dto';
 import { BurndownResponse } from '../sprint/model/dto/BurndownResponse';
 import { VelocityComparisonResponse } from '../sprint/model/dto/VelocityComparisonResponse';
-//import { SprintWorkUnitResponse } from '../sprint/model/dto/sprintWorkUnitResponse';
 
 export interface DashBoardResponse {
   teamId: string;

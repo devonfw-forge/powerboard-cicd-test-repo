@@ -4,8 +4,6 @@ import { TeamsInADC } from '../../../teams/model/dto/TeamsInADC';
 import { MyProject } from '../../user/model/dto/my_project.interface';
 
 export interface HomeResponse {
-  //   userId: string;
-  //   isPasswordChanged: boolean;
   My_Center: MyCenter | undefined;
   My_Team?: MyProject[];
   Teams_In_ADC: TeamsInADC[];
