@@ -47,6 +47,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
       if (teams[i].logo == null) {
         teamsResponse.teamLogo = null;
       } else {
+        console.log(`${this.globalLink}/${teams[i].id}/` + teams[i].logo!);
         teamsResponse.teamLogo = `${this.globalLink}/${teams[i].id}/` + teams[i].logo!;
       }
       teamsResponse.teamStatus = await this.findStatusByTeam(teams[i]);
