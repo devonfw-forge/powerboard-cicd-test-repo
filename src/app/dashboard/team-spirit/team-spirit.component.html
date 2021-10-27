@@ -35,14 +35,14 @@
         <div class="col-md-6" >
             <div *ngIf="teamSpirit?.teamSpiritRating < 6.6 && componentReady">
                 <div *ngIf="teamSpirit?.teamSpiritRating < 3.4;">
-                    <div ><img class="emoji" alt="red emoji" src="assets/Images/red.jpeg"></div>
+                    <div ><img class="emoji" alt="red emoji" src="red.jpeg"></div>
                 </div>   
                 <div *ngIf="teamSpirit?.teamSpiritRating > 3.3;">
-                    <div><img class="emoji" alt="orange emoji" src="assets/Images/orange.png"></div>
+                    <div><img class="emoji" alt="orange emoji" src="orange.png"></div>
                 </div>
             </div>
             <div *ngIf="teamSpirit?.teamSpiritRating > 6.5 && componentReady">
-                <div ><img class="emoji" alt="green emoji" src="assets/Images/green.jpeg"></div>
+                <div ><img class="emoji" alt="green emoji" src="green.jpeg"></div>
             </div>
               <div *ngIf="!componentReady">
                 <h3>Data unavailable</h3>

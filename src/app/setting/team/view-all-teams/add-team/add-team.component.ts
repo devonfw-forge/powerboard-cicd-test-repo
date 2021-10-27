@@ -90,7 +90,7 @@ export class AddTeamComponent implements OnInit {
       );
       console.log(data);
       var image = <HTMLImageElement>document.getElementById('output');
-      image.src = "../../../../../assets/layoutAssets/logo/uploadLogo.PNG";
+      image.src = "uploadLogo.PNG";
       this.form.reset();
       this.team = new TeamInfo();
       this.centerName = 'Select Center';

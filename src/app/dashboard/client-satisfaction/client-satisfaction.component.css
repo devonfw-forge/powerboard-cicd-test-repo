@@ -72,7 +72,7 @@
 }
 .green{
   color:#2ab02f; 
-  background: url("../../../assets/layoutAssets/dashboard/emoji-smile.svg");
+  background: url("emoji-smile.svg");
   background-repeat: no-repeat;
   background-size: cover;
 
