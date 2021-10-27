@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { verify } from 'crypto';
 import { GeneralService } from '../service/general.service';
+import { NotificationService } from '../service/notification.service';
 
 import { LoginComponent } from './login.component';
 
@@ -13,13 +14,15 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let generalService : GeneralService;
+  let notificationService : NotificationService;
   let router;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports :[RouterTestingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
       declarations: [ LoginComponent ],
        providers:[{provide : GeneralService, useValue : generalService},
-      {provide : Router, useValue : router}] 
+      {provide : Router, useValue : router},
+      {provide : NotificationService, useValue : notificationService} ] 
     })
     .compileComponents();
   });
@@ -29,6 +32,7 @@ describe('LoginComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     generalService = TestBed.inject(GeneralService);
+    notificationService = TestBed.inject(NotificationService);
   });
 
   it('should create', () => {
@@ -63,6 +67,8 @@ describe('LoginComponent', () => {
     })
     
   })
-});
 
-
+  /* it('should login for guest users',async () =>{
+   await component.GuestLogin()
+    }) */
+})

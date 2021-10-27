@@ -5,4 +5,9 @@ describe('LinkTypeFilterPipe', () => {
     const pipe = new LinkTypeFilterPipe();
     expect(pipe).toBeTruthy();
   });
+
+  it('should tramsform the link type', () =>{
+    const pipe = new LinkTypeFilterPipe();
+    expect(pipe.transform("Meeting_Link")).toEqual("Meeting Link");
+  })
 });

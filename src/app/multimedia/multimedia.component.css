@@ -82,7 +82,7 @@
 }
 
 vg-player{
-  height: 100%;
+  height: 60vh;
   width: var(--player-width-manual);
   /* padding-top: 8%; */
   margin-left: auto;

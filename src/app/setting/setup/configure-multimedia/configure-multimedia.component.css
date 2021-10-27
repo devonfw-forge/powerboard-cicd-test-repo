@@ -45,6 +45,7 @@
   .mat-icon{
     color: #0070AD;
     cursor: pointer;
+    margin-top: 5px;
     font-size: inherit;
     vertical-align: middle;
     padding-bottom: 3px;
@@ -97,3 +98,18 @@
   align-items: baseline;
   margin-top: 8px;
  }
+
+ .slideshowicon {
+  vertical-align: middle;
+  margin-bottom: 3px;
+  color: #0070AD;
+  align-items: baseline;
+  font-size: 16px;
+}
+
+.slideshowgreyicon{
+font-size: 17px;
+color: gray;
+margin-top: 5px;
+margin-right: 3px;
+}

@@ -67,35 +67,35 @@ describe('TeamService', () => {
   })  */
 
 
-  it('view all team members should throw error for null ', async () => {
+   it('view all team members should throw error for null ', async () => {
     let result;
   service.viewTeamMembersOfTeam(null).then((data) => {
   result = data;
   }).catch(error => {
     result = error;
   });
-  let req = httpTestingController.expectOne("http://localhost:3001/v1/admin/viewAllMemberOfTeam/null" );
+  let req = httpTestingController.expectOne("http://localhost:3001/v1/user/viewAllMemberOfTeam/null" );
       req.flush("Internal Server Error",{
         status : 500,
         statusText : "Something went wrong, Please try again in some moment"
       });
-  }) 
+  })  
 
 
 
-  it('change team member role should get error for null', ()=>{
+   it('change team member role should get error for null', ()=>{
     let result;
     service.updateAccessRole(null).then((data) =>{
       result = data;
     }).catch((error)=>{
       result = error;
     });
-    let req = httpTestingController.expectOne("http://localhost:3001/v1/admin/update/userRole");
+    let req = httpTestingController.expectOne("http://localhost:3001/v1/user/update/userRole");
     req.flush("Internal Server Error",{
       status : 500,
       statusText : "Something went wrong, Please try again in some moment"
     });
-  });
+  }); 
 
   it('should add and delete team member', async () =>{
     let result;
@@ -126,29 +126,23 @@ describe('TeamService', () => {
 
   it('add team should throw internal server error', async () => {
     let result;
-    let team : TeamInfo = 
-    {
-      "teamName": null,
-      "teamCode": null,
-      "projectKey": null,
-      "ad_center":{
-      "id":"98955bf7-ada7-495c-8019-8d7ab62d488e"
-      },
-      "member_number": null,
-      "frequency": null,
-      "start_date": null
-      }
-  service.addTeam(team).then((data) => {
+    var formData: any = new FormData();
+    formData.append('teamName', null);
+    formData.append('projectKey', null);
+    formData.append('ad_center', null);
+    formData.append('teamCode', null);
+    formData.append('logo', null);
+  service.addTeamWithLogo(formData).then((data) => {
   result = data;
   }).catch(error => {
     result = error;
   });
-  let req = httpTestingController.expectOne("http://localhost:3001/v1/admin/team/addTeam");
+  let req = httpTestingController.expectOne("http://localhost:3001/v1/teams/team/addTeam");
       req.flush("Internal Server Error",{
         status : 500,
         statusText : "Something went wrong, Please try again in some moment"
       });
-  }) 
+  })  
 
 
 it('should view all the teams', () => {
@@ -157,6 +151,31 @@ it('should view all the teams', () => {
     viewTeam = data;
     expect(data).toEqual(viewTeam);
   })
+})
+
+
+
+it('should add and delete team', async () =>{
+  let result;
+  var formData: any = new FormData();
+    formData.append('teamName', 'demo');
+    formData.append('projectKey', '23455');
+    formData.append('ad_center', '98755bf7-ada7-495c-8019-8d7ab62d488e');
+    formData.append('teamCode', 'P000');
+    formData.append('logo', null);
+service.addTeamWithLogo(formData).then((data) => {
+result = data;
+let req = httpTestingController.expectOne("http://localhost:3001/v1/teams/team/addTeam");
+service.deleteTeam(result.id).then((deleteData) => {
+
+httpTestingController.expectOne("http://localhost:3001/v1/teams/team/delete/" + result.id);
+}
+).catch(error => {
+  result = error;
+})
+}).catch(error => {
+  result = error;
+})
 })
 
 });

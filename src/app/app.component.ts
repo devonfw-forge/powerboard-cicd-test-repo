@@ -1,13 +1,14 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ElectronService } from 'ngx-electron';
+
 import { Location } from '@angular/common';
 
 import { GeneralService } from './service/general.service';
 import { SlideshowService } from './slideshow/slideshow.service';
 import { TeamDetailsService } from './project-display/service/team-details.service';
-import { NavigationService } from './service/navigation-service.service';
+
 import { GlobalLoaderService } from './service/global-loader.service';
+import { NavigationService } from './service/navigation.service';
 
 
 @Component({
@@ -17,21 +18,21 @@ import { GlobalLoaderService } from './service/global-loader.service';
 })
 export class AppComponent implements OnInit {
   title = 'PowerboardFW_new';
-  teamName: string;
-  isElectronRunning: boolean;
+  teamName: string;/* 
+  isElectronRunning: boolean; */
   checklocationPath : string;
   
  
-  constructor(public generalService: GeneralService, private electronService: ElectronService, public slideShowService: SlideshowService,public navigation: NavigationService, public router: Router, public location: Location, public teamDetailService : TeamDetailsService, public globalLoader : GlobalLoaderService) {
+  constructor(public generalService: GeneralService, public slideShowService: SlideshowService,public navigation: NavigationService, public router: Router, public location: Location, public teamDetailService : TeamDetailsService, public globalLoader : GlobalLoaderService) {
 
     this.teamName = "";
-    if (electronService.isElectronApp) {
-      // Do electron stuff
+    /* if (electronService.isElectronApp) {
+    
       this.isElectronRunning = true;
     } else {
-      // Do other web stuff
+      
       this.isElectronRunning = false;
-    }
+    } */
   }
 
   ngOnInit() {

@@ -4,7 +4,8 @@ import { VgApiService } from '@videogular/ngx-videogular/core';
 import { MultimediaFilesNew, MultimediaFolderResponse } from 'src/app/model/general.model';
 import { environment } from 'src/environments/environment';
 import { GeneralService } from '../service/general.service';
-import { SlideshowService } from '../slideshow/slideshow.service';
+import { UrlPathConstants } from '../UrlPaths';
+
 
 
 
@@ -15,11 +16,12 @@ import { SlideshowService } from '../slideshow/slideshow.service';
 })
 export class MultimediaComponent implements OnInit {
   @ViewChild('widgetsContent') widgetsContent: ElementRef;
-  currentPath : string;
+/*   currentPath : string; */
   currentIndex = 0;
   currentItem: string;
   api: VgApiService;
   thumbnailData: string[];
+  checkStatus :  boolean;
   //multimediaData: string[];
   thumbnailIsImage: boolean[] = [];
   intervalID: any;
@@ -33,16 +35,17 @@ export class MultimediaComponent implements OnInit {
   is_image: boolean = true;
   is_video: boolean = false;
   counter: number = 0;
-  multimediaPrefix = environment.multimediaPrefix;
-  localPrefix = environment.localPrefix;
-  interval: number = environment.slideshowInterval;
+ 
+  interval: number = UrlPathConstants.slideshowInterval;
 
-  constructor(public slideshowService: SlideshowService, private generalService : GeneralService) { 
+  constructor(private generalService : GeneralService) { 
     this.thumbnailData = [];
     this.multimediaFiles = [];
     this.currentFolder = '';
     this.currentIndex = 0;
-    this.currentPath = '';
+    this.multimedia = new MultimediaFolderResponse();
+    /* this.currentPath = ''; */
+  
   }
   async ngOnInit() {
     await this.updateComponent(); 
@@ -55,26 +58,39 @@ export class MultimediaComponent implements OnInit {
     this.multimedia = JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.multimedia;
     this.multimediaFiles  = this.multimedia.display;
     this.currentItem = this.multimediaFiles[this.currentIndex].urlName;
-    this.processFiles();
+   
     for(let folder of this.multimedia.root){
       if(folder.status == true){
         this.currentFolder = folder.folderName;
       }
     }
-   /*  if(this.multimedia.rootResponse.length>0){
-      this.currentItem = this.multimedia.rootResponse[this.currentIndex].fileName;
-      this.multimediaFiles = this.multimedia.rootResponse;
-      this.currentPath = environment.multimediaPrefix + this.teamId + '/';
+    if(this.currentFolder == ''){
+      this.currentFolder = 'Home';
+    }
+    this.processFiles();
+   
+  } 
+  showHomeFiles(){
+    this.multimediaFiles = [];
+    this.checkStatus = false;
+    for(let folder of this.multimedia.root){
+      if(folder.status){
+       this.checkStatus = true;
+      }
+    }
+    if(this.checkStatus){
+      this.multimediaFiles  = [];
     }
     else{
-      this.currentItem = this.multimedia.folderResponse[0].fileResponse[this.currentIndex].fileName;
-      this.multimediaFiles = this.multimedia.folderResponse[0].fileResponse;
-      this.currentPath = environment.multimediaPrefix + this.teamId + '/' 
-                      + this.multimedia.folderResponse[0].folderName + '/';
-      this.currentFolder = this.multimedia.folderResponse[0].folderName;
+      this.multimediaFiles  = [];
+      this.multimediaFiles = this.multimedia.display;
     }
-    this.processFiles(); */
-  } 
+    this.currentFolder = 'Home';
+    if(this.multimediaFiles.length > 0){
+      this.processFiles();
+    }
+    
+  }
   async getFilesFromFolder(folderId:string,folderName:string){
     
     console.log(folderName);
@@ -97,11 +113,12 @@ export class MultimediaComponent implements OnInit {
   
 
   processFiles(){
-  
+  this.thumbnailData = [];
+  this.thumbnailIsImage = [];
       for (let file of this.multimediaFiles) {
          this.tempPath = file.urlName; 
         const isImage = this.isImage(file.urlName);
-        if (!isImage && !this.slideshowService.isSlideshowRunning) {
+        if (!isImage) {
           const video_thumbnail = this.tempPath + '#t=5';
           this.thumbnailData.push(video_thumbnail);
           this.thumbnailIsImage.push(isImage);
@@ -133,7 +150,7 @@ export class MultimediaComponent implements OnInit {
     this.currentIndex = index;
     this.currentItem = item;
 
-    if (this.counter != this.thumbnailData.length - 1 && this.slideshowService.isSlideshowRunning) {
+    /* if (this.counter != this.thumbnailData.length - 1 && this.slideshowService.isSlideshowRunning) {
       console.log(this.counter + "-> on click before +1");
       this.counter = this.counter + 1;
       console.log(this.counter + "-> on click after +1");
@@ -151,27 +168,27 @@ export class MultimediaComponent implements OnInit {
           this.slideshowService.moveSlideshowNextComponent();
         }
       }, this.interval);
-    }
+    } */
 
 
   }
 
-  automatePlaylist(interval: number) {
+  /* automatePlaylist(interval: number) {
     if (this.counter === 0) {
       this.onClickPlaylistItem(this.thumbnailData[this.counter], this.counter);
     }
     else {
       this.intervalID = setInterval(() => this.onClickPlaylistItem(this.thumbnailData[this.counter], this.counter), interval);
     }
-  }
+  } */
 
   isImage(url: string) {
     const images = ["jpg", "jpeg", "gif", "png"];
     const videos = ["mp4", "3gp", "ogg"];
 
 
-    const extension = url.split(".")[1]
-    console.log(extension);
+    const tempextension = url.split(".");
+    const  extension = tempextension[tempextension.length-1];
     if (images.includes(extension)) {
       return true;
     } else if (videos.includes(extension)) {

@@ -10,6 +10,7 @@ import {
 } from '../login/model/login.model';
 import { MultimediaFilesNew, TeamDetailResponse } from '../model/general.model';
 import { GetTeamDetails } from '../project-display/model/pbResponse.model';
+import { UrlPathConstants } from '../UrlPaths';
 
 @Injectable({
   providedIn: 'root',
@@ -122,7 +123,7 @@ export class GeneralService {
     this.showNavBarIcons = false;
     this.setLoginComplete(false);
     this.checkVisibility();
-    this.router.navigateByUrl('/');
+    this.router.navigate(['/']);
   }
 
   checkVisibility() {
@@ -209,7 +210,7 @@ export class GeneralService {
       this.showNavBarIcons = true;
       this.checkVisibility();
 
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigate(['/dashboard']);
     } else {
       this.router.navigate(['/projects']);
     }
@@ -244,14 +245,14 @@ export class GeneralService {
   /* new end point call */
   async getProjectDetails(userId: string): Promise<HomeResponse> {
     return await this.http
-      .get<HomeResponse>('http://localhost:3001/v1/auth/home/' + userId)
+      .get<HomeResponse>(environment.globalEndPoint + UrlPathConstants.getProjectDetailsEndpoint + userId)
       .toPromise();
   }
 
   async sendLastLoggedIn() {
     await this.http
       .put<any>(
-        'http://localhost:3001/v1/user/team/loggedProject',
+        environment.globalEndPoint + UrlPathConstants.lastLoggedEndPoint,
         this.userIdTeamIdDetails
       )
       .toPromise();
@@ -259,8 +260,14 @@ export class GeneralService {
 
   public getLogoPath(){
     if(JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.logo){
-      return environment.logoPrefix + JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.team_id + '/'
-       +JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.logo;
+      const path = JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.logo;
+      const tempextension = path.split(".");
+    const  extension = tempextension[tempextension.length-1];
+    const Logo = ["null", "undefined", null, undefined];
+    if(extension.includes(Logo)){
+      return null;
+    }
+      return JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.logo;
     }
     else{
       return null;
@@ -270,16 +277,16 @@ export class GeneralService {
 
    async getAllFilesFromFolder(teamId: string, folderId : string): Promise<MultimediaFilesNew[]> {
     return await this.http
-      .get<MultimediaFilesNew[]>('http://localhost:3001/v1/multimedia/getAllFilesInFolder/' + teamId + '/' + folderId)
+      .get<MultimediaFilesNew[]>(environment.globalEndPoint + UrlPathConstants.FilesFromFolderEndpoint + teamId + '/' + folderId)
       .toPromise();
   }
 
   async getAllFilesFromTeam(teamId: string): Promise<MultimediaFilesNew[]> {
     return await this.http
-      .get<MultimediaFilesNew[]>('http://localhost:3001/v1/multimedia/getAllFilesForTeam/' + teamId)
+      .get<MultimediaFilesNew[]>(environment.globalEndPoint + UrlPathConstants.FilesForTeamEndpoint + teamId)
       .toPromise();
   }
   async getSlideshowFiles(teamId: string) : Promise<any>{
-    return await this.http.get<any>('http://localhost:3001/v1/multimedia/slideshow/' + teamId).toPromise();
+    return await this.http.get<any>(environment.globalEndPoint + UrlPathConstants.getSlideshowFilesEndpoint + teamId).toPromise();
     }
 }

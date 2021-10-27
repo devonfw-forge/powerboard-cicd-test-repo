@@ -1,109 +1,164 @@
-<div class="container ml-5 mr-5 mt-3" *ngIf="!configureService.viewSubFolder">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="row float-right selectCheckbox">
-        <input class="checkbox pr-2" id='selectAll'
-          type="checkbox"
-          [checked]='isMasterSel'
-          (click)="checkUncheckAll()"
-        />
-        <label for="selectAll">Select All</label>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-3 mt-2">
-          <span
-            class="action-button"
-            data-toggle="modal"
-            data-target=".bd-example-modal-sm"
-            style="font-size: 16px"
-          >
-            + New Folder
-          </span>
+<div class="container" *ngIf="!configureService.viewSubFolder">
+  <div class="m-5">
+    <div class="row mb-2">
+      <div class="col-md-2">
+        <div class="row sel" style="margin-top: 8px;color: #0070AD;margin-left: 1px;">
+          <input class="checkbox pr-2" style="margin-top: 7px; margin-right: 4px; " id='selectAll'
+            type="checkbox"
+            [checked]='isMasterSel'
+            (click)="SelectAndDeselectAll()"
+          />
+          <label for="selectAll">Select All</label>
         </div>
-        <div class="col-md-3">
-          <span class="btn btn-primary btn-file">
+      </div>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-3 mt-2">
+            <span
+              class="action-button"
+              data-toggle="modal"
+              data-target=".bd-example-modal-sm"
+              style="font-size: 16px; float: right"
+            >
+              + New Folder
+            </span>
+          </div>
+          <div class="col-md-3">
+            <span class="btn btn-primary btn-file">
             <span style="font-size: 16px"> + Add File </span>
             <input type="file" (change)="uploadFile($event)" />
           </span>
         </div>
-        <div class="col-md-3 mt-2">
+        <div class="col-md-4 mt-2">
+          <span class="material-icons-outlined slideshowicon">
+            library_add
+            </span>
           <span class="action-button" (click)="addToSlideShow()" style="font-size: 16px">
-            + SlideShow
-          </span>
-          
+            Add To SlideShow
+          </span> 
         </div>
         <div class="col-md-2 mt-2 float-center">
-          <span class="material-icons mat-icon" (click)="deleteFile()"> delete_outline </span>
+          <span class="material-icons mat-icon" (click)="deleteFilesAndFolders()"> delete_outline </span>
         </div>
       </div>
     </div>
   </div>
-  <div
-    class="pl-1 pt-1"
-    *ngFor="let album of multimedia.root; index as i"
-  >
-    <div class="text-left">
-      <div class="icon" >
-        <span
-          class="material-icons-outlined mat-icon pr-1"
-          (click)="viewSubFolder(album.folderId, album.folderName)"
-        >
-          folder </span
-        ><span class="pr-1" (click)="viewSubFolder(album.folderId, album.folderName)">
-          {{ album.folderName | titlecase }}</span
-        ><input class="checkbox"
-          type="checkbox"
-          [checked]='multimedia.root[i].isSelected'
-          (click)="addOrRemoveFromFolderList(i)"
-        />
+
+
+  <!-- FOLDERS AND FILES -->
+  <div class="col-md-12 row">
+    <div class="col-md-3">
+      <div class="pt-1">
+        <div class="text-left">
+          <div class="icon row" >
+            <input class="checkbox"
+              type="checkbox"
+              [checked]="homeFile.isSelected"
+              (click)="checkHomeIsSelected()"
+              style="margin-top: 7px;
+              margin-right: 4px;"
+            />
+            <span
+              class="material-icons-outlined mat-icon pr-1"
+              >
+              folder 
+            </span>
+            
+            <span class="pr-1" (click)="showHomeFiles()" *ngIf="currentFolder !== homeFile.folderName"  style="font-size: 16px; font-weight: 500; color: #2b0a3d;cursor: pointer;"  >Home</span>
+            <span class="pr-1"  *ngIf="currentFolder == homeFile.folderName"  style="font-size: 16px; font-weight: 500;color: #0070AD;cursor: pointer; " >Home</span>
+            <div>
+              <span *ngIf="homeFile.inSlideShow" class="material-icons-outlined slideshowgreyicon" >
+                slideshow
+              </span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="pt-1" 
+        *ngFor="let album of multimedia.root; index as i"
+      >
+        <div class="text-left">
+          <div class="icon row" >
+            <input class="checkbox"
+              type="checkbox"
+              style="margin-top: 7px;
+              margin-right: 4px;"
+              [checked]='multimedia.root[i].isSelected'
+              (click) ="checkRootSelection(i)"
+            />
+            <span
+              class="material-icons-outlined mat-icon pr-1"
+              (click)="getFilesFromFolder(album.folderId, album.folderName)">
+              folder 
+            </span>
+            <span class="pr-1" *ngIf="currentFolder !== album.folderName"  
+              style="font-size: 16px; font-weight: 500; color: #2b0a3d;cursor: pointer;" 
+              (click)="getFilesFromFolder(album.folderId, album.folderName)">
+              {{ album.folderName | titlecase }}
+            </span>
+            <span class="pr-1" *ngIf="currentFolder == album.folderName"  
+              style="font-size: 16px; font-weight: 500;color: #0070AD;cursor: pointer; "
+              >
+              {{ album.folderName | titlecase }}
+            </span>
+            <div *ngIf="multimedia.root[i].inSlideShow">
+              <span class="material-icons-outlined slideshowgreyicon" >
+                slideshow
+              </span>
+            </div>
+            
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="multimedia.display.length != 0">
-    <div class="col-md-12 mt-3">
-      <div class="row">
-        <div
-          class="col-md-3 mt-3"
-          *ngFor="let file of multimedia.display; index as i"
-        >
-          <img
-            id="bigImage"
-            src="{{ file.urlName }}"
-            style="width: 85%; height: auto"
-          />
-          <!-- <span
-              class="material-icons mat-icon"
-              (click)="deleteFile(file.fileId)"
-            >
-              delete_outline
-            </span> -->
+    <div class="col-md-9" > 
+      <div *ngIf="multimediaFiles.length != 0">
+        <div class="col-md-12" style="padding-top: 12px;">
           <div class="row">
-            <div class="col-md-6 float-left">
-              <!-- <div *ngIf="multimedia.rootResponse[i].inSlideshow"> -->
-              <span class="material-icons-outlined">
-                slideshow
-                </span>
-              <!-- </div> -->
-            </div>
-            <div class="col-md-6 float-right">
-              <input class="checkbox"
-              type="checkbox"
-              [checked]='multimedia.display[i].isSelected'
-              (click)="addOrRemoveFromFileList(i)"
-            />
+            <div
+              class="col-md-4 mb-3"
+              *ngFor="let file of multimediaFiles; index as i"
+            >
+              <img
+                id="bigImage"
+                alt="image thumbnail"
+                src="{{ file.urlName }}"
+                style="width: 150px; height: 100px"
+              />
+              <!-- <span
+                  class="material-icons mat-icon"
+                  (click)="deleteFile(file.fileId)"
+                >
+                  delete_outline
+                </span> -->
+              <div class="row">
+                <div class="col-md-6 float-left">
+                  <div *ngIf="multimediaFiles[i].inSlideShow">
+                  <span class="material-icons-outlined slideshowgreyicon" >
+                    slideshow
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6 float-right">
+                  <input class="checkbox"
+                  type="checkbox"
+                  [checked]='multimediaFiles[i].isSelected'
+                  (click)="checkFilesSelection(i)"
+                />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
+  
+</div>
 </div>
 
-<div *ngIf="configureService.viewSubFolder">
-  <app-configure-multimedia-subfolder></app-configure-multimedia-subfolder>
-</div>
 
 <!-- Add folder Modal -->
 

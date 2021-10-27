@@ -14,14 +14,15 @@
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <table class="table table-borderless">
+      <caption></caption>
       <thead>
         <tr>
 
-          <th class=" font-weight-light alignment " scope="col"><b class="title">Team Name</b></th>
+          <th class=" font-weight-light alignment " scope="col"><strong class="title">Team Name</strong></th>
 
-          <th class="font-weight-light alignment " scope="col"><b class="title">Team Code</b></th>
-          <th class="font-weight-light alignment" scope="col"><b class="title">Project Key</b></th>
-          <th class="font-weight-light alignment " scope="col"><b class="title">AD Center</b></th>
+          <th class="font-weight-light alignment " scope="col"><strong class="title">Team Code</strong></th>
+          <th class="font-weight-light alignment" scope="col"><strong class="title">Project Key</strong></th>
+          <th class="font-weight-light alignment " scope="col"><strong class="title">AD Center</strong></th>
           <th scope="col"> </th>
           <th scope="col"> </th>
         </tr>
@@ -30,7 +31,7 @@
 
         <tr *ngFor="let team of allTeams">
 
-          <th class="row-text alignment text-weight">{{team.teamName | titlecase}}</th>
+          <th id="team_name" class="row-text alignment text-weight">{{team.teamName | titlecase}}</th>
           <td class="row-text alignment">
               {{team.teamCode}} </td>
           <td class="row-text alignment">{{team.projectKey | uppercase}}</td>

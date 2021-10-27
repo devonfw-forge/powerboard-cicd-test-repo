@@ -10,21 +10,22 @@
 
   <div class="spacing mt-3 ml-5">
     <table class="table table-borderless">
+      <caption></caption>
       <thead>
         <tr>
 
-          <th class="font-weight-light alignment " scope="col"><b class="title">Link Name</b></th>
+          <th class="font-weight-light alignment " scope="col"><strong class="title">Link Name</strong></th>
 
-          <th class="font-weight-light alignment margin " scope="col"><b class="title">Link URL</b></th>
-          <th class="font-weight-light alignment pl-5" scope="col"><b class="title">Type</b></th>
+          <th class="font-weight-light alignment margin " scope="col"><strong class="title">Link URL</strong></th>
+          <th class="font-weight-light alignment pl-5" scope="col"><strong class="title">Type</strong></th>
           <th scope="col"> </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf= "this.usefullLinks">
 
         <tr *ngFor="let usefullLink of usefullLinks">
 
-          <th class="row-text alignment text-weight">{{usefullLink.linkName | titlecase}}</th>
+          <th class="row-text alignment text-weight" id="title">{{usefullLink.linkName | titlecase}}</th>
           <td class="row-text alignment margin"><a class="link" (click)="openLink(usefullLink)">
               {{usefullLink.links | shortUrl}} </a></td>
           <td class="row-text alignment pl-5">{{usefullLink.linkType | linkTypeFilter | titlecase}}</td>

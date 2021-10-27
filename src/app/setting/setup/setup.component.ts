@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { VisibilityService } from '../service/visibility.service';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-setup',
@@ -7,31 +6,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent implements OnInit {
-  constructor( public visibilityService : VisibilityService, private router : Router, private route : ActivatedRoute) { }
+  constructor(  private router : Router, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.router.navigate(['editTeam'], {relativeTo:this.route});
   }
   
-
-
-  public showMeetingLink(){
-    this.visibilityService.hideAll();
-    this.visibilityService.ShowMeetingLink();
-  }
-
   public showTeamLink(){
     this.router.navigate(['configure-links'], {relativeTo:this.route});
   }
 
   public showMultimedia(){
- /*    this.visibilityService.hideAll();
-    this.visibilityService.ShowMultimedia(); */
     
     this.router.navigate(['configure-multimedia'], {relativeTo:this.route});
   }
-
-  
 
   public showViewTeamMember(){
     this.router.navigate(['view-members'], {relativeTo:this.route});
@@ -47,8 +35,6 @@ export class SetupComponent implements OnInit {
   }
 
   public showEditTeam(){
-    /* this.visibilityService.hideAll();
-    this.visibilityService.ShowEditTeam();  */
     this.router.navigate(['editTeam'], {relativeTo:this.route});
   }
 

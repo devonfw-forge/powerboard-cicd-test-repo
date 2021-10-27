@@ -1,0 +1,71 @@
+{
+        "loginResponse": {
+        "userId": "11cf1dfd-43e9-4cc4-8257-a6ba5c70e33d",
+        "isPasswordChanged": true,
+        "homeResponse": {
+            "My_Center": {
+                "centerId": "99055bf7-ada7-495c-8019-8d7ab62d488e",
+                "centerName": "ADCenter Bangalore"
+            },
+            "My_Team": [
+                {
+                    "teamId": "46455bf7-ada7-495c-8019-8d7ab76d489e",
+                    "teamName": "Team B",
+                    "teamLogo": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/logo/46455bf7-ada7-495c-8019-8d7ab76d489e/logo_B2dd2f2b41-3f0f-44dc-9598-05acc1569771.png",
+                    "myRole": "team_member",
+                    "teamStatus": 3
+                },
+                {
+                    "teamId": "46455bf7-ada7-495c-8019-8d7ab76d490e",
+                    "teamName": "Team C",
+                    "teamLogo": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/logo/46455bf7-ada7-495c-8019-8d7ab76d490e/logo_Cba48ed82-f863-455e-b87e-141ac186f992.png",
+                    "myRole": "team_admin",
+                    "teamStatus": 3
+                }
+            ],
+            "Teams_In_ADC": [
+                {
+                    "teamId": "46455bf7-ada7-495c-8019-8d7ab76d488e",
+                    "teamName": "Team A",
+                    "teamLogo": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/logo/46455bf7-ada7-495c-8019-8d7ab76d488e/logo_Aa4aa8e7a-85d6-4b75-8f93-6a11dee9b13c.png",
+                    "teamStatus": 3
+                },
+                {
+                    "teamId": "46455bf7-ada7-495c-8019-8d7ab76d489e",
+                    "teamName": "Team B",
+                    "teamLogo": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/logo/46455bf7-ada7-495c-8019-8d7ab76d489e/logo_B2dd2f2b41-3f0f-44dc-9598-05acc1569771.png",
+                    "teamStatus": 3
+                },
+                {
+                    "teamId": "46455bf7-ada7-495c-8019-8d7ab76d490e",
+                    "teamName": "Team C",
+                    "teamLogo": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/logo/46455bf7-ada7-495c-8019-8d7ab76d490e/logo_Cba48ed82-f863-455e-b87e-141ac186f992.png",
+                    "teamStatus": 3
+                }
+            ],
+            "ADC_List": [
+                {
+                    "centerId": "98655bf7-ada7-495c-8019-8d7ab62d488e",
+                    "centerName": "ADCenter Valencia"
+                },
+                {
+                    "centerId": "98755bf7-ada7-495c-8019-8d7ab62d488e",
+                    "centerName": "ADCenter Mumbai"
+                },
+                {
+                    "centerId": "98855bf7-ada7-495c-8019-8d7ab62d488e",
+                    "centerName": "ADCenter Poland"
+                },
+                {
+                    "centerId": "98955bf7-ada7-495c-8019-8d7ab62d488e",
+                    "centerName": "ADCenter Murcia"
+                },
+                {
+                    "centerId": "99055bf7-ada7-495c-8019-8d7ab62d488e",
+                    "centerName": "ADCenter Bangalore"
+                }
+            ]
+        },
+        "privileges": []
+    }
+}

@@ -6,14 +6,17 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { ResetPasswordComponent } from './reset-password.component';
 class MockRouter{
-  navigateByUrl(url : string){
+  navigate(url : string){
     return url ;
   }
 }
 describe('ResetPasswordComponent', () => {
   let component: ResetPasswordComponent;
   let fixture: ComponentFixture<ResetPasswordComponent>;
-  let router;
+  
+  let router = {
+    navigate: jasmine.createSpy('navigate')
+  }
   let loginResponse = {
     "loginResponse": {
         "userId": "10cf1dfd-43e9-4cc4-8257-a6ba5c70e33d",
@@ -86,19 +89,9 @@ describe('ResetPasswordComponent', () => {
     fixture = TestBed.createComponent(ResetPasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-it('should navigate to home page', () =>{
-  const spy = spyOn(router, 'navigateByUrl')
-  component.gotoHome();
-  const url = spy.calls.first().args[0];
-  expect(url).toBe('/projects');
- /*  expect(router.navigate).toHaveBeenCalledWith(['/projects']); */
-
-})
-
 });

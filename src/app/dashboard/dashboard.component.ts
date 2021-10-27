@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SprintDetailResponse } from '../model/general.model';
 import { SlideshowService } from '../slideshow/slideshow.service';
-import { environment } from 'src/environments/environment';
+
+import { UrlPathConstants } from '../UrlPaths';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,8 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
   sprintDetails: SprintDetailResponse = new SprintDetailResponse();
   teamStatus: number;
-  interval= environment.slideshowInterval;
+  intervalID: any; 
+  interval= UrlPathConstants.slideshowInterval;
   constructor(public slideshowService: SlideshowService) { }
 
   ngOnInit(): void {
@@ -21,7 +23,7 @@ export class DashboardComponent implements OnInit {
   }
   ngAfterViewInit(){
     if(this.slideshowService.isSlideshowRunning){
-      setTimeout(()=>{
+     this.intervalID = setTimeout(()=>{
         if(this.slideshowService.isSlideshowRunning){
           this.slideshowService.moveSlideshowNextComponent();
         }
@@ -29,6 +31,10 @@ export class DashboardComponent implements OnInit {
     }
    
   }
-
+  ngOnDestroy() {
+    if (this.intervalID) {
+      clearInterval(this.intervalID);
+    }
+  }
 
 }

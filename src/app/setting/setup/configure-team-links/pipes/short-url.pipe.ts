@@ -13,7 +13,9 @@ export class ShortUrlPipe implements PipeTransform {
         return url.substr(0, 21) + '...' + url.substring(len - 9, len);
       return url;
     }
-    return url;
+    else{
+      return null;
+    }
   }
 
 }

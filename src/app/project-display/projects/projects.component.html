@@ -17,8 +17,8 @@
 
 <div class="card" (click)="getTeamDetails(team.teamId)" *ngFor="let team of ADCTeams"> 
     <h3 class="teamname">{{team.teamName}}</h3>
-    <img class="Logo" src="{{getLogoPath(team.teamId, team.teamLogo)}}">
     
+    <img class="Logo" alt="Display Team Logo" *ngIf="team.teamLogo!= null" src="{{team.teamLogo}}">
     <div class="row" style="position: absolute; bottom: 15px; text-align: left; left: 0px;" >
       <div class="row" *ngIf="team.teamStatus != 3" >        
         <span class="dot" *ngIf="team.teamStatus=== 2" style="background-color: #FF304C;"></span>
@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<div class="blur-background" *ngIf ="localLoader">
+<!-- <div class="blur-background" *ngIf ="localLoader">
   <div class="loader"></div>
   </div>  
- 
+  -->

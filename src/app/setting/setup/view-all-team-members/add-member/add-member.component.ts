@@ -34,20 +34,17 @@ teamMember : TeamMemberDetails = new TeamMemberDetails();
       role: ['',[Validators.required]],
       team:['',[Validators.required]]
     });
-
-    console.log(this.settingService.roles);
-    console.log(this.generalService.getPermissions());
   }
-  keyPressed() {
+ /*  keyPressed() {
     this.authError = false;
   }
 
   
   getAuthError() {
     return this.authError;
-  }
+  } */
 
-  async addMember(){
+  /* async addMember(){
     this.teamMember.team.id=  this.teamId;
     this.memberGroup.controls.team.setValue(this.teamMember.team);
 
@@ -62,16 +59,22 @@ teamMember : TeamMemberDetails = new TeamMemberDetails();
   else{
     this.error=true;
     return false;
+    this.updateTeam.teamId = this.team.teamId;
+    this.updateTeam.teamName = this.form.get('teamName').value;
   }
-  }
+  } */
 
   
   async addTeamMember(){
     
     try{
       console.log("teamMemberDetails");
+      this.teamMember.team.id = this.teamId;
+      this.teamMember.username = this.memberGroup.get('username').value
+      this.teamMember.email = this.memberGroup.get('email').value
+      this.teamMember.role = this.memberGroup.get('role').value
       console.log(this.teamMember);
-      const data = await this.teamService.addTeamMember(this.memberGroup.value);
+      const data = await this.teamService.addTeamMember(this.teamMember);
       this.notifyService.showSuccess("Team member added successfully","");
       this.memberGroup.reset();
       this.roleName="Select Role";

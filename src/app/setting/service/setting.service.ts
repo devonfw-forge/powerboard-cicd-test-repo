@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TeamDetailResponse } from 'src/app/model/general.model';
+import { UrlPathConstants } from 'src/app/UrlPaths';
+import { environment } from 'src/environments/environment';
 import { ConfigureTeamSpirit, DailyMeetingLinksDetails, GuestDetails, GuestInfo, RolesResponse, TeamInfo, TeamLinksDetails, TeamMemberDetails, TeamsResponse, UpdateRoles, UpdateTeam } from '../model/setting.model';
 
 @Injectable({
@@ -58,7 +60,7 @@ public teamDetails : TeamDetailResponse = new TeamDetailResponse();
 
   async getRoles():Promise<RolesResponse[]>{
     return await this.http.get<RolesResponse[]>(
-      'http://localhost:3001/v1/user/viewAllUserRoles' ).toPromise();
+      environment.globalEndPoint + UrlPathConstants.viewAllUserRolesEndPoint ).toPromise();
   }
 
 }

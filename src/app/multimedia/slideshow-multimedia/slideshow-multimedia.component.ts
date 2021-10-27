@@ -1,9 +1,11 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
-import { MultimediaFolderResponse, MultimediaFilesNew } from 'src/app/model/general.model';
+import { MultimediaFolderResponse, MultimediaFilesNew, SlideshowFiles } from 'src/app/model/general.model';
 import { GeneralService } from 'src/app/service/general.service';
 import { SlideshowService } from 'src/app/slideshow/slideshow.service';
-import { environment } from 'src/environments/environment';
+import { UrlPathConstants } from 'src/app/UrlPaths';
+
 
 @Component({
   selector: 'app-slideshow-multimedia',
@@ -11,35 +13,25 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./slideshow-multimedia.component.css']
 })
 export class SlideshowMultimediaComponent implements OnInit {
-
-  currentPath : string;
-  currentIndex = 0;
+  
   currentItem: string;
-  api: VgApiService;
-  thumbnailData: string[];
-  //multimediaData: string[];
-  thumbnailIsImage: boolean[] = [];
-  intervalID: any;
-  teamId: string;
-  realItem: string;
-  currentFolder : string;
-  multimedia: MultimediaFolderResponse = new MultimediaFolderResponse();
-  /* multimediaFiles: MultimediaFilesNew[]; */
+  teamId : string;
+  intervalID: any;  
   componentReady: boolean;
-  tempPath: string;
-  is_image: boolean = true;
-  is_video: boolean = false;
-  counter: number = 0;
-  interval: number = environment.slideshowInterval;
-  slideshowFiles : { fileURL : string}[]=[];
+  currentIndex: number = 0;
+  interval: number = UrlPathConstants.slideshowInterval;
+  slideshowFiles : SlideshowFiles[]=[];
+  slideshowTempFiles : SlideshowFiles[]=[];
+  api: VgApiService;
+  is_image : boolean;
+  is_video : boolean
 
-  constructor(public slideshowService: SlideshowService, private generalService : GeneralService) { 
-    this.thumbnailData = [];
-    /* this.multimediaFiles = []; */
+  constructor(public slideshowService: SlideshowService, private generalService : GeneralService,  private changeDetector: ChangeDetectorRef) { 
     this.slideshowFiles = [];
-    this.currentFolder = '';
+    this.slideshowTempFiles = [];
     this.currentIndex = 0;
-    this.currentPath = '';
+    this.is_image = false;
+    this.is_video = false;
   }
   async ngOnInit() {
     await this.updateComponent(); 
@@ -48,97 +40,53 @@ export class SlideshowMultimediaComponent implements OnInit {
    async updateComponent() {
      try{
     this.componentReady = false;
-    this.currentFolder = '';
+    this.slideshowTempFiles = [];
+    this.slideshowFiles = [];
+    this.currentIndex = 0;
     this.teamId = JSON.parse(localStorage.getItem('TeamDetailsResponse')).powerboardResponse.team_id;
     const data = await this.generalService.getSlideshowFiles(this.teamId);
-    this.slideshowFiles = data;
-    console.log(this.slideshowFiles);
-    this.currentItem = this.slideshowFiles[this.currentIndex].fileURL;
-    this.processFiles();
-    for(let folder of this.multimedia.root){
+    this.slideshowTempFiles = data;
+    if(this.slideshowTempFiles.length > 0){
+     /*  this.slideshowFiles = this.slideshowFiles.filter(file =>this.isImage(file.fileURL) == true); */
+    for(let file of this.slideshowTempFiles){
+      if(this.isImage(file.fileURL)){
+        this.slideshowFiles.push(file);
+      }
+    }
+    for(let file of this.slideshowTempFiles){
+      if(!this.isImage(file.fileURL)){
+        this.slideshowFiles.push(file);
+      }
+    }
+     console.log(this.slideshowFiles);
+     this.slideshowControl();
+    /* this.currentItem = this.slideshowFiles[this.counter].fileURL;
+    this.counter++;
+    this.automateSlideshow(); */
+    }
+    else{
+      this.slideshowService.moveSlideshowNextComponent();
+    }
+    /* this.currentItem = this.slideshowFiles[this.currentIndex].fileURL; */
+    /* this.processFiles(); */
+    /* for(let folder of this.multimedia.root){
       if(folder.status == true){
         this.currentFolder = folder.folderName;
       }
-    }
+    } */
     }
     catch(e){
-      console.log(e.error.message);
+      console.log(e);
     }
   } 
   
-
-  
-
-  processFiles(){
-  
-      for (let file of this.slideshowFiles) {
-         this.tempPath = file.fileURL; 
-        const isImage = this.isImage(file.fileURL);
-        if (isImage && this.slideshowService.isSlideshowRunning) {
-          this.thumbnailData.push(this.tempPath);
-          this.thumbnailIsImage.push(isImage);
-        }
-      }
-    this.onClickPlaylistItem(this.thumbnailData[0], 0);
-  }
-
-
-  onClickPlaylistItem(item: string, index: number) {
-
-    if (this.thumbnailIsImage[index]) {
-      this.is_video = false;
-
-      this.is_image = true;
-      this.realItem = this.thumbnailData[index];
-
-    }
-    else {
-      this.is_video = true;
-      this.is_image = false;
-      this.realItem = this.thumbnailData[index].split('#')[0];
-    }
-
-    this.currentIndex = index;
-    this.currentItem = item;
-
-    if (this.counter != this.thumbnailData.length - 1 && this.slideshowService.isSlideshowRunning) {
-      console.log(this.counter + "-> on click before +1");
-      this.counter = this.counter + 1;
-      console.log(this.counter + "-> on click after +1");
-      if (this.counter === 1) {
-        this.automatePlaylist(this.interval);
-      }
-
-    }
-    else if (this.counter === this.thumbnailData.length - 1 && this.slideshowService.isSlideshowRunning) {
-      console.log("automate done");
-
-      clearInterval(this.intervalID);
-      setTimeout(() => {
-        if (this.slideshowService.isSlideshowRunning) {
-          this.slideshowService.moveSlideshowNextComponent();
-        }
-      }, this.interval);
-    }
-
-
-  }
-
-  automatePlaylist(interval: number) {
-    if (this.counter === 0) {
-      this.onClickPlaylistItem(this.thumbnailData[this.counter], this.counter);
-    }
-    else {
-      this.intervalID = setInterval(() => this.onClickPlaylistItem(this.thumbnailData[this.counter], this.counter), interval);
-    }
-  }
-
   isImage(url: string) {
     const images = ["jpg", "jpeg", "gif", "png"];
     const videos = ["mp4", "3gp", "ogg"];
 
 
-    const extension = url.split(".")[1]
+    const tempextension = url.split(".");
+    const  extension = tempextension[tempextension.length-1];
     console.log(extension);
     if (images.includes(extension)) {
       return true;
@@ -147,29 +95,124 @@ export class SlideshowMultimediaComponent implements OnInit {
     }
   }
 
-
-
-  toggleFullScreen() {
-    this.api.fsAPI.toggleFullscreen();
-  }
-
-  previousItem() {
-    console.log("previous");
-    this.counter = this.counter - 1;
-    console.log(this.counter + "-> previous");
-    this.onClickPlaylistItem(this.thumbnailData[this.currentIndex - 1], this.currentIndex - 1);
-
-  }
-  nextItem() {
-    console.log("Next");
-    this.counter = this.counter + 1;
-    console.log(this.counter + "-> next");
-    this.onClickPlaylistItem(this.thumbnailData[this.currentIndex + 1], this.currentIndex + 1);
-  }
-
   ngOnDestroy() {
     if (this.intervalID) {
       clearInterval(this.intervalID);
+    }
+  }
+
+  public slideshowControl(){
+    if(this.isImage(this.slideshowFiles[this.currentIndex].fileURL)){
+      this.is_image = true;
+      this.is_video = false;
+      
+      this.currentItem = this.slideshowFiles[this.currentIndex].fileURL;
+      this.currentIndex++;
+      if(this.currentIndex >= this.slideshowFiles.length){
+        console.log("reached end");
+        setTimeout(()=>{
+          console.log("move to next component");
+          if (this.slideshowService.isSlideshowRunning) {
+            this.slideshowService.moveSlideshowNextComponent();
+          }
+        },this.interval);
+
+      }
+      else{
+        setTimeout(this.slideshowControl.bind(this), this.interval);
+      }
+      
+    }
+    else{
+      this.is_image = false;
+      this.is_video = true;
+      if(this.currentIndex <= this.slideshowFiles.length){
+        this.currentItem = this.slideshowFiles[this.currentIndex].fileURL;
+      }
+      else{
+        if (this.slideshowService.isSlideshowRunning) {
+          this.slideshowService.moveSlideshowNextComponent();
+        }
+      }
+     /*  if (this.api) {
+        if(this.api.state === 'playing'){
+          setTimeout(this.slideshowControl.bind(this), this.interval);
+        }
+        
+      }
+      else{
+        this.currentItem = this.slideshowFiles[this.currentIndex].fileURL;
+        this.currentIndex++;
+        setTimeout(this.slideshowControl.bind(this), this.interval);
+      } */
+    }
+  }
+
+
+  //videos to slideshow
+  /* onPlayerReady(api: VgApiService) {
+    console.log("api value");
+    console.log(api);
+    this.api = api;
+
+    if (this.componentReady) {
+      this.api.volume = 0;
+    }
+
+
+  } */
+
+
+
+
+  onPlayerReady(api: VgApiService) {
+    this.api = api;
+
+    if (this.componentReady) {
+      this.api.volume = 0;
+    }
+
+    this.api.getDefaultMedia().subscriptions.loadedMetadata.subscribe({
+      next: this.playVideo.bind(this),
+      error: (reason) => {
+        console.error('Error while loading video metadata?');
+        // console.log(reason);
+      }
+    });
+    this.api.getDefaultMedia().subscriptions.ended.subscribe({
+      next: this.nextVideo.bind(this),
+      error: (reason) => {
+        console.error('Error when loaded video metadata?');
+        // console.log(reason);
+      }
+    });
+  }
+
+
+
+  nextVideo() {
+    this.currentIndex++;
+    if (this.currentIndex === this.slideshowFiles.length) {
+      if (this.slideshowService.isSlideshowRunning) {
+        this.slideshowService.moveSlideshowNextComponent();
+      }
+    }
+    else{
+      this.currentItem = this.slideshowFiles[this.currentIndex].fileURL;
+    }
+    this.changeDetector.detectChanges();
+  }
+
+  playVideo() {
+    this.api.play();
+  }
+
+  onTap() {
+    if (this.api.state === 'playing') {
+      this.api.pause();
+
+    } else {
+      this.api.play();
     }
   }
 

@@ -5,34 +5,30 @@
     <div class="row">
       <div class="col-md-1"></div>
       <table class="table table-borderless col-md-6">
+        <caption></caption>
         <tbody>
           <tr>
-            <th>AD Center</th>
+            <th id="center">AD Center</th>
             <td>
               <div class="row" style="padding-left: 30px">
                 <div>
-                  <b>{{ team.adCenter }}</b>
+                  {{ team.adCenter }}
                 </div>
               </div>
             </td>
           </tr>
           <tr>
-            <th>Team Name</th>
+            <th id="Team_Name">Team Name</th>
             <td>
-              <div class="row">
-                <div class="form-group input-field">
-                  <input
-                    class="form-control"
-                    placeholder="{{ team.teamName }}"
-                    formControlName="teamName"
-                  />
+              <div class="row" style="padding-left: 30px">
+                <div>
+                  {{ team.teamName }}
                 </div>
-                <!-- <div>{{team.teamName}}</div> -->
               </div>
             </td>
           </tr>
           <tr>
-            <th>Team Code</th>
+            <th id="Team_code">Team Code</th>
             <td>
               <div class="row">
                 <div class="form-group input-field">
@@ -51,7 +47,7 @@
             </td>
           </tr>
           <tr>
-            <th>Project Key</th>
+            <th id="Prokey_key">Project Key</th>
 
             <td>
               <div class="row">
@@ -89,6 +85,7 @@
           <div class="row" style="justify-content: center"> 
             <img
               class="logo" id="output"
+              alt="Display logo thumbnail"
               *ngIf="isLogo"
               src= "{{editLogoPath}}"
             />
@@ -99,6 +96,7 @@
           /> -->
             <img
               class="logo"
+              alt="Default logo view"
               *ngIf="!isLogo"
               src="assets/layoutAssets/logo/noLogo.png"
             />

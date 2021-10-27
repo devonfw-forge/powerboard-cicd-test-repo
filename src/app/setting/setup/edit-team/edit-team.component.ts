@@ -25,8 +25,7 @@ export class EditTeamComponent implements OnInit {
   logo: string;
   
   newLogoPath : string;
-  logoPrefix = environment.multimediaPrefix;
-  localPrefix = environment.localPrefix;
+  
   editLogoPath : string;
   form: FormGroup;
   constructor(
@@ -68,16 +67,20 @@ export class EditTeamComponent implements OnInit {
     if (this.logo) {
       this.isLogo = true;
     
-      this.editLogoPath =  environment.logoPrefix + this.team.teamId + '/' + this.logo;
+      this.editLogoPath =  this.logo;
     } else {
       this.isLogo = false;
     
     }
+if(JSON.parse(
+  localStorage.getItem('PowerboardDashboard')
+).loginResponse.homeResponse){
 
-    this.ADCList = JSON.parse(
-      localStorage.getItem('PowerboardDashboard')
-    ).loginResponse.ADC_List;
-    console.log(this.ADCList);
+  this.ADCList = JSON.parse(
+    localStorage.getItem('PowerboardDashboard')
+  ).loginResponse.homeResponse.ADC_List;
+  console.log(this.ADCList);
+}
 
     this.form.controls['teamName'].setValue(this.team.teamName);
     this.form.controls['teamCode'].setValue(this.team.teamCode);
@@ -108,7 +111,7 @@ export class EditTeamComponent implements OnInit {
       this.spinner = true;
      const data = await this.setupService.addLogoToTeam(this.team.teamId, file);
      console.log(data);
-     this.editLogoPath =  environment.logoPrefix + this.team.teamId + '/' + data.logo; 
+     this.editLogoPath = data.logo; 
      this.spinner = false;
      this.isLogo = true;
      this.teamDetail = JSON.parse(localStorage.getItem('TeamDetailsResponse'));
@@ -116,6 +119,7 @@ export class EditTeamComponent implements OnInit {
      localStorage.setItem('TeamDetailsResponse', JSON.stringify(this.teamDetail));
      var image = <HTMLImageElement>document.getElementById('output');
      image.src = URL.createObjectURL(file); 
+     this.notifyService.showSuccess("","Logo Uploaded Successfully");
      /* this.teamDetail = JSON.parse(localStorage.getItem('TeamDetailsResponse'));
      this.teamDetail.powerboardResponse.logo = data.logo;
      localStorage.setItem('TeamDetailsResponse', JSON.stringify(this.teamDetail)); */

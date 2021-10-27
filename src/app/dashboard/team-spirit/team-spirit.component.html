@@ -1,150 +1,3 @@
-<!-- <div *ngIf="componentReady">
-<div *ngIf="teamSpirit?.teamSpiritRating < 6.6 ">
-    <div *ngIf="teamSpirit?.teamSpiritRating < 3.4 then content else other_content"> </div>
-    <ng-template #content>
-        <div class="TeamSpirit" id="critical" >
-            
-            <div class='Gauge'>
-                <div echarts [options]="chartOption" class="demo-chart" style="height: 170px; width: 170px;"></div>
-            </div>
-            <div class="circle" ><img class="emoji" src="assets/Images/red.jpeg"></div>
-        </div>
-    </ng-template>
-    <ng-template #other_content>
-        <div class="TeamSpirit" id="normal">
-            
-            <div class='Gauge'>
-                <div echarts [options]="chartOption" class="demo-chart" style="height: 170px; width: 170px;"></div>
-            </div>
-            
-            <div class="circle"><img class="emoji" src="assets/Images/orange.png"></div>
-        </div>
-    </ng-template>
-   
-    
-</div>
-<div  class="TeamSpirit" id="good" *ngIf ="teamSpirit?.teamSpiritRating > 6.6">
-    
-    <div class='Gauge'>
-        <div echarts [options]="chartOption" class="demo-chart" style="height: 170px; width: 170px;"></div>
-    </div>
-    <div class="circle" *ngIf = "teamSpirit?.teamSpiritRating > 6.6"><img class="emoji" src="assets/Images/green.jpeg"></div>
-</div>
-</div>
-
-<div class="TeamSpirit" *ngIf="!componentReady">
-   <div style="margin-left: 20%; margin-top: 30%;"><h3> Data unavailable</h3></div>
-</div>
-<h5 class="title">Team Spirit</h5>
-
-
-
- -->
-<!-- 
-<div class="row">
-  <div class="col-md-12" style=" font-weight: 500;">Team Spirit</div>
-  <div class="col-md-12  mt-1" style="height:120px; overflow: hidden;">
-    <div class="row">
-      <div class="col-md-6">
-        <div *ngIf="teamSpirit?.teamSpiritRating < 6.6">
-          <div *ngIf="teamSpirit?.teamSpiritRating < 3.4;then content;else other_content"></div>
-          <ng-template #content>
-                <div
-                  echarts
-                  [options]="chartOption"
-                  style="height: 200px; width: 200px"
-                ></div>
-          </ng-template>
-          <ng-template #other_content>
-            <div
-                  echarts
-                  [options]="chartOption"
-                  style="height: 200px; width: 200px"
-                ></div>
-          </ng-template>
-        </div>
-        <div *ngIf="teamSpirit?.teamSpiritRating > 6.6">
-            <div
-              echarts
-              [options]="chartOption"
-              style="height: 200px; width: 200px"
-            ></div>
-        </div>
-        <div *ngIf="!componentReady">
-          <h3>Data unavailable</h3>
-        </div>
-      </div>
-        <div class="col-md-6" >
-            <div *ngIf="teamSpirit?.teamSpiritRating < 6.6 && componentReady">
-                <div *ngIf="teamSpirit?.teamSpiritRating < 3.4;">
-                  <div ><img class="emoji" src="assets/Images/red.jpeg"></div>
-                </div>   
-                <div *ngIf="teamSpirit?.teamSpiritRating > 3.3;">
-                  <div><img class="emoji" src="assets/Images/orange.png"></div>
-            </div>
-            <div *ngIf="teamSpirit?.teamSpiritRating > 6.5 && componentReady">
-              <div ><img class="emoji " src="assets/Images/green.jpeg"></div>
-            </div>
-              <div *ngIf="!componentReady">
-                <h3>Data unavailable</h3>
-              </div>
-        </div>
-    </div>
-  </div>
-</div>
- -->
-
-
-
-
- <!-- <div *ngIf="componentReady">
-<div *ngIf="teamSpirit?.teamSpiritRating < 6.6 ">
-    <div *ngIf="teamSpirit?.teamSpiritRating < 3.4 then content else other_content"> </div>
-    <ng-template #content>
-        <div class="TeamSpirit" id="critical" >
-            
-            <div class='Gauge'>
-                <div echarts [options]="chartOption" class="demo-chart" style="height: 170px; width: 170px;"></div>
-            </div>
-            <div class="circle" ><img class="emoji" src="assets/Images/red.jpeg"></div>
-        </div>
-    </ng-template>
-    <ng-template #other_content>
-        <div class="TeamSpirit" id="normal">
-            
-            <div class='Gauge'>
-                <div echarts [options]="chartOption" class="demo-chart" style="height: 170px; width: 170px;"></div>
-            </div>
-            
-            <div class="circle"><img class="emoji" src="assets/Images/orange.png"></div>
-        </div>
-    </ng-template>
-   
-    
-</div>
-<div  class="TeamSpirit" id="good" *ngIf ="teamSpirit?.teamSpiritRating > 6.6">
-    
-    <div class='Gauge'>
-        <div echarts [options]="chartOption" class="demo-chart" style="height: 170px; width: 170px;"></div>
-    </div>
-    <div class="circle" *ngIf = "teamSpirit?.teamSpiritRating > 6.6"><img class="emoji" src="assets/Images/green.jpeg"></div>
-</div>
-</div>
-
- 
-
-<div class="TeamSpirit" *ngIf="!componentReady">
-   <div style="margin-left: 20%; margin-top: 30%;"><h3> Data unavailable</h3></div>
-</div>
-<h5 class="title">Team Spirit</h5>
-
- 
-
- 
-
- -->
-
- 
 
 <div class="row">
   <div class="col-md-12" style=" font-weight: 500;">Team Spirit</div>
@@ -182,14 +35,14 @@
         <div class="col-md-6" >
             <div *ngIf="teamSpirit?.teamSpiritRating < 6.6 && componentReady">
                 <div *ngIf="teamSpirit?.teamSpiritRating < 3.4;">
-                    <div ><img class="emoji" src="assets/Images/red.jpeg"></div>
+                    <div ><img class="emoji" alt="red emoji" src="assets/Images/red.jpeg"></div>
                 </div>   
                 <div *ngIf="teamSpirit?.teamSpiritRating > 3.3;">
-                    <div><img class="emoji" src="assets/Images/orange.png"></div>
+                    <div><img class="emoji" alt="orange emoji" src="assets/Images/orange.png"></div>
                 </div>
             </div>
             <div *ngIf="teamSpirit?.teamSpiritRating > 6.5 && componentReady">
-                <div ><img class="emoji " src="assets/Images/green.jpeg"></div>
+                <div ><img class="emoji" alt="green emoji" src="assets/Images/green.jpeg"></div>
             </div>
               <div *ngIf="!componentReady">
                 <h3>Data unavailable</h3>

@@ -38,18 +38,18 @@ slideshowArray: string[] = [];
     this.router.navigateByUrl(this.lastCheckPoint);
   }
 
-public checkValue(){
+/* public checkValue(){
     console.log(this.isSlideshowRunning);
     if(this.isSlideshowRunning){
-      /* const { BrowserWindow } = require('electron');
+      const { BrowserWindow } = require('electron');
 const win = new BrowserWindow({ width: 800, height: 600, frame: false });
-win.show(); */
-      /* const win = new BrowserWindow({ width: 800, height: 600, frame: false });
-      win.show(); */
-      /* const win= new BrowserWindow();
-      win.maximize(); */
+win.show();
+      const win = new BrowserWindow({ width: 800, height: 600, frame: false });
+      win.show();
+      const win= new BrowserWindow();
+      win.maximize();
     }
-  }
+  } */
 
   public checkSlideshowArray(){
     this.slideshowIndex = 0;
@@ -64,7 +64,7 @@ win.show(); */
 
 
     if(this.isSlideshowRunning){
-      this.router.navigateByUrl("slideshow");
+      this.router.navigateByUrl("/slideshow");
     }
   }
 

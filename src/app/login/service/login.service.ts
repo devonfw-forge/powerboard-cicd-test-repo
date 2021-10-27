@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
+import { UrlPathConstants } from 'src/app/UrlPaths';
+import { environment } from 'src/environments/environment';
 import { HomeResponse, PasswordResetForm, PowerboardLoginResponse } from '../model/login.model';
 
 
@@ -8,7 +10,7 @@ import { HomeResponse, PasswordResetForm, PowerboardLoginResponse } from '../mod
   providedIn: 'root'
 })
 export class LoginService {
-
+   
   constructor(private http: HttpClient) 
   {
 
@@ -17,7 +19,7 @@ export class LoginService {
    public async Login(userName: string, password: string): Promise<PowerboardLoginResponse> {
     return await this.http
       .post<PowerboardLoginResponse>(
-        'http://localhost:3001/v1/auth/login',
+        environment.globalEndPoint + UrlPathConstants.loginEndPoint,
         {
           username: userName,     //'raj11',
           password: password              //'password'
@@ -28,13 +30,13 @@ export class LoginService {
   }
 
   public async resetPassword(resetPassword : PasswordResetForm): Promise<any>{
-       return await this.http.put<any>('http://localhost:3001/v1/auth/change-password', resetPassword).toPromise();
+       return await this.http.put<any>(environment.globalEndPoint + UrlPathConstants.resetPasswordEndPonit, resetPassword).toPromise();
   }
 
   public async guestLogin(): Promise<HomeResponse> {
     return await this.http
       .post<HomeResponse>(
-        'http://localhost:3001/v1/auth/login/guest',
+        environment.globalEndPoint + UrlPathConstants.guestLoginEndPoint,
         {
           username: "guest",  
           password: "guest"              

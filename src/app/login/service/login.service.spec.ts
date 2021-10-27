@@ -25,64 +25,6 @@ describe('LoginService', () => {
     service = TestBed.inject(LoginService);
     httpTestingController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(LoginService);
-    response = {
-      "loginResponse": {
-          "userId": "10cf1dfd-43e9-4cc4-8257-a6ba5c70e33d",
-          "isPasswordChanged": true,
-          "My_Center": {
-              "centerId": "99055bf7-ada7-495c-8019-8d7ab62d488e",
-              "centerName": "ADCenter Bangalore"
-          },
-          "My_Team": [
-              {
-                  "teamId": "46455bf7-ada7-495c-8019-8d7ab76d488e",
-                  "teamName": "",
-                  "myRole": "team_member",
-                  "teamStatus": 1
-              }
-          ],
-          "Teams_In_ADC": [
-              {
-                  "teamId": "46455bf7-ada7-495c-8019-8d7ab76d488e",
-                  "teamName": " ",
-                  "teamStatus": 1
-              },
-              {
-                  "teamId": "46455bf7-ada7-495c-8019-8d7ab76d489e",
-                  "teamName": ""
-              },
-              {
-                  "teamId": "46455bf7-ada7-495c-8019-8d7ab76d490e",
-                  "teamName": "",
-                  "teamStatus": 1
-              }
-          ],
-          "ADC_List": [
-              {
-                  "centerId": "98655bf7-ada7-495c-8019-8d7ab62d488e",
-                  "centerName": "ADCenter Valencia"
-              },
-              {
-                  "centerId": "98755bf7-ada7-495c-8019-8d7ab62d488e",
-                  "centerName": "ADCenter Mumbai"
-              },
-              {
-                  "centerId": "98855bf7-ada7-495c-8019-8d7ab62d488e",
-                  "centerName": "ADCenter Poland"
-              },
-              {
-                  "centerId": "98955bf7-ada7-495c-8019-8d7ab62d488e",
-                  "centerName": "ADCenter Murcia"
-              },
-              {
-                  "centerId": "99055bf7-ada7-495c-8019-8d7ab62d488e",
-                  "centerName": "ADCenter Bangalore"
-              }
-          ],
-          "privileges": []
-      },
-     
-  };
   });
  
  
@@ -122,7 +64,7 @@ describe('LoginService', () => {
 
   it('login should throw erorr for incorrect data', () =>{
     let result = response;
-    service.Login("qwerty", "wrongpassword").then((data) =>{
+    service.Login("wrongusername", "wrongpassword").then((data) =>{
       result = data;
     }).catch(error => {
       result = error;
@@ -146,7 +88,9 @@ describe('LoginService', () => {
     service.resetPassword(resetpasswordForm).then((data) =>{
       result = data;
     },
-    );
+    ).catch(error => {
+      result = error;
+    });
       let req = httpTestingController.expectOne("http://localhost:3001/v1/auth/change-password");
     req.flush("internal server error",{
       status : 500,
@@ -154,4 +98,22 @@ describe('LoginService', () => {
     });
    
   })
+
+  it('guest login should return data', async() => {
+    let result : any;
+    service.guestLogin().then((data) =>{
+      result = data;
+      expect(data).toBeTruthy();
+    }).catch(error => {
+      result = error;
+    })
+    const req = httpTestingController.expectOne(
+      {
+      method: "POST",
+      url :   'http://localhost:3001/v1/auth/login/guest'
+      });
+    req.flush([response]);
+    
+  })
+
 });

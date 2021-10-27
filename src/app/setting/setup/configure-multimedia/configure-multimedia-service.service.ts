@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UrlPathConstants } from 'src/app/UrlPaths';
+import { environment } from 'src/environments/environment';
 import { DeleteResponse } from '../../model/setting.model';
 
 @Injectable({
@@ -13,17 +15,13 @@ export class ConfigureMultimediaServiceService {
 
   constructor(private http: HttpClient) { }
 
-  addFolder(){
-
-  }
-
 
   async addFilesToTeam(teamId, file:File):Promise<any>{
     // Headers
     const formData = new FormData();
     formData.append('file', file, file.name);
     return await this.http
-    .post<any>('http://localhost:3001/v1/multimedia/uploadFile/' + teamId, formData).toPromise();
+    .post<any>(environment.globalEndPoint + UrlPathConstants.uploadFileEndPoint + teamId, formData).toPromise();
   }
   
 
@@ -31,7 +29,7 @@ export class ConfigureMultimediaServiceService {
    async addFolderToTeam(teamId: string, name :string):Promise<any>{
     // Headers
     return await this.http
-    .post<any>('http://localhost:3001/v1/multimedia/addFolder/' + teamId, {name}).toPromise();
+    .post<any>(environment.globalEndPoint + UrlPathConstants.addFolderEndPoint + teamId, {name}).toPromise();
   }
  
 
@@ -41,11 +39,11 @@ export class ConfigureMultimediaServiceService {
     const formData = new FormData();
     formData.append('file', file, file.name);
     return await this.http
-    .post<any>('http://localhost:3001/v1/multimedia/uploadFileToFolder/' + folderId + '/' + teamId, formData).toPromise();
+    .post<any>(environment.globalEndPoint + UrlPathConstants.uploadFileToFolderEndPoint + folderId + '/' + teamId, formData).toPromise();
   }
   
   
-  async deleteFilesInSubFolder(teamId : string , deleteResponse : DeleteResponse):Promise<any>{
+  async deleteFilesAndFolders(teamId : string , deleteResponse : DeleteResponse):Promise<any>{
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -54,14 +52,14 @@ export class ConfigureMultimediaServiceService {
     };
     
     return await this.http.delete<any>(
-      'http://localhost:3001/v1/multimedia/deleteFilesAndFolders/' + teamId , options).toPromise();
+      environment.globalEndPoint + UrlPathConstants.deleteFilesAndFoldersEndPoint + teamId , options).toPromise();
   }
 
 
   async addToSlideshow(teamId: string,  fileAndFolderIds : string[]):Promise<any>{
     // Headers
     return await this.http
-    .post<any>('http://localhost:3001/v1/multimedia/addToSlideshow/' + teamId, {fileAndFolderIds}).toPromise();
+    .post<any>(environment.globalEndPoint + UrlPathConstants.addToSlideshowEndPoint + teamId, {fileAndFolderIds}).toPromise();
   }
   
 }

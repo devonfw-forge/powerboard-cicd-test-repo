@@ -1,0 +1,109 @@
+{
+    "powerboardResponse": {
+        "team_id": "46455bf7-ada7-495c-8019-8d7ab76d488e",
+        "team_name": "Team A",
+        "project_key": "P12343",
+        "center": "ADCenter Bangalore",
+        "team_code": "10012345",
+        "logo": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/logo/46455bf7-ada7-495c-8019-8d7ab76d488e/logo_Aa4aa8e7a-85d6-4b75-8f93-6a11dee9b13c.png",
+        "dashboard": {
+            "teamId": "46455bf7-ada7-495c-8019-8d7ab76d488e",
+            "codeQuality": {
+                "bugs": 3,
+                "codeSmells": 13,
+                "codeCoverage": 85,
+                "status": "PASSED"
+            },
+            "clientStatus": {
+                "clientSatisfactionRating": 8,
+                "sprintNumber": 10
+            },
+            "teamSpirit": {
+                "teamSpiritRating": 8
+            },
+            "sprintDetail": {
+                "Sprint_current_day": 22,
+                "sprint_number": 11,
+                "Sprint_days": 28
+            },
+            "burndown": {
+                "workUnit": "story point",
+                "remainingDays": -2,
+                "remainingWork": 83,
+                "count": 97,
+                "burndownStatus": "Behind Time"
+            },
+            "sprintWorkUnit": "story point",
+            "velocity": {
+                "Avg": 115,
+                "Committed": 140,
+                "Completed": 57
+            },
+            "teamStatus": 3
+        },
+        "teamLinks": [
+            {
+                "teamLinkId": "51055bf7-ada6-495c-8019-8d7ab76d488e",
+                "linkName": "Jira cloud",
+                "linkType": "web_link",
+                "links": "https://powerboard-capgemini.atlassian.net/jira/software/projects/DUM/boards/3"
+            },
+            {
+                "teamLinkId": "51055bf8-ada5-495c-8019-8d7ab76d488e",
+                "linkName": "GitHub",
+                "linkType": "web_link",
+                "links": "https://github.com/devonfw-forge/powerboard-api/tree/develop-0.0.1"
+            },
+            {
+                "teamLinkId": "51055bf2-ada5-495c-8019-8d7ab76d488e",
+                "linkName": "Skype Demo",
+                "linkType": "meeting_link",
+                "links": "https://lync.capgemini.com/capgemini.com/meet/raj.bhushan/L6C7HBQC"
+            },
+            {
+                "teamLinkId": "51056bf8-ada5-495c-8019-8d7ab76d488e",
+                "linkName": "Stand Up",
+                "linkType": "meeting_link",
+                "links": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_NjY3MzIyNmYtZTg1YS00MzBjLTk0NmUtMTk4MWE0OWJjNjhl%40thread.v2/0?context=%7b%22Tid%22%3a%2276a2ae5a-9f00-4f6b-95ed-5d33d77c4d61%22%2c%22Oid%22%3a%22d6dd7c98-546f-4dcb-9c39-39c8eeff8a24%22%7d"
+            }
+        ],
+        "multimedia": {
+            "display": [
+                {
+                    "id": "36078c40-6667-4a15-bd5f-38d0c74fb006",
+                    "urlName": "https://powerboard-test.s3.eu-central-1.amazonaws.com/uploads/uploads/multimedia/46455bf7-ada7-495c-8019-8d7ab76d488e/farewell/CapgeminiPurpose3258001d-dc2b-4208-afb4-f5a66f2af697.mp4",
+                    "inSlideShow": false
+                }
+            ],
+            "root": [
+                {
+                    "folderId": "aaad19f7-1b66-44aa-a443-4fcdd173f386",
+                    "folderName": "farewell",
+                    "inSlideShow": false,
+                    "status": true
+                },
+                {
+                    "folderId": "aaad19f7-1b66-44aa-a443-4fcdd173f385",
+                    "folderName": "resort",
+                    "inSlideShow": true,
+                    "status": false
+                }
+            ]
+        },
+        "privileges": []
+    },
+    "privileges": [
+        "add_team_admin",
+        "view_links",
+        "team_configuration",
+        "register_team",
+        "update_team",
+        "delete_team",
+        "view_all_team",
+        "view_members_of_team",
+        "update_role",
+        "delete_team_members",
+        "add_team_member",
+        "add_guest_user"
+    ]
+}

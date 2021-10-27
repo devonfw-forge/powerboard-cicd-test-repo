@@ -6,9 +6,9 @@ import { ElectronService } from 'ngx-electron';
 import { LinkResponse, TeamDetailResponse } from 'src/app/model/general.model';
 import { NotificationService } from 'src/app/service/notification.service';
 import { TeamLinksDetails } from '../../model/setting.model';
-import { SettingService } from '../../service/setting.service';
 import { SetupService } from '../service/setup.service';
 import { AddLinksComponent } from './add-links/add-links.component';
+
 
 @Component({
   selector: 'app-configure-team-links',
@@ -30,14 +30,14 @@ export class ConfigureTeamLinksComponent implements OnInit {
 
 
   constructor( private setupService: SetupService,
-    private ref: ChangeDetectorRef, private electronService : ElectronService, private notifyService : NotificationService, private settingService: SettingService) 
+    private ref: ChangeDetectorRef, private electronService : ElectronService, public notifyService : NotificationService) 
     {
       this.usefullLinks=[];
        if (electronService.isElectronApp) {
-        // Do electron stuff
+       
         this.isElectronRunning = true;
       } else {
-        // Do other web stuff
+       
         this.isElectronRunning = false;
       } 
      }
@@ -102,14 +102,6 @@ export class ConfigureTeamLinksComponent implements OnInit {
       const data = await this.setupService.deleteLink(this.selectedLinkId);
       this.notifyService.showSuccess("Team Link deleted successfully !!", "")
       console.log(data);
-    /*   this.settingService.getTeamDetails(); */
-        /* for(let link of this.settingService.teamDetails.powerboardResponse.teamLinks){
-          if(link.teamLinkId == this.selectedLinkId){
-            this.settingService.teamDetails.powerboardResponse.teamLinks = this.settingService.teamDetails.powerboardResponse.teamLinks.filter(item => item !== link);
-          }
-        }
-        this.settingService.setTeamDetails();
-        this.getLinks(); */
        this.usefullLinks = this.usefullLinks.filter(link => link.teamLinkId != this.selectedLinkId);
         this.teamDetail = JSON.parse(localStorage.getItem('TeamDetailsResponse'));
         this.teamDetail.powerboardResponse.teamLinks = this.usefullLinks;

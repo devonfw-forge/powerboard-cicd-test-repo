@@ -16,7 +16,7 @@ import {  PowerboardLoginResponse } from './model/login.model';
 
 import { LoginService } from './service/login.service';
 import { NotificationService } from '../service/notification.service';
-import { GlobalLoaderService } from '../service/global-loader.service';
+
 
 @Component({
   selector: 'app-login',
@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
   fieldTextType: boolean = false;
   private powerboardLoginResponse: PowerboardLoginResponse = new PowerboardLoginResponse();
   loginForm: FormGroup;
-  multimediaPrefix = environment.multimediaPrefix;
+
   imagePath : string;
-  localLoader : boolean;
+  /* localLoader : boolean; */
   teamDetails : TeamDetailResponse = new TeamDetailResponse();
 
   constructor(
@@ -39,13 +39,12 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private teamDetailsService : TeamDetailsService,
     private generalService: GeneralService,
-    public globalLoader :GlobalLoaderService,
     private notificationService : NotificationService,
     private changeDetector: ChangeDetectorRef
   ) {
     this.authError = null;
-    this.localLoader = false;
-    this.imagePath = this.multimediaPrefix + "multimedia/46455bf7-ada7-495c-8019-8d7ab76d490e/Screenshot(3)2fd7e5fd-5340-47b3-b704-f18596a38656.png"
+    /* this.localLoader = false; */
+    this.imagePath = ""
   }
 
   ngOnInit(): void {
@@ -57,13 +56,13 @@ export class LoginComponent implements OnInit {
 
   async login() {
     try {
-     this.localLoader = true;
+    /*  this.localLoader = true; */
       const data = await this.loginService.Login(
         this.loginForm.controls.id.value,
         this.loginForm.controls.password.value
       );
       this.powerboardLoginResponse = data;
-      this.localLoader = false;
+     /*  this.localLoader = false; */
       this.generalService.setPermissions(
         this.powerboardLoginResponse.loginResponse.privileges
       );
@@ -88,9 +87,9 @@ export class LoginComponent implements OnInit {
       
       this.notificationService.showSuccess("", "Login Successful");
     } catch (e) {
-      this.localLoader = false;
+     /*  this.localLoader = false; */
       console.log(e);
-      this.globalLoader.stopLoader();
+      
 
       window.alert(e.error.message);
       this.router.navigateByUrl('/');

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SetupComponent } from './setup/setup.component';
 import { ConfigureTeamLinksComponent } from './setup/configure-team-links/configure-team-links.component';
-import { ConfigureLogoComponent } from './setup/configure-logo/configure-logo.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { NgxElectronModule } from 'ngx-electron';
 import { TeamComponent } from './team/team.component';
@@ -14,11 +13,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ViewAllTeamsComponent } from './team/view-all-teams/view-all-teams.component';
 
 
-import { GuestComponent } from './guest/guest.component';
-import { AddGuestComponent } from './guest/add-guest/add-guest.component';
-
-import { ConfigureTeamSpiritComponent } from './setup/configure-team-spirit/configure-team-spirit.component';
-import { ViewAllGuestsComponent } from './guest/view-all-guests/view-all-guests.component';
 import { EditTeamComponent } from './setup/edit-team/edit-team.component';
 import { RemoveUnderscorePipe } from './model/setting.model';
 import { ShortUrlPipe } from './setup/configure-team-links/pipes/short-url.pipe';
@@ -31,7 +25,6 @@ import { ViewAllTeamMembersComponent } from './setup/view-all-team-members/view-
 import { AddMemberComponent } from './setup/view-all-team-members/add-member/add-member.component';
 import { EditTeamMemberComponent } from './setup/view-all-team-members/edit-team-member/edit-team-member.component';
 import { ViewTeamComponent } from './team/view-team/view-team.component';
-import { ConfigureMultimediaSubfolderComponent } from './setup/configure-multimedia/configure-multimedia-subfolder/configure-multimedia-subfolder.component';
 
 const routes: Routes = [{
   path: '',
@@ -69,15 +62,10 @@ const routes: Routes = [{
     SetupComponent,
 
     ConfigureTeamLinksComponent,
-    ConfigureLogoComponent,
     TeamComponent,
     AddTeamComponent,
     ViewAllTeamsComponent,
     ViewAllTeamMembersComponent,
-    GuestComponent,
-    AddGuestComponent,
-    ConfigureTeamSpiritComponent,
-    ViewAllGuestsComponent,
     ViewTeamComponent,
     EditTeamComponent,
     RemoveUnderscorePipe,
@@ -88,7 +76,6 @@ const routes: Routes = [{
     ADcenterFilterPipe,
     ConfigureMultimediaComponent,
     EditTeamMemberComponent,
-    ConfigureMultimediaSubfolderComponent
 
 
   ],
@@ -105,7 +92,8 @@ const routes: Routes = [{
   exports: [
     ReactiveFormsModule,
     FormsModule,
-    SettingComponent
+    SettingComponent,
+    ShortUrlPipe
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

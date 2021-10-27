@@ -10,19 +10,20 @@
 
   <div class="spacing mt-3 ml-5">
     <table class="table table-borderless">
+      <caption></caption>
       <thead>
         <tr>
 
           <th class="font-weight-light alignment " scope="col"><span class="material-icons-outlined mat-icon mr-1">
             account_box
-            </span><b class="title">Name</b></th>
+            </span><strong class="title">Name</strong></th>
 
           <th class="font-weight-light alignment margin-mail " scope="col"><span class="material-icons-outlined mat-icon mr-1">
             mail_outline
-            </span><b class="title">Email Address</b></th>
+            </span><strong class="title">Email Address</strong></th>
           <th class="font-weight-light alignment margin-role" scope="col"><span class="material-icons-outlined mat-icon mr-1">
                   work_outline
-                  </span> <b class="title">Role</b></th>
+                  </span> <strong class="title">Role</strong></th>
           <th scope="col"> </th>
           <th scope="col"> </th>
         </tr>
@@ -31,7 +32,7 @@
 
         <tr *ngFor="let member of teamMembers">
 
-          <th class="row-text alignment text-weight">{{member.userName | titlecase}}</th>
+          <th id="User_Name" class="row-text alignment text-weight">{{member.userName | titlecase}}</th>
           <td class="row-text alignment margin-mail"> {{member.email}} </td>
           <td class="row-text alignment margin-role">
             <div *ngFor="let role of settingService.roles">

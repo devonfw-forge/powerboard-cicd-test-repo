@@ -5,62 +5,36 @@ import { TeamDetails } from 'src/app/login/model/login.model';
 import { TeamDetailResponse } from 'src/app/model/general.model';
 import { GeneralService } from 'src/app/service/general.service';
 import { SlideshowService } from 'src/app/slideshow/slideshow.service';
-import { environment } from 'src/environments/environment';
 import { GetTeamDetails } from '../model/pbResponse.model';
 
 import { TeamDetailsService } from '../service/team-details.service';
 
-
-
 @Component({
   selector: 'app-my-projects',
   templateUrl: './my-projects.component.html',
-  styleUrls: ['./my-projects.component.css']
+  styleUrls: ['./my-projects.component.css'],
 })
 export class MyProjectsComponent implements OnInit {
-myTeams : TeamDetails[] = [];
-userId : string;
+  myTeams: TeamDetails[] = [];
 
-localLoader : boolean;
-logoPrefix = environment.logoPrefix;
-UserIdTeamIdDetails : GetTeamDetails = new GetTeamDetails();
-teamDetails : TeamDetailResponse = new TeamDetailResponse();
-  constructor(private teamDetailsService : TeamDetailsService, private router:Router, public generalService : GeneralService, public slideShowService : SlideshowService ) { 
-    this.localLoader = false;
-    
-  }
+  constructor(
+    private teamDetailsService: TeamDetailsService,
+    public generalService: GeneralService,
+    public slideShowService: SlideshowService
+  ) {}
 
   ngOnInit(): void {
-  this.userId = JSON.parse(localStorage.getItem('PowerboardDashboard')).loginResponse.userId;
-  this.myTeams = JSON.parse(localStorage.getItem('PowerboardDashboard')).loginResponse.homeResponse.My_Team;
-  console.log(this.myTeams);
+    this.myTeams = JSON.parse(
+      localStorage.getItem('PowerboardDashboard')
+    ).loginResponse.homeResponse.My_Team;
+    console.log(this.myTeams);
   }
- 
 
-async getTeamDetails(teamId:string){
-
-  try{
-    this.UserIdTeamIdDetails.teamId = teamId;
-    this.UserIdTeamIdDetails.userId = this.userId;
-    this.localLoader = true;
-    const data = await this.teamDetailsService.getTeamDetails(this.UserIdTeamIdDetails);
-    this.teamDetails.powerboardResponse = data;
-    this.localLoader = false;
-    localStorage.setItem('TeamDetailsResponse', JSON.stringify(this.teamDetails));
-    this.teamDetailsService.setTeamDetailPermissions();
-    this.generalService.showNavBarIcons = true;
-    this.generalService.checkVisibility();
-    this.router.navigateByUrl('/dashboard');
-    this.generalService.storeLastLoggedIn();
+  async getTeamDetails(teamId: string) {
+    try {
+      await this.teamDetailsService.processTeamDetails(teamId);
+    } catch (e) {
+      console.log(e.error.message);
+    }
   }
-  catch(e){
-    this.localLoader = false;
-    console.log(e.error.message);
-  }
-}
-
-public getLogoPath(teamId : string, logo : string): string{
-  return environment.logoPrefix + teamId + '/' + logo;
- }
-
 }

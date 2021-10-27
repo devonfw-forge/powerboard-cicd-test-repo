@@ -3,17 +3,19 @@
 
 
         <div class="team-sec-1">
-            <b class="title">Meeting Links</b>
+            <strong class="title">Meeting Links</strong>
         </div>
         <div class="team-sec-2 pt-3 inner-container">
 
             <ng-template let-link ngFor [ngForOf]="teamLinks" let-i="index" >
+                <ul>
                 <li class="text-left" [ngClass]="{'spacing-1':i==1}" *ngIf="link.linkType!='web_link'">
                     <a class="spacing-2"  (click)="openMeetingLink(link.links)">
                         
                         <span >{{ link.linkName}}</span>
                     </a>
                 </li>
+            </ul>
             </ng-template>
 
         </div>
@@ -21,16 +23,18 @@
     </div>
     <div class="web-links pt-3" *ngIf="!slideshowService.isSlideshowRunning">
         <div class='web-sec-1' >
-            <b class="title">Web Links</b> 
+            <strong class="title">Web Links</strong> 
         </div>
         <div class="web-sec-2 pt-3 inner-container" >
             
                 <ng-template let-link ngFor [ngForOf]="teamLinks" let-i="index">
+                    <ul>
                     <li  [ngClass]="{'spacing-1':i==1}" *ngIf="link.linkType=='web_link'">
                         <a class="spacing-2" [ngClass]="{'selected': src===link.links && isElectronRunning}" (click)="openLink(link.links)">
                             <span >{{ link.linkName}}</span>
                         </a>
                     </li>
+                </ul>
                 </ng-template>
             
         </div>

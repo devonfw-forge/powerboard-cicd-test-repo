@@ -3,9 +3,6 @@
 
 }
 
-input::value{
-    color: #2B0A3D;
-}
 .dropdown-item{
     cursor: pointer;
   }

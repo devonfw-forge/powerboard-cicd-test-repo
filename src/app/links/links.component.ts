@@ -4,7 +4,8 @@ import { WebviewTag } from 'electron';
 import { ElectronService } from 'ngx-electron';
 import { LinkResponse } from '../model/general.model';
 import { SlideshowService } from '../slideshow/slideshow.service';
-import { environment } from 'src/environments/environment';
+import { UrlPathConstants } from '../UrlPaths';
+
 @Component({
   selector: 'app-links',
   templateUrl: './links.component.html',
@@ -21,7 +22,7 @@ export class LinksComponent implements OnInit {
   counter: number = 1;
   webLinksIndex: number[];
   intervalID: any;
-  interval= environment.slideshowInterval;
+  interval= UrlPathConstants.slideshowInterval;
 
   constructor(private electronService: ElectronService, private ref: ChangeDetectorRef, public slideshowService: SlideshowService) {
     this.src = '';

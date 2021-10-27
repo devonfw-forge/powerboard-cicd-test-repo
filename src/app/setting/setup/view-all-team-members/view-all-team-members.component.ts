@@ -71,7 +71,7 @@ export class ViewAllTeamMembersComponent implements OnInit {
   
    
   async addMember(){
-    const result=await this.child.addMember();
+    const result=await this.child.addTeamMember();
     console.log(result);
     if(result){
       await this.viewAllMembers();
