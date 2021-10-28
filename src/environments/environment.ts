@@ -6,8 +6,7 @@ export const environment = {
 
   production: false,
  
-
-  globalEndPoint : "http://localhost:3000/v1/",
+  globalEndPoint : process.env.globalEndPoint,
   
 };
 
