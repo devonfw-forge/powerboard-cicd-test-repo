@@ -6,7 +6,8 @@ export const environment = {
 
   production: false,
  
-  globalEndPoint : process.env.globalEndPoint,
+
+  globalEndPoint :'',
   
 };
 
