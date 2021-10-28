@@ -173,8 +173,8 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
     this.flag = true;
   }
   getStatusForFolder(albumName: string) {
-    if (albumName == this.folderName) {
-      return this.flag;
+    if (this.folderName == albumName) {
+      return true;
     } else {
       return false;
     }
