@@ -18,7 +18,7 @@ export class TeamService {
 
   async addTeamWithLogo(formData : FormData):Promise<any>{
     return await this.http.post<any>(
-      environment.globalEndPoint + UrlPathConstants.addTeamEndPoint, formData).toPromise();
+      environment.API_URL + UrlPathConstants.addTeamEndPoint, formData).toPromise();
   }
   
 
@@ -29,12 +29,12 @@ export class TeamService {
       responseType: 'text' 
    }
     return await this.http.delete<any>(
-      environment.globalEndPoint + UrlPathConstants.deleteTeamEndPoint+ teamId, requestOptions).toPromise();
+      environment.API_URL + UrlPathConstants.deleteTeamEndPoint+ teamId, requestOptions).toPromise();
   }
 
   async viewAllTeams():Promise<TeamsResponse[]>{
     return await this.http.get<TeamsResponse[]>(
-      environment.globalEndPoint + UrlPathConstants.viewAllTeamsEndPoint).toPromise();
+      environment.API_URL + UrlPathConstants.viewAllTeamsEndPoint).toPromise();
   }
 
 
@@ -47,24 +47,24 @@ export class TeamService {
       responseType: 'text' 
    }
     return await this.http.post<any>(
-      environment.globalEndPoint + UrlPathConstants.addTeamMemberEndPoint, teamMember, requestOptions
+      environment.API_URL + UrlPathConstants.addTeamMemberEndPoint, teamMember, requestOptions
         
    ).toPromise();
   }
 
   async viewTeamMembersOfTeam(teamId : string):Promise<any>{
     return await this.http.get<any>(
-      environment.globalEndPoint + UrlPathConstants.viewAllMembersOfTeamEndPoint + teamId).toPromise();
+      environment.API_URL + UrlPathConstants.viewAllMembersOfTeamEndPoint + teamId).toPromise();
   }
 
    async deleteTeamMember(userteamId : string):Promise<any>{
     return await this.http.delete<any>(
-      environment.globalEndPoint + UrlPathConstants.deleteTeamMemberEndPoint + userteamId).toPromise();
+      environment.API_URL + UrlPathConstants.deleteTeamMemberEndPoint + userteamId).toPromise();
   } 
 
   async updateAccessRole(updateRole : UpdateRoles):Promise<any>{
     return await this.http.put<any>(
-      environment.globalEndPoint + UrlPathConstants.updateUserRoleEndPoint,updateRole).toPromise();
+      environment.API_URL + UrlPathConstants.updateUserRoleEndPoint,updateRole).toPromise();
   }
 
 

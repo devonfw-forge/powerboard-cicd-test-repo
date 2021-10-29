@@ -60,7 +60,7 @@ public teamDetails : TeamDetailResponse = new TeamDetailResponse();
 
   async getRoles():Promise<RolesResponse[]>{
     return await this.http.get<RolesResponse[]>(
-      environment.globalEndPoint + UrlPathConstants.viewAllUserRolesEndPoint ).toPromise();
+      environment.API_URL + UrlPathConstants.viewAllUserRolesEndPoint ).toPromise();
   }
 
 }

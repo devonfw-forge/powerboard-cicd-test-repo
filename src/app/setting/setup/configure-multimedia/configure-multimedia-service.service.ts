@@ -21,7 +21,7 @@ export class ConfigureMultimediaServiceService {
     const formData = new FormData();
     formData.append('file', file, file.name);
     return await this.http
-    .post<any>(environment.globalEndPoint + UrlPathConstants.uploadFileEndPoint + teamId, formData).toPromise();
+    .post<any>(environment.API_URL + UrlPathConstants.uploadFileEndPoint + teamId, formData).toPromise();
   }
   
 
@@ -29,7 +29,7 @@ export class ConfigureMultimediaServiceService {
    async addFolderToTeam(teamId: string, name :string):Promise<any>{
     // Headers
     return await this.http
-    .post<any>(environment.globalEndPoint + UrlPathConstants.addFolderEndPoint + teamId, {name}).toPromise();
+    .post<any>(environment.API_URL + UrlPathConstants.addFolderEndPoint + teamId, {name}).toPromise();
   }
  
 
@@ -39,7 +39,7 @@ export class ConfigureMultimediaServiceService {
     const formData = new FormData();
     formData.append('file', file, file.name);
     return await this.http
-    .post<any>(environment.globalEndPoint + UrlPathConstants.uploadFileToFolderEndPoint + folderId + '/' + teamId, formData).toPromise();
+    .post<any>(environment.API_URL + UrlPathConstants.uploadFileToFolderEndPoint + folderId + '/' + teamId, formData).toPromise();
   }
   
   
@@ -52,14 +52,14 @@ export class ConfigureMultimediaServiceService {
     };
     
     return await this.http.delete<any>(
-      environment.globalEndPoint + UrlPathConstants.deleteFilesAndFoldersEndPoint + teamId , options).toPromise();
+      environment.API_URL + UrlPathConstants.deleteFilesAndFoldersEndPoint + teamId , options).toPromise();
   }
 
 
   async addToSlideshow(teamId: string,  fileAndFolderIds : string[]):Promise<any>{
     // Headers
     return await this.http
-    .post<any>(environment.globalEndPoint + UrlPathConstants.addToSlideshowEndPoint + teamId, {fileAndFolderIds}).toPromise();
+    .post<any>(environment.API_URL + UrlPathConstants.addToSlideshowEndPoint + teamId, {fileAndFolderIds}).toPromise();
   }
   
 }

@@ -20,7 +20,7 @@ export class LoginService {
  
     return await this.http
       .post<PowerboardLoginResponse>(
-        environment.globalEndPoint + UrlPathConstants.loginEndPoint,
+        environment.API_URL + UrlPathConstants.loginEndPoint,
         {
           username: userName,     //'raj11',
           password: password              //'password'
@@ -31,13 +31,13 @@ export class LoginService {
   }
 
   public async resetPassword(resetPassword : PasswordResetForm): Promise<any>{
-       return await this.http.put<any>(environment.globalEndPoint + UrlPathConstants.resetPasswordEndPonit, resetPassword).toPromise();
+       return await this.http.put<any>(environment.API_URL + UrlPathConstants.resetPasswordEndPonit, resetPassword).toPromise();
   }
 
   public async guestLogin(): Promise<HomeResponse> {
     return await this.http
       .post<HomeResponse>(
-        environment.globalEndPoint + UrlPathConstants.guestLoginEndPoint,
+        environment.API_URL + UrlPathConstants.guestLoginEndPoint,
         {
           username: "guest",  
           password: "guest"              

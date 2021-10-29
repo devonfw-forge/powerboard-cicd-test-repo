@@ -23,12 +23,12 @@ teamDetails : TeamDetailResponse = new TeamDetailResponse();
   
   async getTeamDetails(userIdTeamIdDetails : GetTeamDetails):Promise<PowerboardResponse>{
     return await this.http.post<PowerboardResponse>(
-      environment.globalEndPoint + UrlPathConstants.getTeamDetailsEndPoint, userIdTeamIdDetails ).toPromise();
+      environment.API_URL + UrlPathConstants.getTeamDetailsEndPoint, userIdTeamIdDetails ).toPromise();
   }
 
   async getTeamsInADCenter(centerId : string):Promise<ProjectTeamDetail[]>{
     return await this.http.get<ProjectTeamDetail[]>(
-      environment.globalEndPoint + UrlPathConstants.getTeamsCenterEndPoint  + centerId ).toPromise();
+      environment.API_URL + UrlPathConstants.getTeamsCenterEndPoint  + centerId ).toPromise();
   }
 
 /* new call */
