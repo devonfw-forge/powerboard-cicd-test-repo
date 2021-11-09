@@ -9,8 +9,10 @@ import { SendEmailDTO } from '../model/dto/SendEmail.dto';
 
 export class EmailService implements IEmailService {
   async sendTeamplateEmail(sendEmail: SendEmailDTO) {
+    console.log('In email service');
+    console.log(sendEmail);
     fs.readFile(
-      'src/app/templates/new-user-email.template.html',
+      'app/templates/new-user-email.template.html',
       { encoding: 'utf-8' },
       (err: any, emailHtmlTemplate: any) => {
         if (err) {

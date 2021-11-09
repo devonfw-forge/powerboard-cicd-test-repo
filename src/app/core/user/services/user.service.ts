@@ -69,6 +69,8 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
 
       this.userSessionDetailsService.registerUserIntoUserSession(result.id);
       const finalResult = this.userTeamService.addUserToTeam(result, userDTO);
+      console.log('user team step done');
+      console.log(finalResult);
       try {
         this.emailService.sendTeamplateEmail(sendEmailDTO);
       } catch (e) {
