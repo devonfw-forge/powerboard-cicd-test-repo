@@ -67,12 +67,12 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
       sendEmailDTO.toEmail = result.email;
       sendEmailDTO.defaultPassword = password;
 
-      this.userSessionDetailsService.registerUserIntoUserSession(result.id);
-      const finalResult = this.userTeamService.addUserToTeam(result, userDTO);
+      await this.userSessionDetailsService.registerUserIntoUserSession(result.id);
+      const finalResult = await this.userTeamService.addUserToTeam(result, userDTO);
       console.log('user team step done');
       console.log(finalResult);
       try {
-        this.emailService.sendTeamplateEmail(sendEmailDTO);
+        await this.emailService.sendTeamplateEmail(sendEmailDTO);
       } catch (e) {
         console.log('Error Occured in Email Service');
         console.log(e);
