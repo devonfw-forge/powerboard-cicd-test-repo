@@ -20,7 +20,7 @@ export class EmailService implements IEmailService {
             console.log(err);
             throw err;
           }
-
+          console.log(emailHtmlTemplate);
           const template = Handlebars.compile(emailHtmlTemplate);
           const replacements = {
             username: sendEmail.username,
