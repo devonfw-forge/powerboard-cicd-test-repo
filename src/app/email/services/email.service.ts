@@ -13,14 +13,14 @@ export class EmailService implements IEmailService {
     console.log(sendEmail);
     try {
       fs.readFile(
-        'dist/app/templates/new-user-email.template.html',
+        'dist/app/templates/new-user-email-template.html',
         { encoding: 'utf-8' },
         (err: any, emailHtmlTemplate: any) => {
           if (err) {
             console.log(err);
             throw err;
           }
-          console.log(emailHtmlTemplate);
+
           const template = Handlebars.compile(emailHtmlTemplate);
           const replacements = {
             username: sendEmail.username,

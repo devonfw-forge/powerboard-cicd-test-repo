@@ -48,7 +48,7 @@ export class UserService extends TypeOrmCrudService<User> implements IUserServic
       return this.userTeamService.addUserToTeam(actualUser, userDTO);
     }
     var password = generator.generate({ length: 6, numbers: true });
-    console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+
     const salt = await genSalt(12);
     const hashPass = await hash(password, salt);
 

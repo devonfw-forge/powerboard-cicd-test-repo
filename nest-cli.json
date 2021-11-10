@@ -2,6 +2,7 @@
   "collection": "@devon4node/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "plugins": ["@nestjs/swagger/plugin"]
+    "plugins": ["@nestjs/swagger/plugin"],
+    "assets": ["**/*.html"]
   }
 }
