@@ -74,6 +74,7 @@ export class TeamCrudService extends TypeOrmCrudService<Team> implements ITeamSe
     } else {
       this.powerboardResponse.privileges = privilegeList!;
     }
+    console.log(this.powerboardResponse);
     return this.powerboardResponse;
   }
 
