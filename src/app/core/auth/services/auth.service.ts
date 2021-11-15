@@ -35,7 +35,7 @@ export class AuthService implements IAuthService {
     private readonly jwtService: JwtService,
     @Inject('IUserPrivilegeService') private readonly userPrivilegeService: IUserPrivilegeService,
   ) {}
-  globalLink = process.env.AWS_lOGO_URL;
+  globalLink = process.env.AWS_URL + 'logo';
   dash: DashBoardResponse = {} as DashBoardResponse;
   /**
    * validateUser method will validate User

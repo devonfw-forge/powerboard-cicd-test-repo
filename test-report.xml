@@ -1,223 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\dashboard\services\dashboard.service.spec.ts">
-    <testCase name="DashboardService should be defined after module initialization" duration="84"/>
-    <testCase name="DashboardService getDashboardByTeamId() test 1 if team present" duration="31"/>
-    <testCase name="DashboardService fetchStatus method will return status of project test 1 if client status is null" duration="44"/>
-    <testCase name="DashboardService fetchStatus method will return status of project test 1 if client status is null" duration="116"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\multimedia\services\multimedia.crud.service.spec.ts">
-    <testCase name="MultimdeiaCrudService should be defined after module initialization" duration="535"/>
-    <testCase name="MultimdeiaCrudService uploadFile should return the multimedia entity which is uploaded" duration="589"/>
-    <testCase name="MultimdeiaCrudService uploadFile should return undefined if the file is not uploaded " duration="124"/>
-    <testCase name="MultimdeiaCrudService uploadFileToFolder should return the uploaded file entity " duration="35"/>
-    <testCase name="MultimdeiaCrudService uploadFileToFolder should return undefined if the file is not uploaded " duration="33"/>
-    <testCase name="MultimdeiaCrudService getDefaultMultimediaForTeam() should return the default root multimedia for team who has root files" duration="101"/>
-    <testCase name="MultimdeiaCrudService getDefaultMultimediaForTeam() should return the default root multimedia for team who has no root files" duration="88"/>
-    <testCase name="MultimdeiaCrudService getDefaultMultimediaForTeam() should throw no found message if there is no multimedia present in the root file" duration="41"/>
-    <testCase name="MultimdeiaCrudService getDisplay() should return the files display" duration="38"/>
-    <testCase name="MultimdeiaCrudService addFiles() should add files" duration="67"/>
-    <testCase name="MultimdeiaCrudService getDisplayFilesFromFolder() should return display files for a folder" duration="25"/>
-    <testCase name="MultimdeiaCrudService getDisplayFilesFromFolder() should return empty array if the files are not present in any sub folder" duration="16"/>
-    <testCase name="MultimdeiaCrudService getCommonFiles() should return the common root files present in the root folder" duration="38"/>
-    <testCase name="MultimdeiaCrudService getFolderList() should return list of sub folders" duration="15"/>
-    <testCase name="MultimdeiaCrudService deleteFilesFromSubFolder() should return all the files present in a particular folder" duration="27"/>
-    <testCase name="MultimdeiaCrudService deleteFilesAndFoldersFromRoot() should delete all the files and folders present in the root" duration="32"/>
-    <testCase name="MultimdeiaCrudService deleteMultipleFilesAndFolders() should delete multiple root multimedia files and folders present for a team" duration="33"/>
-    <testCase name="MultimdeiaCrudService deleteMultipleFilesAndFolders() should delete multiple multimedia files present in a sub-folder of a team" duration="54"/>
-    <testCase name="MultimdeiaCrudService addFolder() should create a new folder" duration="56"/>
-    <testCase name="MultimdeiaCrudService addFolder() should throw error if empty folderName is given" duration="87"/>
-    <testCase name="MultimdeiaCrudService getAllFilesInFolderForTeam() should return all files present in the folder" duration="17"/>
-    <testCase name="MultimdeiaCrudService getAllFilesForTeam() should return all files present in the team" duration="36"/>
-    <testCase name="MultimdeiaCrudService getAllFilesForTeam() should return all files present in root folder of the team" duration="22"/>
-    <testCase name="MultimdeiaCrudService addFilesAndFoldersIntoSlideshow() should add files and folders to the slide show" duration="18"/>
-    <testCase name="MultimdeiaCrudService addFilesAndFoldersIntoSlideshow() getMultimediaForSlideshow() should return all the multimedia present in an album for slide show" duration="50"/>
-    <testCase name="MultimdeiaCrudService addFilesAndFoldersIntoSlideshow() getMultimediaForSlideshow() should return all the root files present for slide show" duration="64"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\multimedia\controllers\multimedia.crud.controller.spec.ts">
-    <testCase name="Multimedia Controller should be defined after module initialization" duration="20"/>
-    <testCase name="Multimedia Controller getAllAlbums() should return all the folders/albums present in the DB" duration="9"/>
-    <testCase name="Multimedia Controller uploadImage() should upload the image properly" duration="2"/>
-    <testCase name="Multimedia Controller uploadFileToFolder() should upload the file to a folder properly" duration="1"/>
-    <testCase name="Multimedia Controller getAllFilesInFolderForTeam() should return all the files present in a folder of a team" duration="2"/>
-    <testCase name="Multimedia Controller deleteMultipleFilesAndFolders() should delete multiple files and folders present in a team" duration="14"/>
-    <testCase name="Multimedia Controller getAllFilesForTeam() should return all files present in a team" duration="2"/>
-    <testCase name="Multimedia Controller addFolderInRoot() should return all files present in a team" duration="20"/>
-    <testCase name="Multimedia Controller addFilesAndFoldersIntoSlideshow() should return all files present in a team" duration="5"/>
-    <testCase name="Multimedia Controller getMultimediaForSlideshow() should return all files present in a team" duration="2"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\dashboard\sprint\controllers\sprint.crud.controller.spec.ts">
-    <testCase name="SprintController should be defined after module initialization" duration="78"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\controllers\team.crud.controller.spec.ts">
-    <testCase name="Multimedia Controller should be defined after module initialization" duration="3"/>
-    <testCase name="Multimedia Controller getTeamInfoById() should return team information by user id and team id" duration="2"/>
-    <testCase name="Multimedia Controller getTeamsByCenterId() should return team information by user id and team id" duration="2"/>
-    <testCase name="Multimedia Controller addTeam() should create a new team" duration="7"/>
-    <testCase name="Multimedia Controller deleteTeamById() should create a new team" duration="2"/>
-    <testCase name="Multimedia Controller getAllTeams() should create a new team" duration="1"/>
-    <testCase name="Multimedia Controller updateTeam() should create a new team" duration="13"/>
-    <testCase name="Multimedia Controller uploadLogo() should create a new team" duration="1"/>
-    <testCase name="Multimedia Controller deleteLogoFromTeam() should create a new team" duration="2"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\team-links\controllers\team-links.crud.controller.spec.ts">
-    <testCase name="Auth Controller should be defined after module initialization" duration="2"/>
-    <testCase name="Auth Controller getTeamLinks should return all the team links of team" duration="5"/>
-    <testCase name="Auth Controller deleteTeamLinkById should delete the team link by its id" duration="5"/>
-    <testCase name="Auth Controller addTeamLinks should create the team link" duration="2"/>
-    <testCase name="Auth Controller getLinksCategory should return the team links category" duration="2"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\user\services\user-privilege.service.spec.ts">
-    <testCase name="UserPrivilegeService should be defined after module initialization" duration="33"/>
-    <testCase name="UserPrivilegeService getUserPrivilegeForTeam() getPrivilegesList()  getPrivilegesList() method should return all the privileges of that particular user" duration="72"/>
-    <testCase name="UserPrivilegeService getAllPrivileges() getAllPrivileges() method should return all the privileges of that particular user if the user is present" duration="23"/>
-    <testCase name="UserPrivilegeService getAllPrivileges() getAllPrivileges() method should throw error if the user is not present" duration="19"/>
-    <testCase name="UserPrivilegeService getAllUserRoles() getAllUserRoles() should fetch all user roles" duration="64"/>
-    <testCase name="UserPrivilegeService getAllUserRoles() getAllUserRoles() should throw error if user is not present" duration="27"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\user\controllers\user.controller.spec.ts">
-    <testCase name="Auth Controller should be defined after module initialization" duration="12"/>
-    <testCase name="Auth Controller getAllMemberOfTeam should return all the members of a team" duration="2"/>
-    <testCase name="Auth Controller deleteUserFromTeamById should delete the member from a team" duration="5"/>
-    <testCase name="Auth Controller updateUserRole should update user role" duration="8"/>
-    <testCase name="Auth Controller getAllUserRoles should return all the user roles" duration="2"/>
-    <testCase name="Auth Controller updateLastLoggedProject should update the project with last logged in project" duration="2"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\file-storage\services\file-storage.service.spec.ts">
-    <testCase name="CloudFileStorageService should be defined after module initialization" duration="11"/>
-    <testCase name="CloudFileStorageService uploadFile() method  should upload the file to s3 correctly" duration="33"/>
-    <testCase name="CloudFileStorageService uploadFile() method  uploadS3() method  should call the s3 with correct parameters to upload a file to aws" duration="17"/>
-    <testCase name="CloudFileStorageService uploadFile() method  uploadS3() method  should throw error if there any" duration="14"/>
-    <testCase name="CloudFileStorageService uploadFile() method  getS3() method  should return the S3 instance" duration="88"/>
-    <testCase name="CloudFileStorageService uploadFile() method  deleteFile() method  should delete the file from s3 successfully" duration="6"/>
-    <testCase name="CloudFileStorageService uploadFile() method  deleteFile() method  should throw error if there is any" duration="7"/>
-    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFiles() method  should delete the multiple files together from s3 successfully" duration="19"/>
-    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFiles() method  should throw error if there is any" duration="10"/>
-    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFolders() method  should delete the multiple files together from s3 successfully" duration="35"/>
-    <testCase name="CloudFileStorageService uploadFile() method  deleteMultipleFolders() method  should throw error if there is any" duration="10"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\user\services\user-session-details.service.spec.ts">
-    <testCase name="UserSessionDetailsService should be defined after module initialization" duration="114"/>
-    <testCase name="UserSessionDetailsService registerUserIntoUserSession should register the user into the User Session" duration="132"/>
-    <testCase name="UserSessionDetailsService getUserSessionDetails should get the User Session Details of the user" duration="18"/>
-    <testCase name="UserSessionDetailsService updateUserSessionAfterPasswordChange should update user session after password change" duration="30"/>
-    <testCase name="UserSessionDetailsService updateLastLoggedInProject should update last logged in project id in user session entity in db" duration="28"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\dashboard\team-spirit\controllers\team-spirit.crud.controller.spec.ts">
-    <testCase name="TeamSpiritController should be defined after module initialization" duration="1"/>
-    <testCase name="TeamSpiritController getTeamSpiritFromSurvery() should fetch the team spirit rating for the team" duration="1"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\user\services\user.service.spec.ts">
-    <testCase name="UserService should be defined after module initialization" duration="83"/>
-    <testCase name="UserService findUser() should return the User successfully if the user is present" duration="36"/>
-    <testCase name="UserService registerUser registerUser() should register the User successfully if the user is not already present" duration="1981"/>
-    <testCase name="UserService registerUser registerUser() should successfully register the existing user to other team" duration="31"/>
-    <testCase name="UserService registerUser registerUser() should throw error message if the user is already present in that team" duration="30"/>
-    <testCase name="UserService changePassword() changePassword() method should change the password of a user successfully if user is present" duration="2068"/>
-    <testCase name="UserService changePassword() changePassword() method should throw error if user is not present" duration="30"/>
-    <testCase name="UserService deleteGuestById() deleteGuestById() should delete guest user if it is present" duration="26"/>
-    <testCase name="UserService deleteGuestById() deleteGuestById() should throw error if user is not present" duration="22"/>
-  </file>
   <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\auth\services\auth.service.spec.ts">
-    <testCase name="AuthService should be defined after module initialization" duration="254"/>
-    <testCase name="AuthService validateUser should return a defined user response if the user is present in the database" duration="1328"/>
-    <testCase name="AuthService validateUser should return undefined response if the user is not present in the database" duration="247"/>
-    <testCase name="AuthService singIn should return accessToken if the user is present in the database" duration="481"/>
-    <testCase name="AuthService login should return a JWT token and login response when a valid user is provided" duration="246"/>
-    <testCase name="AuthService login should return a exception when an invalid user is provided" duration="243"/>
-    <testCase name="AuthService loginGuest() should call the loginResponseForGuest() method and return login response for a guest user" duration="184"/>
-    <testCase name="AuthService loginResponseForGuest() should return login response for a guest user" duration="119"/>
-    <testCase name="AuthService getHomeDetailsForUserId should return a home detail response for the given user" duration="82"/>
-    <testCase name="AuthService getPowerboard() should return the powerboard response inside login response for a user who visited any team earlier" duration="60"/>
-    <testCase name="AuthService changePassword() should return the user with updated password" duration="84"/>
-    <testCase name="AuthService systemAdminHome() should return home response for system admin" duration="92"/>
-    <testCase name="AuthService teamMemberTeamAdminHome() should return a home detail response for the team member or team admin" duration="41"/>
-    <testCase name="AuthService homeDetailsForTeamMemberAdmin() should return home detail for the team member or team admin" duration="74"/>
-    <testCase name="AuthService getPrivileges() should return the priveleges if the user is system admin or guest " duration="104"/>
-    <testCase name="AuthService getPrivileges() should return the priveleges if the user is team admin or team member associated with any team" duration="195"/>
-    <testCase name="AuthService register should register a new user if not exists" duration="86"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\dashboard\client-status\services\client-status.crud.service.spec.ts">
-    <testCase name="ClientStatusCrudService should be defined after module initialization" duration="60"/>
-    <testCase name="ClientStatusCrudService getClientFeedback() method should return clientStatusResponse" duration="55"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\dashboard\team-spirit\services\team-spirit.crud.service.spec.ts">
-    <testCase name="TeamSpiritCrudService should be defined after module initialization" duration="47"/>
-    <testCase name="TeamSpiritCrudService getTeamSpiritFromSurvey getTeamSpiritFromSurvey() method should return teamSpiritResponse" duration="35"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\dashboard\sprint\services\sprint.crud.service.spec.ts">
-    <testCase name="SprintCrudService should be defined after module initialization" duration="121"/>
-    <testCase name="SprintCrudService getSprintDetailResponse() should return sprint Detail Response" duration="323"/>
-    <testCase name="SprintCrudService getBurnDown() should return burndown details" duration="240"/>
-    <testCase name="SprintCrudService getVelocityComparison() getVelocityComparison() should return velocity comparison details" duration="25"/>
-    <testCase name="SprintCrudService getVelocityComparison() getVelocityComparison() should return undefined error if there is any error with query builder" duration="34"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\services\global.team.service.spec.ts">
-    <testCase name="TeamCrudService should be defined after module initialization" duration="209"/>
-    <testCase name="TeamCrudService getTeamsByCenterId() should update the team test 1 if no team found inside centerId" duration="151"/>
-    <testCase name="TeamCrudService getTeamsByCenterId() should update the team test 2 if teams found inside centerId" duration="837"/>
-    <testCase name="TeamCrudService uploadLogoForTeam()  should upload logo of a team" duration="116"/>
-    <testCase name="TeamCrudService deleteLogoForTeam()  should delete logo of a team" duration="106"/>
-    <testCase name="TeamCrudService deleteLogoForTeam()  should throw error if file not present in path" duration="250"/>
-    <testCase name="TeamCrudService addTeam()  should throw error if team is already present in db" duration="96"/>
-    <testCase name="TeamCrudService addTeam()  should add team if team is not already present in db" duration="139"/>
-    <testCase name="TeamCrudService addTeam()  should create new team if team is not already present in db and even if logo is not there" duration="154"/>
-    <testCase name="TeamCrudService deleteTeamById()  should delete team if team is present in db" duration="113"/>
-    <testCase name="TeamCrudService deleteTeamById()  should throw error if team is not present in db" duration="262"/>
-    <testCase name="TeamCrudService getAllTeams()  should return all the teams present in the db" duration="213"/>
-    <testCase name="TeamCrudService getAllTeams()  should return a message when no team is found" duration="157"/>
-    <testCase name="TeamCrudService viewTeamsInADC() should return adc Team list" duration="183"/>
-    <testCase name="TeamCrudService findTeamById() should return the team if it is present in the db" duration="152"/>
-    <testCase name="TeamCrudService updateTeamStatus() should update the status of team " duration="122"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\team-links\services\team-links.crud.service.spec.ts">
-    <testCase name="TeamLinksCrudService should be defined after module initialization" duration="27"/>
-    <testCase name="TeamLinksCrudService getTeamLinks getTeamLinks() method should return TeamLinkResponse" duration="20"/>
-    <testCase name="TeamLinksCrudService createTeamLinks createTeamLinks() method should return saved TeamLinks" duration="56"/>
-    <testCase name="TeamLinksCrudService deleteTeamLinkById deleteTeamLinkById() should delete the given team links " duration="69"/>
-    <testCase name="TeamLinksCrudService getLinksCategory  should throw error message if the links are not present" duration="49"/>
-    <testCase name="TeamLinksCrudService getLinksCategory  should fetch all the links category present" duration="38"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\user\services\user-team.service.spec.ts">
-    <testCase name="UserService should be defined after module initialization" duration="28"/>
-    <testCase name="UserService addUserToTeam() addUserToTeam() should throw error if the user is already present in the team" duration="44"/>
-    <testCase name="UserService addUserToTeam() addUserToOtherTeam() should successfully add user to the team if it is not present in the team" duration="12"/>
-    <testCase name="UserService deleteUserFromTeamById() deleteUserFromTeamById() should delete the user from team if it is present there  " duration="9"/>
-    <testCase name="UserService deleteUserFromTeamById() should delete the user from team if it is present there  " duration="25"/>
-    <testCase name="UserService updateUserRole() updateUserRole should successfully update the user role" duration="15"/>
-    <testCase name="UserService updateUserRole() updateUserRole should successfully update the user role" duration="10"/>
-    <testCase name="UserService isSystemAdmin()  method should return true if the user role name is system_admin" duration="11"/>
-    <testCase name="UserService isSystemAdmin()  method should return true if the user role name is guest_user" duration="98"/>
-    <testCase name="UserService isSystemAdmin()  method should return false if the user role name is not system_admin or guest_user" duration="10"/>
-    <testCase name="UserService findUserTeamDetails() findUserTeamDetails() should return unqiue userteam object for that particular user in that team  " duration="8"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\core\auth\controllers\auth.controller.spec.ts">
-    <testCase name="Auth Controller should be defined after module initialization" duration="137"/>
-    <testCase name="Auth Controller login should return the JWT token and login response when the user is correct" duration="42"/>
-    <testCase name="Auth Controller login should return the error if there is any error from the auth service" duration="133"/>
-    <testCase name="Auth Controller loginGuest should return the JWT token and login response when the user is a guest" duration="11"/>
-    <testCase name="Auth Controller register should return the newly registered User entity" duration="75"/>
-    <testCase name="Auth Controller changePassword should change the password of the user" duration="18"/>
-    <testCase name="Auth Controller getHomeDetailsForUserId should home page response for user" duration="4"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\app.controller.spec.ts">
-    <testCase name="AppController root should return &quot;Hello World!&quot;" duration="52"/>
-  </file>
-  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\email\controller\email.controller.spec.ts">
-    <testCase name="EmailController should be defined after module initialization" duration="4"/>
-    <testCase name="EmailController sendEmailToNewUser should send templated email to new user" duration="22"/>
+    <testCase name="AuthService should be defined after module initialization" duration="158"/>
+    <testCase name="AuthService validateUser should return a defined user response if the user is present in the database" duration="811"/>
+    <testCase name="AuthService validateUser should return undefined response if the user is not present in the database" duration="60"/>
+    <testCase name="AuthService singIn should return accessToken if the user is present in the database" duration="209"/>
+    <testCase name="AuthService login should return a JWT token and login response when a valid user is provided" duration="164"/>
+    <testCase name="AuthService login should return a exception when an invalid user is provided" duration="358"/>
+    <testCase name="AuthService loginGuest() should call the loginResponseForGuest() method and return login response for a guest user" duration="100"/>
+    <testCase name="AuthService loginResponseForGuest() should return login response for a guest user" duration="159"/>
+    <testCase name="AuthService getHomeDetailsForUserId should return a home detail response for the given user" duration="227"/>
+    <testCase name="AuthService getPowerboard() should return the powerboard response inside login response for a user who visited any team earlier" duration="53"/>
+    <testCase name="AuthService changePassword() should return the user with updated password" duration="46"/>
+    <testCase name="AuthService systemAdminHome() should return home response for system admin" duration="130"/>
+    <testCase name="AuthService teamMemberTeamAdminHome() should return a home detail response for the team member or team admin" duration="62"/>
+    <testCase name="AuthService homeDetailsForTeamMemberAdmin() should return home detail for the team member or team admin" duration="68"/>
+    <testCase name="AuthService getPrivileges() should return the priveleges if the user is system admin or guest " duration="111"/>
+    <testCase name="AuthService getPrivileges() should return the priveleges if the user is team admin or team member associated with any team" duration="368"/>
+    <testCase name="AuthService register should register a new user if not exists" duration="102"/>
   </file>
   <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\services\team.crud.service.spec.ts">
-    <testCase name="TeamCrudService should be defined after module initialization" duration="93"/>
-    <testCase name="TeamCrudService updateTeam() should update the team test 1 if team not found" duration="66"/>
-    <testCase name="TeamCrudService updateTeam() should update the team test 2 if team found" duration="49"/>
-    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 1 if team not present in db " duration="30"/>
-    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 2 if team present in db and user is System Admin " duration="69"/>
-    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 3 if team present in db and user is not a System Admin " duration="31"/>
-    <testCase name="TeamCrudService getCenterByTeamId() should ftech all center in the team test 1 if team not found" duration="37"/>
-    <testCase name="TeamCrudService getCenterByTeamId() should ftech all center in the team test 2 if team found" duration="37"/>
-    <testCase name="TeamCrudService  getLinksForTeam() getLinksForTeam() should fetch the all the links of the team if priveleges includes view-links" duration="26"/>
-    <testCase name="TeamCrudService  getLinksForTeam() getLinksForTeam() should fetch the all the links of the team if priveleges does not include view-links" duration="37"/>
-    <testCase name="TeamCrudService  getMultimediaForTeam() it should return all the multimedia related to the team" duration="41"/>
+    <testCase name="TeamCrudService should be defined after module initialization" duration="156"/>
+    <testCase name="TeamCrudService updateTeam() should update the team test 1 if team not found" duration="65"/>
+    <testCase name="TeamCrudService updateTeam() should update the team test 2 if team found" duration="85"/>
+    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 1 if team not present in db " duration="67"/>
+    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 2 if team present in db and user is System Admin " duration="189">
+      <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 1
++ Received  + 1
+
+@@ -26,11 +26,11 @@
+      "teamId": "46455bf7-ada7-495c-8019-8d7ab76d488e",
+      "teamSpirit": Object {
+        "teamSpiritRating": 7,
+      },
+    },
+-   "logo": "undefined/46455bf7-ada7-495c-8019-8d7ab76d488e/",
++   "logo": "undefinedlogo/46455bf7-ada7-495c-8019-8d7ab76d488e/",
+    "multimedia": Array [
+      Object {
+        "fileId": "aaad19f7-1b66-44aa-a443-4fcdd173f385",
+        "fileName": "bannerd8a32383-b767-44e7-b48c-d15fbecc9a49.jpg",
+      },
+    at Object.<anonymous> (C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\services\team.crud.service.spec.ts:503:28)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testCase>
+    <testCase name="TeamCrudService getTeamInfoById() get all 5 kpis details along with sprint and status test 3 if team present in db and user is not a System Admin " duration="91">
+      <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 1
++ Received  + 1
+
+@@ -26,11 +26,11 @@
+      "teamId": "46455bf7-ada7-495c-8019-8d7ab76d488e",
+      "teamSpirit": Object {
+        "teamSpiritRating": 7,
+      },
+    },
+-   "logo": "undefined/46455bf7-ada7-495c-8019-8d7ab76d488e/",
++   "logo": "undefinedlogo/46455bf7-ada7-495c-8019-8d7ab76d488e/",
+    "multimedia": Array [
+      Object {
+        "fileId": "aaad19f7-1b66-44aa-a443-4fcdd173f385",
+        "fileName": "bannerd8a32383-b767-44e7-b48c-d15fbecc9a49.jpg",
+      },
+    at Object.<anonymous> (C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\services\team.crud.service.spec.ts:552:28)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testCase>
+    <testCase name="TeamCrudService getCenterByTeamId() should ftech all center in the team test 1 if team not found" duration="57"/>
+    <testCase name="TeamCrudService getCenterByTeamId() should ftech all center in the team test 2 if team found" duration="60"/>
+    <testCase name="TeamCrudService  getLinksForTeam() getLinksForTeam() should fetch the all the links of the team if priveleges includes view-links" duration="137"/>
+    <testCase name="TeamCrudService  getLinksForTeam() getLinksForTeam() should fetch the all the links of the team if priveleges does not include view-links" duration="92"/>
+    <testCase name="TeamCrudService  getMultimediaForTeam() it should return all the multimedia related to the team" duration="70"/>
+  </file>
+  <file path="C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\services\global.team.service.spec.ts">
+    <testCase name="TeamCrudService should be defined after module initialization" duration="492"/>
+    <testCase name="TeamCrudService getTeamsByCenterId() should update the team test 1 if no team found inside centerId" duration="103"/>
+    <testCase name="TeamCrudService getTeamsByCenterId() should update the team test 2 if teams found inside centerId" duration="127"/>
+    <testCase name="TeamCrudService uploadLogoForTeam()  should upload logo of a team" duration="113">
+      <failure message="Error: expect(received).toEqual(expected) // deep equality"><![CDATA[Error: expect(received).toEqual(expected) // deep equality
+
+- Expected  - 1
++ Received  + 1
+
+  Object {
+    "ad_center": "98955bf7-ada7-495c-8019-8d7ab62d488e",
+    "id": "fe4f8120-8a2c-47ad-bad7-86e412e323c1",
+-   "logo": "undefined/fe4f8120-8a2c-47ad-bad7-86e412e323c1/logo_B222bf72b3-3f3b-471d-b0d8-f21a6283d00e.png",
++   "logo": "undefinedlogo/fe4f8120-8a2c-47ad-bad7-86e412e323c1/logo_B222bf72b3-3f3b-471d-b0d8-f21a6283d00e.png",
+    "name": "Team E",
+    "projectKey": "P112461",
+    "teamCode": "9900918",
+  }
+    at Object.<anonymous> (C:\projects\devonfw-ide-scripts-2020.08.002\workspaces\powerboard_latest_api\CICD\powerboard-cicd-test-repo\src\app\teams\services\global.team.service.spec.ts:456:71)
+    at processTicksAndRejections (internal/process/task_queues.js:97:5)]]></failure>
+    </testCase>
+    <testCase name="TeamCrudService deleteLogoForTeam()  should delete logo of a team" duration="71"/>
+    <testCase name="TeamCrudService deleteLogoForTeam()  should throw error if file not present in path" duration="62"/>
+    <testCase name="TeamCrudService addTeam()  should throw error if team is already present in db" duration="67"/>
+    <testCase name="TeamCrudService addTeam()  should add team if team is not already present in db" duration="107"/>
+    <testCase name="TeamCrudService addTeam()  should create new team if team is not already present in db and even if logo is not there" duration="83"/>
+    <testCase name="TeamCrudService deleteTeamById()  should delete team if team is present in db" duration="68"/>
+    <testCase name="TeamCrudService deleteTeamById()  should throw error if team is not present in db" duration="121"/>
+    <testCase name="TeamCrudService getAllTeams()  should return all the teams present in the db" duration="117"/>
+    <testCase name="TeamCrudService getAllTeams()  should return a message when no team is found" duration="100"/>
+    <testCase name="TeamCrudService viewTeamsInADC() should return adc Team list" duration="430"/>
+    <testCase name="TeamCrudService findTeamById() should return the team if it is present in the db" duration="137"/>
+    <testCase name="TeamCrudService updateTeamStatus() should update the status of team " duration="111"/>
   </file>
 </testExecutions>

@@ -26,7 +26,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
   ) {
     super(teamRepository);
   }
-  globalLink = process.env.AWS_lOGO_URL;
+  globalLink = process.env.AWS_URL + 'logo';
   /**
    * getTeamsyBUId method will fetch the list of all teams belong to particular BU
    * @param {Bu_id} Bu_id it takes Business Unit as input
@@ -47,7 +47,7 @@ export class GlobalTeamsService extends TypeOrmCrudService<Team> implements IGlo
       if (teams[i].logo == null) {
         teamsResponse.teamLogo = null;
       } else {
-        const logo = process.env.AWS_lOGO_URL + '/' + teams[i].id + '/' + teams[i].logo;
+        const logo = process.env.AWS_URL + 'logo' + '/' + teams[i].id + '/' + teams[i].logo;
         console.log(logo);
         // teamsResponse.teamLogo = `${this.globalLink}/${teams[i].id}/` + teams[i].logo!;
         teamsResponse.teamLogo = logo;
