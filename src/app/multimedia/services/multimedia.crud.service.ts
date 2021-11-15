@@ -30,7 +30,7 @@ export class MultimediaCrudService extends TypeOrmCrudService<Multimedia> implem
   rootResponse: RootResponse = {} as RootResponse;
   folderResponse: FolderResponse = {} as FolderResponse;
   displayResponse: DisplayResponse = {} as DisplayResponse;
-  globalLink = process.env.AWS_URL;
+  globalLink = process.env.AWS_URL + 'multimedia';
   /**
    * setImagePath method will set image fot that team
    * @param {teamId, path} .Takes teamId and path as input

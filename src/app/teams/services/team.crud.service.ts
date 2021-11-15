@@ -34,7 +34,8 @@ export class TeamCrudService extends TypeOrmCrudService<Team> implements ITeamSe
   ) {
     super(teamRepository);
   }
-  globalLink = process.env.AWS_lOGO_URL;
+  globalLink = process.env.AWS_URL + 'logo';
+
   powerboardResponse: PowerboardResponse = {} as PowerboardResponse;
 
   /**
